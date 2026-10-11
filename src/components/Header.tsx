@@ -91,7 +91,7 @@ export default function Header() {
                           isSolutions ? "w-[560px] grid grid-cols-2 gap-2" : "w-[260px] flex flex-col gap-1"
                         }`}
                       >
-                        {link.submenu?.map((item) => {
+                        {link.submenu?.map((item: any) => {
                           const IconComp = solutionIcons[item.name];
 
                           if (isSolutions) {
