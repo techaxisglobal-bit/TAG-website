@@ -65,10 +65,10 @@ export const navLinks = [
 ];
 
 export const heroStats = [
-  { value: "15+", label: "Years in business", desc: "Delivering enterprise excellence" },
+  { value: "12+", label: "Years Experience", desc: "Delivering enterprise excellence" },
   { value: "99%", label: "Customer Satisfaction", desc: "Across Fortune 500 & mid-market" },
-  { value: "250+", label: "Projects Completed", desc: "On-time and on-budget delivery" },
-  { value: "100+", label: "Team Members", desc: "Certified global specialists" }
+  { value: "100+", label: "Clients Served", desc: "Enterprise partnerships worldwide" },
+  { value: "2", label: "Continents Served", desc: "USA & India global delivery" }
 ];
 
 export const valueProps = [
