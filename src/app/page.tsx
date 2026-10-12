@@ -18,12 +18,6 @@ import {
   Cpu,
   Award,
   Maximize,
-  Car,
-  Factory,
-  Activity,
-  DollarSign,
-  ShoppingBag,
-  Building2,
   ChevronRight,
   Server,
   Check,
@@ -35,7 +29,6 @@ import {
   heroStats,
   valueProps,
   solutions,
-  industries,
   vendorEcosystem,
   clientPartners,
   consultationBenefits,
@@ -52,13 +45,7 @@ const iconMap: Record<string, any> = {
   TrendingDown,
   Cpu,
   Award,
-  Maximize,
-  Car,
-  Factory,
-  Activity,
-  DollarSign,
-  ShoppingBag,
-  Building2
+  Maximize
 };
 
 export default function Home() {
@@ -402,96 +389,6 @@ export default function Home() {
                     <span>Learn more</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-
-        </div>
-      </section>
-
-      {/* =========================================================
-          SECTION 5: INDUSTRY FOCUS ("Solving IT challenges in every industry, every day")
-          ========================================================= */}
-      <section id="industries" className="py-20 lg:py-28 bg-[#0F172A] text-white relative overflow-hidden">
-        {/* Subtle grid in dark background */}
-        <div className="absolute inset-0 bg-[radial-gradient(#B42318_1px,transparent_1px)] [background-size:28px_28px] opacity-10 pointer-events-none" />
-
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
-            <div className="max-w-2xl">
-              <span className="badge-tag-dark mb-3">WHAT WE DO</span>
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight leading-tight">
-                Solving IT challenges in every industry, every day.
-              </h2>
-              <p className="text-slate-300 text-base sm:text-lg mt-3 leading-relaxed">
-                Specialized industry solutions engineered with compliance, domain logic, and high operational reliability.
-              </p>
-            </div>
-
-            <Link
-              href="/industries"
-              className="inline-flex items-center gap-2 bg-[#B42318] hover:bg-white hover:text-[#B42318] text-white text-sm font-semibold px-6 py-3 rounded-md transition-all shadow-sm flex-shrink-0"
-            >
-              <span>View All Industries</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {industries.map((ind, index) => {
-              const IconComp = iconMap[ind.icon] || Building2;
-
-              return (
-                <motion.div
-                  key={ind.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08, duration: 0.5 }}
-                  className="group relative rounded-xl overflow-hidden border border-white/10 bg-slate-900/60 hover:border-[#B42318]/80 transition-all duration-300 flex flex-col justify-between min-h-[320px]"
-                >
-                  {/* Background Image with Dark Vignette */}
-                  <div className="absolute inset-0 z-0">
-                    <Image
-                      src={ind.image}
-                      alt={ind.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-35"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/80 to-transparent" />
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="relative z-10 p-7 flex flex-col justify-between h-full">
-                    <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 rounded-lg bg-[#B42318]/25 text-red-400 flex items-center justify-center">
-                          <IconComp className="w-5 h-5" />
-                        </div>
-                        <span className="text-[11px] font-bold tracking-wide uppercase text-amber-300 bg-amber-400/10 border border-amber-400/20 px-2.5 py-1 rounded">
-                          {ind.highlight}
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
-                        {ind.title}
-                      </h3>
-
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        {ind.description}
-                      </p>
-                    </div>
-
-                    <Link
-                      href={`/industries#${ind.id}`}
-                      className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-red-400 group-hover:text-white transition-colors pt-4 border-t border-white/10 mt-6"
-                    >
-                      <span>Explore {ind.title}</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </div>
                 </motion.div>
               );
             })}
