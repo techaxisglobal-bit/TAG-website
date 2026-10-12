@@ -552,12 +552,8 @@ export default function Home() {
                 <div>
                   <p className="text-xs uppercase tracking-wider font-extrabold text-slate-400">Call us directly:</p>
                   <p className="text-lg sm:text-xl font-bold text-[#0F172A]">
-                    <a href={`tel:${siteConfig.contact.phoneUS}`} className="hover:text-[#B42318] transition-colors">
-                      {siteConfig.contact.phoneUS} (US)
-                    </a>
-                    {" / "}
-                    <a href={`tel:${siteConfig.contact.phoneIN}`} className="hover:text-[#B42318] transition-colors">
-                      {siteConfig.contact.phoneIN} (IN)
+                    <a href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-[#B42318] transition-colors">
+                      {siteConfig.contact.phone}
                     </a>
                   </p>
                 </div>

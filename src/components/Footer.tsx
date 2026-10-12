@@ -51,21 +51,14 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[#B42318] mt-1 flex-shrink-0" />
                 <div>
-                  <p className="font-semibold text-white">Global Operations (USA):</p>
-                  <p className="text-slate-400">{siteConfig.contact.addressUS}</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-[#B42318] mt-1 flex-shrink-0" />
-                <div>
-                  <p className="font-semibold text-white">India Technology Center:</p>
-                  <p className="text-slate-400">{siteConfig.contact.addressIN}</p>
+                  <p className="font-semibold text-white">Headquarters (USA):</p>
+                  <p className="text-slate-400">{siteConfig.contact.address}</p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#D97706] flex-shrink-0" />
-                <a href={`tel:${siteConfig.contact.phoneUS}`} className="hover:text-white transition-colors">
-                  {siteConfig.contact.phoneUS} (US) / {siteConfig.contact.phoneIN} (IN)
+                <a href={`tel:${siteConfig.contact.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-white transition-colors">
+                  {siteConfig.contact.phone}
                 </a>
               </div>
               <div className="flex items-center gap-3">

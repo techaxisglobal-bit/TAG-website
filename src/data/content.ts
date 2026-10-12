@@ -9,11 +9,9 @@ export const siteConfig = {
     email: "contact@techaxisglobal.com",
     phone: "+1 434-285-4949",
     phoneUS: "+1 434-285-4949",
-    phoneIN: "+91 40 2931 2233",
-    hours: "Mon–Fri, 9am–6pm (EST / IST)",
-    address: "USA & India (Global Operations)",
-    addressUS: "13800 Coppermine Rd, Herndon, VA 20171, USA",
-    addressIN: "Plot No. 200, Block B, Kavuri Hills, Madhapur, Hyderabad – 500081, India"
+    hours: "Mon–Fri, 9am–6pm EST",
+    address: "8401 Mayland Dr, Ste S, Richmond, VA 23294, USA",
+    addressUS: "8401 Mayland Dr, Ste S, Richmond, VA 23294, USA"
   },
   links: {
     linkedin: "https://linkedin.com/company/techaxisglobal",
