@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
-import { ChevronRight, Search } from "lucide-react";
+import Image from "next/image";
+import { ChevronRight, Search, ShieldCheck } from "lucide-react";
 import LocalNav from "@/components/LocalNav";
 import BackgroundMedia from "@/components/BackgroundMedia";
 import MediaFrame from "@/components/MediaFrame";
@@ -119,11 +120,57 @@ export default function Careers() {
           </div>
         </section>
         
-        {/* Equal Opportunity */}
-        <section className="py-12 px-6 max-w-[980px] mx-auto">
-           <p className="text-[12px] text-apple-text-sec text-center max-w-4xl mx-auto">
-              // TODO: HR/legal to review. TechAxis Global LLC is an equal opportunity employer. We evaluate qualified applicants without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, disability, veteran status, and other legally protected characteristics.
-           </p>
+        {/* Official Federal E-Verify Authorization & Equal Opportunity */}
+        <section className="py-16 px-6 max-w-[1040px] mx-auto">
+          <div className="rounded-[28px] bg-[#161617] text-white p-8 sm:p-12 border border-white/10 shadow-xl relative overflow-hidden">
+            {/* Ambient subtle glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#B42318]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
+              {/* E-Verify Badge Box */}
+              <div className="flex-shrink-0 w-48 sm:w-56 p-3 rounded-2xl bg-[#1A1A1A] border border-white/10 shadow-inner flex flex-col items-center justify-center text-center">
+                <Image
+                  src="/e-verify.png"
+                  alt="Official E-Verify Federal Employment Verification Program"
+                  width={220}
+                  height={90}
+                  className="object-contain w-full h-auto"
+                />
+                <div className="mt-3 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Active Participant
+                </div>
+              </div>
+
+              {/* Authority and Description */}
+              <div className="flex-1 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-emerald-400 text-[11px] font-semibold uppercase tracking-wider mb-3">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  U.S. Federal Compliance Authorization
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">
+                  An E-Verified US Firm
+                </h3>
+                <p className="text-[15px] sm:text-[16px] text-white/80 leading-relaxed mb-4">
+                  TechAxis Global LLC is an official participant in the U.S. Department of Homeland Security (DHS) and Social Security Administration (SSA) E-Verify program. We electronically confirm the employment eligibility of all newly hired employees across our United States operations.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[13px] text-white/70 mb-5">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#B42318]"></span>
+                    <span>STEM OPT Extensions Eligible</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                    <span>Federal Work Authorization Verified</span>
+                  </div>
+                </div>
+                <p className="text-[12px] text-white/50 leading-relaxed border-t border-white/10 pt-4">
+                  TechAxis Global LLC is an Equal Opportunity Employer. We evaluate qualified applicants without regard to race, color, religion, sex, sexual orientation, gender identity, national origin, disability, veteran status, or other legally protected characteristics under federal, state, and local laws.
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </>

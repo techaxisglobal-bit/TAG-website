@@ -22,7 +22,8 @@ import {
   Server,
   Check,
   Send,
-  ExternalLink
+  ExternalLink,
+  ArrowUpRight
 } from "lucide-react";
 
 import {
@@ -146,6 +147,10 @@ export default function Home() {
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#D97706]" />
                   <span>24/7 SLA Guarantee</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span className="font-semibold text-[#1D1D1F]">An E-Verified US Firm</span>
                 </div>
               </div>
             </motion.div>
@@ -502,36 +507,111 @@ export default function Home() {
       </section>
 
       {/* =========================================================
-          SECTION 6: CLIENT RECOGNITION (Apple Newsroom Style Badges)
+          SECTION 6: CLIENT RECOGNITION & COLLABORATIONS (Apple HIG Grid)
           ========================================================= */}
-      <section className="py-20 bg-[#F5F5F7] border-y border-black/[0.06]">
+      <section id="partnerships" className="py-24 bg-[#F5F5F7] border-y border-black/[0.06] scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="badge-tag mb-3">WHERE WE DO</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1D1D1F] tracking-tight">
-              Recognized by the best
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="badge-tag mb-3">COLLABORATIONS & CREDENTIALS</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-bold text-[#1D1D1F] tracking-tight">
+              Collaborations & Federal Verification
             </h2>
-            <p className="text-[#86868B] text-base mt-2">
-              Strategic collaborations and enterprise integrations with industry leaders across the globe.
+            <p className="text-[#86868B] text-base sm:text-lg mt-3 leading-relaxed">
+              Strategic enterprise collaborations with premier global technology leaders alongside official U.S. federal compliance certifications powering mission-critical operations.
             </p>
           </div>
 
-          {/* Partner Badges Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {clientPartners.map((partner) => (
-              <div
-                key={partner.name}
-                className="bg-white hover:bg-white rounded-2xl p-6 border border-black/[0.06] hover:border-black/[0.12] hover:shadow-xs transition-all text-center flex flex-col items-center justify-center min-h-[105px] group active:scale-98"
-              >
-                <p className="font-bold text-[#1D1D1F] group-hover:text-[#B42318] transition-colors text-[15px] tracking-tight">
-                  {partner.name}
-                </p>
-                <p className="text-[11px] text-[#86868B] font-medium uppercase tracking-wider mt-1">
-                  {partner.category}
-                </p>
-              </div>
-            ))}
+          {/* 8 Collaboration Cards in a Symmetrical 4x2 Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch">
+            {clientPartners.map((partner) => {
+              if (partner.isEVerify) {
+                return (
+                  <div
+                    key={partner.name}
+                    className="h-full relative rounded-2xl p-6 bg-[#161617] text-white border border-white/10 hover:border-white/25 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group overflow-hidden"
+                  >
+                    {/* Subtle federal red & blue ambient glow */}
+                    <div className="absolute top-0 right-0 w-36 h-36 bg-[#B42318]/20 rounded-full blur-2xl pointer-events-none" />
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
+                    
+                    <div className="relative z-10 flex-1 flex flex-col">
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-2.5 py-0.5 rounded-full border border-emerald-400/20">
+                          {partner.badge}
+                        </span>
+                        <span className="text-[10px] text-white/50 font-medium tracking-wide">U.S. DHS</span>
+                      </div>
+
+                      {/* Official E-Verify Emblem Container */}
+                      <div className="relative w-full h-12 bg-black/40 rounded-xl border border-white/10 p-1.5 my-2 flex items-center justify-center shadow-inner">
+                        <Image
+                          src="/e-verify.png"
+                          alt="Official E-Verify Federal Employment Verification Program"
+                          width={140}
+                          height={45}
+                          className="object-contain max-h-9 w-auto"
+                        />
+                      </div>
+
+                      <h3 className="font-bold text-white text-[18px] tracking-tight mt-1 group-hover:text-emerald-300 transition-colors">
+                        {partner.name}
+                      </h3>
+                      <p className="text-[11px] text-white/50 font-semibold uppercase tracking-wider mt-0.5">
+                        {partner.category}
+                      </p>
+                      <p className="text-[12.5px] text-white/70 font-normal mt-2 leading-relaxed">
+                        {partner.role}
+                      </p>
+                    </div>
+
+                    <div className="relative z-10 mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-[11px] text-white/60">
+                      <span>Federal Compliance</span>
+                      <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Verified US Firm
+                      </span>
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <div
+                  key={partner.name}
+                  className="h-full bg-white hover:bg-white rounded-2xl p-6 border border-black/[0.08] hover:border-black/[0.16] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group cursor-default"
+                >
+                  <div className="flex-1 flex flex-col">
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="text-[11px] font-semibold uppercase tracking-wider text-[#B42318] bg-[#B42318]/8 px-2.5 py-0.5 rounded-full">
+                        {partner.badge || partner.category}
+                      </span>
+                      <span className="text-[11px] text-[#86868B] font-medium">Enterprise</span>
+                    </div>
+
+                    <h3 className="font-bold text-[#1D1D1F] group-hover:text-[#B42318] transition-colors text-[20px] tracking-tight">
+                      {partner.name}
+                    </h3>
+
+                    <p className="text-[11px] text-[#86868B] font-semibold uppercase tracking-wider mt-1">
+                      {partner.category}
+                    </p>
+
+                    <p className="text-[13px] text-[#515154] mt-2 leading-relaxed">
+                      {partner.role}
+                    </p>
+                  </div>
+
+                  <div className="mt-auto pt-4 border-t border-black/[0.06] flex items-center justify-between text-[12px] text-[#86868B]">
+                    <span>Collaboration</span>
+                    <span className="text-[#1D1D1F] font-medium flex items-center gap-1 group-hover:text-[#B42318] transition-colors">
+                      Active Alliance
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
         </div>

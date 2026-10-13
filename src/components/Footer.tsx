@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig, solutions, industries } from "@/data/content";
 import Logo from "./Logo";
 import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
@@ -66,6 +67,30 @@ export default function Footer() {
                 <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-white transition-colors">
                   {siteConfig.contact.email}
                 </a>
+              </div>
+            </div>
+
+            {/* Official E-Verify Federal Authorization Badge */}
+            <div className="pt-2">
+              <div className="inline-flex items-center gap-3.5 p-3 rounded-xl bg-slate-900/90 border border-white/10 hover:border-white/20 transition-all max-w-sm">
+                <div className="relative w-24 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-[#1A1A1A] p-1 flex items-center justify-center">
+                  <Image
+                    src="/e-verify.png"
+                    alt="E-Verify Official Federal Employment Eligibility Verification Program"
+                    width={100}
+                    height={45}
+                    className="object-contain max-h-10 w-auto"
+                  />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    <span className="text-[12px] font-bold text-white tracking-wide">An E-Verified US Firm</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400 leading-tight mt-0.5">
+                    U.S. Department of Homeland Security authorized employer.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -187,7 +212,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about-us#partnerships" className="text-slate-400 hover:text-white hover:translate-x-1 inline-block transition-all text-[13.5px]">
+                <Link href="/#partnerships" className="text-slate-400 hover:text-white hover:translate-x-1 inline-block transition-all text-[13.5px]">
                   Partners & Certifications
                 </Link>
               </li>

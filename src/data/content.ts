@@ -258,16 +258,56 @@ export const vendorEcosystem = [
 ];
 
 export const clientPartners = [
-  { name: "SAP Partner", category: "Alliance Partner" },
-  { name: "Microsoft Gold", category: "Cloud & Solutions" },
-  { name: "Oracle Partner", category: "Fusion & Database" },
-  { name: "AWS Partner", category: "Cloud Infrastructure" },
-  { name: "Eviden", category: "Technology Partner" },
-  { name: "HP Enterprise", category: "Infrastructure" },
-  { name: "Proaxia", category: "Automotive Solutions" },
-  { name: "Yash Technologies", category: "Implementation Partner" },
-  { name: "Prodigi", category: "Digital Services" },
-  { name: "Wiselink", category: "Enterprise Partner" }
+  {
+    name: "Microsoft",
+    category: "Cloud, AI & Solutions",
+    role: "Azure Cloud, Microsoft 365, Power BI & Enterprise Modernization",
+    badge: "Cloud & AI Partner"
+  },
+  {
+    name: "Nvidia",
+    category: "AI Computing & GPUs",
+    role: "Accelerated Enterprise AI Computing & High-Performance Infrastructure",
+    badge: "AI Partner"
+  },
+  {
+    name: "AWS",
+    category: "Cloud Infrastructure",
+    role: "Amazon Web Services Scalable Architecture, Serverless & DevOps",
+    badge: "Cloud Partner"
+  },
+  {
+    name: "Ekipit",
+    category: "Strategic Alliance",
+    role: "Global Enterprise Delivery & Scalable IT Infrastructure Services",
+    badge: "Strategic Partner"
+  },
+  {
+    name: "HCL Tech",
+    category: "Digital Engineering",
+    role: "Enterprise Technology Consulting & Large-Scale Systems Integration",
+    badge: "Technology Partner"
+  },
+  {
+    name: "Cognizant",
+    category: "Core Modernization",
+    role: "Business Architecture Transformation & Enterprise Advisory",
+    badge: "Enterprise Partner"
+  },
+  {
+    name: "Capgemini",
+    category: "Global Transformation",
+    role: "Cloud Engineering, Systems Modernization & Industry Solutions",
+    badge: "Global Partner"
+  },
+  {
+    name: "An E-verified US Firm",
+    category: "Federal DHS Authorization",
+    role: "Official U.S. Department of Homeland Security E-Verify Program Participant",
+    badge: "Federal Compliance",
+    isEVerify: true,
+    logo: "/e-verify.png"
+  }
 ];
 
 export const consultationBenefits = [
