@@ -28,7 +28,7 @@ export default function Industries() {
       <div id="overview" className="pb-0 scroll-mt-[100px]">
         {/* Hero */}
         <section className="relative pt-[120px] pb-[80px] px-6 text-center">
-          <BackgroundMedia slotKey="industries-hero" type="video" overlay="white-bottom" priority parallax />
+          <BackgroundMedia slotKey="industries-hero" type="video" overlay="white-full" overlayOpacity={0.92} priority parallax />
           <div className="max-w-[980px] mx-auto relative z-10">
             <p className="text-[14px] font-semibold text-apple-text-sec uppercase tracking-widest mb-4">
               Industries Served
@@ -36,7 +36,7 @@ export default function Industries() {
             <h1 className="text-h1 mb-6 text-apple-text">
               Empowering Enterprises Across Sectors
             </h1>
-            <p className="text-h3 text-apple-text-sec font-normal max-w-[800px] mx-auto mb-10 bg-white/40 p-2 rounded-2xl backdrop-blur-[2px]">
+            <p className="text-h3 text-apple-text-sec font-normal max-w-[800px] mx-auto mb-10">
               TechAxis Global LLC (TAG) delivers advanced analytics, IT consulting, and staffing solutions for a diverse range of industries. Our expertise drives digital transformation and business intelligence for leading organizations.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

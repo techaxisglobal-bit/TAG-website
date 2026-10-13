@@ -21,7 +21,7 @@ export default function Careers() {
       <div id="overview" className="pb-0 scroll-mt-[100px]">
         {/* Hero */}
         <section className="relative pt-[120px] pb-[80px] px-6 text-center">
-          <BackgroundMedia slotKey="careers-hero" type="video" overlay="white-bottom" priority parallax />
+          <BackgroundMedia slotKey="careers-hero" type="video" overlay="white-full" overlayOpacity={0.92} priority parallax />
           <div className="max-w-[980px] mx-auto relative z-10">
             <p className="text-[14px] font-semibold text-apple-text-sec uppercase tracking-widest mb-4">
               Join Our Team
@@ -29,7 +29,7 @@ export default function Careers() {
             <h1 className="text-h1 mb-6 text-apple-text">
               Careers at TechAxis Global LLC (TAG)
             </h1>
-            <p className="text-h3 text-apple-text-sec font-normal max-w-[800px] mx-auto mb-10 bg-white/40 p-2 rounded-2xl backdrop-blur-[2px]">
+            <p className="text-h3 text-apple-text-sec font-normal max-w-[800px] mx-auto mb-10">
               Empowering IT professionals to drive innovation in enterprise analytics, business intelligence, and data engineering. Explore opportunities to grow your career with a global leader in consulting and technology solutions.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

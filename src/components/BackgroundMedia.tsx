@@ -158,7 +158,7 @@ export default function BackgroundMedia({
         <div className="absolute inset-0 bg-white" style={{ opacity: overlayOpacity }} />
       )}
       {overlay === "frost" && (
-        <div className="absolute inset-0 bg-white/50 backdrop-blur-xl saturate-150" style={{ opacity: overlayOpacity }} />
+        <div className="absolute inset-0 bg-white/92 backdrop-blur-2xl" style={{ opacity: overlayOpacity }} />
       )}
     </div>
   );

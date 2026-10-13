@@ -103,8 +103,8 @@ export default function ContactUs() {
                     </div>
                   </div>
                   <div>
-                    <select id="service" className="w-full bg-white/80 border border-apple-hairline rounded-[12px] px-4 py-4 text-[17px] focus:outline-none focus:border-[#B42318] focus:ring-1 focus:ring-[#B42318] transition-colors text-apple-text backdrop-blur-md">
-                      <option value="" disabled selected>Service of Interest</option>
+                    <select id="service" defaultValue="" className="w-full bg-white/80 border border-apple-hairline rounded-[12px] px-4 py-4 text-[17px] focus:outline-none focus:border-[#B42318] focus:ring-1 focus:ring-[#B42318] transition-colors text-apple-text backdrop-blur-md">
+                      <option value="" disabled>Service of Interest</option>
                       <option>Business Intelligence & Analytics</option>
                       <option>Data Engineering & Cloud</option>
                       <option>Qlik to Power BI Migration</option>

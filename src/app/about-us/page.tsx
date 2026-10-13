@@ -21,7 +21,7 @@ export default function AboutUs() {
       <div id="overview" className="pb-0 scroll-mt-[100px]">
         {/* Hero */}
         <section className="relative pt-[120px] pb-[80px] px-6 text-center">
-          <BackgroundMedia slotKey="about-hero" type="video" overlay="white-bottom" priority parallax />
+          <BackgroundMedia slotKey="about-hero" type="video" overlay="white-full" overlayOpacity={0.92} priority parallax />
           <div className="max-w-[980px] mx-auto relative z-10">
             <p className="text-[14px] font-semibold text-apple-text-sec uppercase tracking-widest mb-4">
               About TechAxis Global LLC (TAG)
@@ -29,7 +29,7 @@ export default function AboutUs() {
             <h1 className="text-h1 mb-6 text-apple-text">
               Delivering Data, Analytics & IT Consulting Excellence
             </h1>
-            <p className="text-h3 text-apple-text-sec font-normal max-w-[800px] mx-auto mb-10 bg-white/30 p-2 rounded-2xl backdrop-blur-[2px]">
+            <p className="text-h3 text-apple-text-sec font-normal max-w-[800px] mx-auto mb-10">
               For over 12 years, TAG has empowered enterprises with modern analytics, business intelligence, and IT consulting solutions. Our dual presence in the USA & India enables us to deliver global expertise with boutique focus.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

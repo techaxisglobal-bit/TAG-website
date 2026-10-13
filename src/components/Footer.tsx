@@ -25,10 +25,10 @@ export default function Footer() {
           </div>
           <Link
             href="/contact-us"
-            className="bg-[#B42318] hover:bg-white hover:text-[#B42318] text-white px-7 py-3.5 rounded-md font-semibold transition-all duration-300 shadow-lg flex items-center gap-2 flex-shrink-0 group"
+            className="bg-[#B42318] hover:bg-white hover:text-[#B42318] text-white px-7 py-3.5 rounded-full font-semibold transition-all duration-200 shadow-md flex items-center gap-2 flex-shrink-0 group active:scale-95"
           >
             <span>Schedule a Free Consultation</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

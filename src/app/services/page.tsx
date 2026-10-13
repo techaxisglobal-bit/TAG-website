@@ -21,7 +21,7 @@ export default function Services() {
       <div id="overview" className="pb-0 scroll-mt-[100px]">
         {/* Hero */}
         <section className="relative pt-[120px] pb-[80px] px-6 text-center">
-          <BackgroundMedia slotKey="services-hero" type="video" overlay="white-bottom" priority parallax />
+          <BackgroundMedia slotKey="services-hero" type="video" overlay="white-full" overlayOpacity={0.92} priority parallax />
           <div className="max-w-[980px] mx-auto relative z-10">
             <p className="text-[14px] font-semibold text-apple-text-sec uppercase tracking-widest mb-4">
               Our Services
@@ -29,7 +29,7 @@ export default function Services() {
             <h1 className="text-h1 mb-6 text-apple-text">
               Enterprise IT Consulting & Data Solutions
             </h1>
-            <p className="text-h3 text-apple-text-sec font-normal max-w-[800px] mx-auto mb-10 bg-white/40 p-2 rounded-2xl backdrop-blur-[2px]">
+            <p className="text-h3 text-apple-text-sec font-normal max-w-[800px] mx-auto mb-10">
               TechAxis Global LLC (TAG) delivers world-class IT consulting, analytics, and staffing services to help enterprises modernize reporting, data, and business intelligence platforms.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -85,7 +85,7 @@ export default function Services() {
                 { title: "Enterprise Analytics", desc: "Modern analytics and reporting for business growth and operational efficiency." },
                 { title: "Cloud Data Solutions", desc: "Cloud-based data platforms and engineering for scalable, future-ready enterprises." },
               ].map(item => (
-                <div key={item.title} className="card bg-apple-surface/80 backdrop-blur-md">
+                <div key={item.title} className="card bg-white border border-slate-200/80 shadow-sm">
                   <h3 className="text-[24px] font-semibold text-apple-text mb-3">{item.title}</h3>
                   <p className="text-[17px] text-apple-text-sec leading-relaxed mb-6">{item.desc}</p>
                   <Link href="/contact-us" className="btn-link">
@@ -113,7 +113,7 @@ export default function Services() {
                 { q: "Their expertise in Power BI migration ensured a seamless transition and improved reporting efficiency.", a: "VP, Data & Analytics, Fortune 500 Client" },
                 { q: "We rely on TAG for specialized IT staffing and ongoing consulting support.", a: "IT Program Manager, Enterprise Retailer" },
               ].map((test, i) => (
-                <div key={i} className="card bg-white/90 backdrop-blur-sm flex flex-col justify-between shadow-sm">
+                <div key={i} className="card bg-white border border-slate-200/80 flex flex-col justify-between shadow-sm">
                   <div>
                     <div className="flex gap-1 mb-6">
                       {[1,2,3,4,5].map(j => <span key={j} className="text-[18px] text-apple-text">★</span>)}
