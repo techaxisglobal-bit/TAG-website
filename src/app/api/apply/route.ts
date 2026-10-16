@@ -136,19 +136,21 @@ export async function POST(request: Request) {
     await saveApplicationRecord(record);
 
     // 6. Forward application & resume to Google Sheets Webhook (logs row, saves resume to Google Drive, sends emails with zero passwords)
-    sendToGoogleSheetWebhook({
-      name,
-      email,
-      phone,
-      role,
-      message,
-      timestamp,
-      resumeFileName,
-      resumeContentType,
-      resumeBuffer
-    }).catch((sheetErr) => {
-      console.error("[GoogleSheet] Async dispatch error:", sheetErr);
-    });
+    try {
+      await sendToGoogleSheetWebhook({
+        name,
+        email,
+        phone,
+        role,
+        message,
+        timestamp,
+        resumeFileName,
+        resumeContentType,
+        resumeBuffer
+      });
+    } catch (sheetErr) {
+      console.error("[GoogleSheet] Webhook dispatch error:", sheetErr);
+    }
 
     // 7. Deliver email via SMTP if configured
     await sendApplicationToHR({

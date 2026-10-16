@@ -20,34 +20,42 @@ const APPLICATIONS_FILE = path.join(DATA_DIR, "applications.json");
 const RESUMES_DIR = path.join(process.cwd(), "public", "uploads", "resumes");
 
 function ensureDirectories() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-  if (!fs.existsSync(RESUMES_DIR)) {
-    fs.mkdirSync(RESUMES_DIR, { recursive: true });
-  }
-  if (!fs.existsSync(APPLICATIONS_FILE)) {
-    fs.writeFileSync(APPLICATIONS_FILE, JSON.stringify([], null, 2), "utf8");
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(RESUMES_DIR)) {
+      fs.mkdirSync(RESUMES_DIR, { recursive: true });
+    }
+    if (!fs.existsSync(APPLICATIONS_FILE)) {
+      fs.writeFileSync(APPLICATIONS_FILE, JSON.stringify([], null, 2), "utf8");
+    }
+  } catch (err) {
+    // Gracefully handle read-only filesystems on serverless hosting (Vercel/Netlify/Lambda)
+    console.log("[Storage: Info] Serverless read-only filesystem; skipping local directory creation.");
   }
 }
 
 /**
- * Saves an uploaded resume file to public/uploads/resumes
+ * Saves an uploaded resume file to local disk (if writable)
  */
 export async function saveResumeFile(
   fileBuffer: Buffer,
   originalFilename: string,
   applicantName: string
 ): Promise<{ fileName: string; relativeUrl: string; fullPath: string }> {
-  ensureDirectories();
-
   const ext = path.extname(originalFilename) || ".pdf";
   const sanitizedName = applicantName.toLowerCase().replace(/[^a-z0-9]/g, "_").slice(0, 30);
   const timestamp = Date.now();
   const safeFileName = `${timestamp}_${sanitizedName}${ext}`;
   const fullPath = path.join(RESUMES_DIR, safeFileName);
 
-  await fs.promises.writeFile(fullPath, fileBuffer);
+  try {
+    ensureDirectories();
+    await fs.promises.writeFile(fullPath, fileBuffer);
+  } catch (err) {
+    console.log("[Storage: Info] Serverless read-only filesystem; skipping local resume file write.");
+  }
 
   return {
     fileName: safeFileName,
@@ -57,14 +65,13 @@ export async function saveResumeFile(
 }
 
 /**
- * Persists application to JSON database & optionally syncs to Google Sheets webhook
+ * Persists application to JSON database (if writable)
  */
 export async function saveApplicationRecord(
   record: JobApplicationRecord
 ): Promise<void> {
-  ensureDirectories();
-
   try {
+    ensureDirectories();
     let applications: JobApplicationRecord[] = [];
     if (fs.existsSync(APPLICATIONS_FILE)) {
       const content = await fs.promises.readFile(APPLICATIONS_FILE, "utf8");
@@ -82,45 +89,23 @@ export async function saveApplicationRecord(
       JSON.stringify(applications, null, 2),
       "utf8"
     );
-
-    // Optional Google Sheet Webhook Sync
-    const sheetWebhook = process.env.GOOGLE_SHEET_WEBHOOK_URL;
-    if (sheetWebhook && sheetWebhook.startsWith("http")) {
-      try {
-        await fetch(sheetWebhook, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            timestamp: record.timestamp,
-            role: record.role,
-            name: record.name,
-            email: record.email,
-            phone: record.phone,
-            message: record.message,
-            resumeFileName: record.resumeFileName,
-            resumeUrl: record.resumeUrl || "N/A"
-          })
-        });
-        console.log(`[Storage] Synced application ${record.id} to Google Sheet Webhook`);
-      } catch (sheetErr) {
-        console.error("[Storage] Google Sheet webhook sync failed:", sheetErr);
-      }
-    }
   } catch (error) {
-    console.error("[Storage] Failed to save application record to disk:", error);
-    throw error;
+    console.log("[Storage: Info] Serverless read-only filesystem; skipping local JSON backup.");
   }
 }
 
 /**
- * Retrieves all stored applications
+ * Retrieves stored applications
  */
 export async function getApplicationRecords(): Promise<JobApplicationRecord[]> {
-  ensureDirectories();
   try {
-    const content = await fs.promises.readFile(APPLICATIONS_FILE, "utf8");
-    return JSON.parse(content);
+    ensureDirectories();
+    if (fs.existsSync(APPLICATIONS_FILE)) {
+      const content = await fs.promises.readFile(APPLICATIONS_FILE, "utf8");
+      return JSON.parse(content);
+    }
   } catch {
-    return [];
+    // read-only or empty
   }
+  return [];
 }

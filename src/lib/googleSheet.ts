@@ -10,12 +10,14 @@ export interface GoogleSheetPayload {
   resumeBuffer?: Buffer;
 }
 
+const DEFAULT_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwl4fLF5F78XVqHsyFkawT3ACzCnczyXeMXga1tW-eSYMhkLuDcTK1zGOVwa_K1GLQ/exec";
+
 /**
  * Forwards application and resume to Google Apps Script Webhook
  * Which saves to Google Sheet, Google Drive, and sends emails automatically
  */
 export async function sendToGoogleSheetWebhook(payload: GoogleSheetPayload): Promise<{ success: boolean; message?: string }> {
-  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL || DEFAULT_WEBHOOK_URL;
   if (!webhookUrl || !webhookUrl.startsWith("http")) {
     return { success: false, message: "GOOGLE_SHEET_WEBHOOK_URL not configured" };
   }
