@@ -1,47 +1,45 @@
 @import "tailwindcss";
 
 @theme {
+  --color-primary: #B42318;
+  --color-primary-hover: #991B1B;
+  --color-primary-subtle: rgba(180, 35, 24, 0.08);
+  --color-accent: #4F46E5;
+  
   --color-brand-primary: #B42318;
-  --color-brand-primary-hover: #8E1010;
-  --color-brand-crimson: #C92A2A;
+  --color-brand-primary-hover: #991B1B;
   --color-brand-gold: #D97706;
-  --color-brand-gold-hover: #B45309;
   --color-brand-navy: #0F172A;
-  --color-brand-charcoal: #1E293B;
-  --color-brand-muted: #64748B;
-  --color-brand-surface: #F8FAFC;
-  --color-brand-card: #FFFFFF;
-  --color-brand-border: #E2E8F0;
-
-  /* Apple Human Interface Guidelines Design Tokens */
-  --color-apple-text: #1D1D1F;
-  --color-apple-text-sec: #86868B;
-  --color-apple-text-tertiary: #A1A1A6;
-  --color-apple-surface: #F5F5F7;
-  --color-apple-surface-secondary: #E8E8ED;
-  --color-apple-card: #FFFFFF;
-  --color-apple-border: rgba(0, 0, 0, 0.08);
-  --color-apple-hairline: rgba(0, 0, 0, 0.06);
-  --color-apple-link: #0066CC;
-  --color-apple-link-hover: #004499;
-  --color-apple-dark: #161617;
-  --color-apple-dark-surface: #1D1D1F;
-  --color-apple-dark-card: #242426;
-  --color-apple-dark-border: rgba(255, 255, 255, 0.12);
-  --color-apple-dark-text-sec: #A1A1A6;
-
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", var(--font-inter), sans-serif;
+  
+  /* Font Family Tokens */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @layer base {
   :root {
     --background: #FFFFFF;
-    --foreground: #1D1D1F;
+    --foreground: #09090B;
+    --surface-subtle: #FAFAFA;
+    --surface-card: #FFFFFF;
+    --surface-muted: #F4F4F5;
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --border-strong: rgba(0, 0, 0, 0.12);
   }
-  
+
+  .dark {
+    --background: #09090B;
+    --foreground: #FAFAFA;
+    --surface-subtle: #121215;
+    --surface-card: #18181B;
+    --surface-muted: #27272A;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.16);
+  }
+
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 96px;
+    scroll-padding-top: 88px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -51,8 +49,8 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
-    font-size: 16px;
-    line-height: 1.55;
+    font-size: 15px;
+    line-height: 1.6;
     letter-spacing: -0.011em;
   }
 
@@ -63,154 +61,176 @@
 }
 
 @layer components {
-  /* Apple Optical Sizing & Tracking */
-  .text-h1 {
-    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  /* =========================================================
+     TYPOGRAPHY TOKENS (Linear & Stripe Scale)
+     ========================================================= */
+  .display-hero {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5.2vw, 4.25rem);
     font-weight: 700;
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    color: #1D1D1F;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    color: #09090B;
   }
-  
-  .text-h2 {
-    font-size: clamp(2rem, 3.8vw, 3.25rem);
+
+  .display-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.6vw, 3rem);
     font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-    color: #1D1D1F;
+    line-height: 1.15;
+    letter-spacing: -0.028em;
+    color: #09090B;
   }
-  
-  .text-h3 {
-    font-size: clamp(1.25rem, 2vw, 1.75rem);
+
+  .display-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
     font-weight: 600;
     line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: #09090B;
+  }
+
+  .body-lead {
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: #52525B;
+    max-width: 65ch;
+  }
+
+  /* Backwards compatibility aliases for existing templates */
+  .text-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4.8vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #09090B;
+  }
+
+  .text-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.85rem, 3.4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: #09090B;
+  }
+
+  .text-h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.3;
     letter-spacing: -0.015em;
-    color: #1D1D1F;
+    color: #09090B;
   }
 
   .text-lead {
-    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-    font-weight: 400;
-    line-height: 1.5;
-    letter-spacing: -0.012em;
-    color: #86868B;
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    line-height: 1.6;
+    color: #52525B;
+    max-width: 65ch;
   }
 
-  /* Apple Solid & Clean Surfaces (Prevents background bleed-through) */
-  .nav-blur {
+  /* =========================================================
+     SURFACE & ELEVATION (Stripe/Linear Ambient Depth)
+     ========================================================= */
+  .frosted-header {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
+  }
+
+  .frosted-header-dark {
+    background-color: rgba(9, 9, 11, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .card-modern, .apple-card, .card {
     background-color: #FFFFFF;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-  }
-
-  .nav-blur-dark {
-    background-color: #161617;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .liquid-glass {
-    background-color: #FFFFFF;
+    border-radius: 1rem;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 6px 16px -4px rgba(0, 0, 0, 0.04);
+    transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 250ms ease, border-color 200ms ease;
   }
 
-  .liquid-glass-dark {
-    background-color: #1D1D1F;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.4);
-  }
-
-  /* Apple Cards & Squircle Surfaces */
-  .apple-card, .card {
-    background-color: #FFFFFF;
-    border-radius: 1.5rem;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 300ms ease, border-color 200ms ease;
-  }
-  
-  .apple-card:hover, .card:hover {
+  .card-modern:hover, .apple-card:hover, .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.14);
+    box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.08);
   }
 
-  .card {
-    padding: 2rem;
+  .card-modern-dark {
+    background-color: #18181B;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   }
 
-  .feature-card {
-    background-color: #FFFFFF;
-    border-radius: 1.25rem;
-    padding: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
-    transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Section Spacing Utilities */
+  .section-padding {
+    padding-top: clamp(5rem, 8vw, 7.5rem);
+    padding-bottom: clamp(5rem, 8vw, 7.5rem);
   }
 
-  .feature-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 36px rgba(180, 35, 24, 0.1);
-    border-color: rgba(180, 35, 24, 0.3);
+  .section-padding-sm {
+    padding-top: clamp(3.5rem, 5vw, 5rem);
+    padding-bottom: clamp(3.5rem, 5vw, 5rem);
   }
 
-  /* Tactile Physical Buttons (WWDC Fluid Motion: Instant press response) */
-  .btn-apple-pill {
-    @apply inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none;
+  /* =========================================================
+     BUTTONS & MICRO-INTERACTIONS
+     ========================================================= */
+  .btn-primary {
+    @apply inline-flex items-center justify-center bg-[#B42318] hover:bg-[#991B1B] text-white rounded-full font-semibold transition-all duration-200 shadow-xs hover:shadow-md cursor-pointer select-none active:scale-[0.98];
     padding: 10px 22px;
     font-size: 14px;
     letter-spacing: -0.01em;
   }
 
-  .btn-apple-pill:active,
-  .btn-primary:active,
-  .btn-secondary:active,
-  .btn-outline-white:active,
-  .btn-gold:active {
-    transform: scale(0.97);
-    transition: transform 80ms ease-out;
-  }
-
-  .btn-primary {
-    @apply inline-flex items-center justify-center bg-[#B42318] hover:bg-[#8E1010] text-white rounded-full font-semibold transition-all duration-300 shadow-sm cursor-pointer select-none;
-    padding: 11px 24px;
-    font-size: 14px;
-  }
-  
   .btn-secondary {
-    @apply inline-flex items-center justify-center border border-slate-300 text-[#1D1D1F] hover:bg-[#1D1D1F] hover:text-white rounded-full font-medium transition-all duration-300 cursor-pointer select-none;
-    padding: 11px 24px;
+    @apply inline-flex items-center justify-center bg-white hover:bg-zinc-50 text-zinc-900 border border-zinc-200/90 hover:border-zinc-300 rounded-full font-medium transition-all duration-200 shadow-2xs cursor-pointer select-none active:scale-[0.98];
+    padding: 10px 22px;
     font-size: 14px;
-  }
-
-  .btn-outline-white {
-    @apply inline-flex items-center justify-center border border-white/80 text-white hover:bg-white hover:text-[#1D1D1F] rounded-full font-medium transition-all duration-300 cursor-pointer select-none backdrop-blur-sm;
-    padding: 11px 24px;
-    font-size: 14px;
-  }
-
-  .btn-gold {
-    @apply inline-flex items-center justify-center bg-[#D97706] hover:bg-[#B45309] text-white rounded-full font-semibold transition-all duration-300 shadow-sm cursor-pointer select-none;
-    padding: 11px 24px;
-    font-size: 14px;
-  }
-  
-  .btn-link {
-    @apply inline-flex items-center text-[#0066CC] hover:text-[#004499] font-medium transition-colors cursor-pointer;
-    font-size: 15px;
     letter-spacing: -0.01em;
   }
 
+  .btn-ghost {
+    @apply inline-flex items-center justify-center text-zinc-600 hover:text-zinc-900 hover:bg-black/[0.04] rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98];
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .btn-link {
+    @apply inline-flex items-center text-[#B42318] hover:text-[#991B1B] font-medium transition-colors cursor-pointer;
+    font-size: 14.5px;
+    letter-spacing: -0.01em;
+  }
+
+  /* =========================================================
+     BADGES & CAPSULES
+     ========================================================= */
   .badge-tag {
-    @apply inline-flex items-center gap-1.5 uppercase tracking-widest text-[11px] font-bold text-[#B42318] bg-[#B42318]/10 border border-[#B42318]/20 px-3.5 py-1 rounded-full;
+    @apply inline-flex items-center gap-1.5 uppercase tracking-wider text-[11px] font-semibold text-[#B42318] bg-[#B42318]/8 border border-[#B42318]/15 px-3 py-1 rounded-full;
   }
 
-  .badge-tag-gold {
-    @apply inline-flex items-center gap-1.5 uppercase tracking-widest text-[11px] font-bold text-[#D97706] bg-[#D97706]/10 border border-[#D97706]/20 px-3.5 py-1 rounded-full;
+  .badge-neutral {
+    @apply inline-flex items-center gap-1.5 uppercase tracking-wider text-[11px] font-medium text-zinc-600 bg-zinc-100 border border-zinc-200/80 px-3 py-1 rounded-full;
   }
 
-  .badge-tag-dark {
-    @apply inline-flex items-center gap-1.5 uppercase tracking-widest text-[11px] font-bold text-white bg-white/15 backdrop-blur-md px-3.5 py-1 rounded-full border border-white/20;
+  .badge-success {
+    @apply inline-flex items-center gap-1.5 uppercase tracking-wider text-[11px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-3 py-1 rounded-full;
+  }
+
+  /* Inputs */
+  .input-modern {
+    @apply w-full bg-white border border-zinc-200 rounded-xl px-4 py-3 text-[14px] text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-[#B42318] focus:ring-2 focus:ring-[#B42318]/12 transition-all;
   }
 }
 
@@ -225,14 +245,108 @@
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .nav-blur, .liquid-glass {
+  .frosted-header {
     background-color: #FFFFFF !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
-  .liquid-glass-dark, .nav-blur-dark {
-    background-color: #161617 !important;
+  .frosted-header-dark {
+    background-color: #09090B !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
 }
+
+/* =========================================================
+   HOME PAGE HERO BACKGROUND VIDEO
+   Looping background video for Home Page Hero section only
+   ========================================================= */
+
+.hero-video-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-video-element {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Transparent overlay allowing background video to shine through clearly and vividly */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.22) 65%, rgba(0, 0, 0, 0.05) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Static poster image for prefers-reduced-motion / fallback */
+.hero-video-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Small Pause/Play toggle button in hero corner matching site theme */
+.hero-video-toggle {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1D1D1F;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-video-toggle:hover {
+  background-color: #FFFFFF;
+  border-color: #B42318;
+  color: #B42318;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(180, 35, 24, 0.15);
+}
+
+.hero-video-toggle:active {
+  transform: scale(0.95);
+}
+
+.hero-video-toggle:focus-visible {
+  outline: 2px solid #B42318;
+  outline-offset: 2px;
+}
+
+/* Accessibility: Hide video and show static poster on prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video-element {
+    display: none !important;
+  }
+  .hero-video-poster {
+    display: block !important;
+  }
+}
+

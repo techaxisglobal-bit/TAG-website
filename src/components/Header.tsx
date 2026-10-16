@@ -27,18 +27,18 @@ export default function Header() {
   };
 
   const solutionIcons: Record<string, any> = {
-    "Digital Transformation": Sparkles,
-    "ERP Solutions": Database,
-    "Managed Services": ShieldCheck,
-    "Cyber Security": Lock,
-    "Intelligent Automation": Zap,
-    "Data Engineering & BI": BarChart3
+    "Business Intelligence & Analytics": BarChart3,
+    "Data Engineering & Cloud": Database,
+    "Qlik to Power BI Migration": Zap,
+    "Reporting Modernization": Sparkles,
+    "IT Consulting & Staffing": ShieldCheck,
+    "Enterprise Analytics & Cloud": Lock
   };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[60] bg-white border-b border-slate-200/90 transition-all duration-300 ${
-        isScrolled ? "h-[70px] shadow-[0_4px_16px_rgba(0,0,0,0.04)]" : "h-[78px]"
+      className={`fixed top-0 left-0 right-0 z-[60] frosted-header transition-all duration-300 ${
+        isScrolled ? "h-[68px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]" : "h-[76px]"
       }`}
     >
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
@@ -47,8 +47,8 @@ export default function Header() {
           <Logo variant="full" />
         </div>
 
-        {/* Desktop Navigation Links with Dropdowns (1280px+) */}
-        <nav className="hidden xl:flex items-center space-x-1" aria-label="Main Navigation">
+        {/* Desktop Navigation Links with Dropdowns (1024px+) */}
+        <nav className="hidden lg:flex items-center space-x-1" aria-label="Main Navigation">
           {navLinks.map((link) => {
             const hasSubmenu = link.submenu && link.submenu.length > 0;
             const isSolutions = link.name === "Solutions";
@@ -155,9 +155,9 @@ export default function Header() {
             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
           </Link>
 
-          {/* Hamburger Button (shown below 1280px) */}
+          {/* Hamburger Button (shown below 1024px) */}
           <button
-            className="xl:hidden p-2 text-[#1D1D1F] hover:text-[#B42318] transition-colors rounded-full border border-black/[0.08] active:scale-95"
+            className="lg:hidden p-2 text-zinc-900 hover:text-[#B42318] transition-colors rounded-full border border-black/[0.08] active:scale-95 cursor-pointer"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
@@ -172,10 +172,10 @@ export default function Header() {
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "calc(100vh - 70px)" }}
+            animate={{ opacity: 1, height: "calc(100vh - 68px)" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="xl:hidden fixed inset-x-0 top-[70px] bg-white border-t border-slate-200 z-50 overflow-y-auto px-6 py-6 flex flex-col justify-between"
+            className="lg:hidden fixed inset-x-0 top-[68px] bg-white/95 backdrop-blur-xl border-t border-zinc-200 z-50 overflow-y-auto px-6 py-6 flex flex-col justify-between"
           >
             <div className="space-y-2">
               {navLinks.map((link) => {

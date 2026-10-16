@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "TechAxis Global LLC",
   shortName: "TAG",
-  tagline: "Complexity Simplified",
+  tagline: "Enterprise IT Consulting & Solutions",
   heroHeading: "We manage your IT,\nso you can manage\nyour business.",
   heroSubheading: "Take charge of your business continuity with innovative IT solutions. Helping enterprises modernize data, ERP, cybersecurity, and cloud platforms with trusted consulting expertise.",
   description: "Enterprise IT consulting firm delivering digital transformation, ERP solutions, managed services, cybersecurity, and advanced data analytics for global organizations.",
@@ -28,12 +28,12 @@ export const navLinks = [
     name: "Solutions", 
     href: "/services",
     submenu: [
-      { name: "Digital Transformation", href: "/services#digital-transformation", desc: "Agile modern IT infrastructure & cloud transition" },
-      { name: "ERP Solutions", href: "/services#erp-solutions", desc: "SAP, Oracle Fusion, Microsoft Dynamics implementations" },
-      { name: "Managed Services", href: "/services#managed-services", desc: "24/7 proactive monitoring & enterprise application support" },
-      { name: "Cyber Security", href: "/services#cyber-security", desc: "Threat assessments, SOC monitoring & endpoint resilience" },
-      { name: "Intelligent Automation", href: "/services#automation", desc: "RPA, AI workflows, and process optimization" },
-      { name: "Data Engineering & BI", href: "/services#data-bi", desc: "Power BI, Microsoft Fabric, snowflake & modern analytics" }
+      { name: "Business Intelligence & Analytics", href: "/services", desc: "Power BI dashboards & advanced enterprise reporting" },
+      { name: "Data Engineering & Cloud", href: "/services", desc: "SQL architectures, data pipelines & cloud lakes" },
+      { name: "Qlik to Power BI Migration", href: "/services", desc: "Proven, minimal disruption migration methodology" },
+      { name: "Reporting Modernization", href: "/services", desc: "Modernize legacy systems and enhance reporting efficiency" },
+      { name: "IT Consulting & Staffing", href: "/services", desc: "Tailored IT talent & dedicated enterprise architects" },
+      { name: "Enterprise Analytics & Cloud", href: "/services", desc: "Predictive models & future-ready cloud data platforms" }
     ]
   },
   { 
@@ -73,84 +73,145 @@ export const valueProps = [
   {
     id: "cost",
     title: "Cost-effectiveness",
+    subtitle: "Engineered ROI & Transparent Cloud Optimization",
     description: "We offer affordable IT solutions that help you reduce overhead, maximize cloud efficiency, and optimize bottom-line ROI.",
-    icon: "TrendingDown"
+    icon: "TrendingDown",
+    benchmark: "Up to 35% reduction in enterprise IT total cost of ownership (TCO) through workload right-sizing, proactive automation, and transparent blended delivery.",
+    metric: { value: "35%", label: "Average TCO Reduction" },
+    pillars: [
+      { label: "FinOps & Cloud Optimization", desc: "Automated workload profiling and license consolidation across AWS, Azure, and private clouds." },
+      { label: "Predictable Blended Delivery", desc: "US enterprise architecture leadership paired with high-throughput dual-continent delivery centers." },
+      { label: "Transparent SLA Pricing", desc: "Zero hidden fees, milestone-backed contracts, and clear resource allocation." },
+      { label: "Waste & Zombie Elimination", desc: "Proactive audits to eliminate unused SaaS seats, idle servers, and redundant software subscriptions." }
+    ],
+    ctaText: "Schedule a Cost Audit",
+    ctaHref: "/contact-us?service=Cost%20Optimization"
   },
   {
     id: "tech",
     title: "Innovative Technology",
+    subtitle: "Future-Proof Architecture & AI-Driven Acceleration",
     description: "We stay at the frontier of technology trends, deploying AI, low-code frameworks, and modern architectures to keep you ahead.",
-    icon: "Cpu"
+    icon: "Cpu",
+    benchmark: "Zero-technical-debt engineering standards deploying secure enterprise AI, cloud-native microservices, and modern low-code frameworks.",
+    metric: { value: "4x", label: "Faster Deployment Velocity" },
+    pillars: [
+      { label: "Enterprise AI & Machine Learning", desc: "Private LLM deployment, predictive workflow analytics, and secure corporate knowledge bases." },
+      { label: "Modern Cloud-Native Stack", desc: "Kubernetes containerization, event-driven architectures, and scalable serverless compute." },
+      { label: "Low-Code Enterprise Agility", desc: "Rapid prototype-to-production using Microsoft Power Platform and PEGA Systems." },
+      { label: "Rigorous Code Governance", desc: "Automated CI/CD pipelines, 90%+ test coverage, and strict branch security policies." }
+    ],
+    ctaText: "Explore Technology Services",
+    ctaHref: "/services"
   },
   {
     id: "industry",
     title: "Industry Expertise",
+    subtitle: "Vertical Compliance & Proven Domain Know-How",
     description: "We specialize in tailored domain solutions for automotive, finance, manufacturing, and healthcare with deep compliance know-how.",
-    icon: "Award"
+    icon: "Award",
+    benchmark: "100% regulatory compliance and tailored sector workflows built from 12+ years of Fortune 500 and mid-market enterprise execution.",
+    metric: { value: "100%", label: "Audit Readiness Guarantee" },
+    pillars: [
+      { label: "Healthcare & Life Sciences", desc: "HIPAA, HITECH, and HITRUST certified data pipelines with encrypted EHR interoperability." },
+      { label: "Financial Services & Banking", desc: "SOC 1/2 Type II, PCI-DSS Level 1 compliance, and low-latency transactional integrity." },
+      { label: "Automotive & Manufacturing", desc: "Supply chain telemetry, IoT shop-floor integration, and strict IATF/ISO adherence." },
+      { label: "Retail & Consumer Goods", desc: "Omnichannel inventory synchronization and high-concurrency order management." }
+    ],
+    ctaText: "View Industry Solutions",
+    ctaHref: "/industries"
   },
   {
     id: "scale",
     title: "Scalability",
+    subtitle: "Resilient High-Throughput Distributed Infrastructure",
     description: "Our solutions are architected to scale seamlessly with your organizational growth, guaranteeing long-term sustainable value.",
-    icon: "Maximize"
+    icon: "Maximize",
+    benchmark: "Guaranteed 99.98% SLA availability with zero-downtime horizontal scaling and active-active geo-redundancy.",
+    metric: { value: "99.98%", label: "SLA Availability Standard" },
+    pillars: [
+      { label: "Elastic Auto-Scaling", desc: "Dynamic capacity bursting handling 10x traffic spikes with automated resource provisioning." },
+      { label: "Zero-Downtime Deployments", desc: "Blue-green and canary release pipelines ensuring 24/7 continuous business continuity." },
+      { label: "Multi-Region Disaster Recovery", desc: "Sub-minute RTO and RPO targets across geographically isolated global data centers." },
+      { label: "Enterprise ERP Scaling", desc: "High-concurrency performance tuning for mission-critical SAP S/4HANA and Oracle Fusion platforms." }
+    ],
+    ctaText: "Consult with an Architect",
+    ctaHref: "/contact-us"
+  }
+];
+
+export const comprehensiveServices = [
+  {
+    id: "bi-analytics",
+    category: "Business Intelligence",
+    title: "Business Intelligence & Analytics",
+    description: "Enterprise-grade BI solutions with Power BI, dashboard development, and advanced analytics to drive decision making.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+    href: "/services",
+    features: ["Power BI", "Executive Dashboards", "DAX & Tabular Modeling"]
+  },
+  {
+    id: "data-engineering",
+    category: "Data Platforms",
+    title: "Data Engineering & Cloud Solutions",
+    description: "Robust data engineering services including SQL, cloud data platforms, and modern data architecture for scalability.",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+    href: "/services",
+    features: ["SQL Warehousing", "ETL Pipelines", "Cloud Lakehouses"]
+  },
+  {
+    id: "qlik-powerbi",
+    category: "Migration",
+    title: "Qlik to Power BI Migration",
+    description: "Streamlined migration from Qlik to Power BI with proven methodologies and minimal business disruption.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    href: "/services",
+    features: ["Report Conversion", "Data Validation", "Zero Downtime"]
+  },
+  {
+    id: "reporting-modernization",
+    category: "Modernization",
+    title: "Reporting Modernization",
+    description: "Modernize legacy reporting platforms, improve data accuracy, and enhance reporting efficiency.",
+    image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80",
+    href: "/services",
+    features: ["Legacy Modernization", "Data Accuracy", "Automated Workflows"]
+  }
+];
+
+export const specializedStaffing = [
+  {
+    id: "it-consulting-staffing",
+    category: "Consulting & Staffing",
+    title: "IT Consulting & Staffing",
+    description: "Specialized IT consulting and staffing services for enterprise projects, ensuring the right expertise and ongoing support.",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80",
+    href: "/contact-us?service=IT%20Consulting%20%26%20Staffing",
+    features: ["Certified Enterprise Architects", "Flexible Staff Augmentation", "US E-Verified Firm"]
+  },
+  {
+    id: "enterprise-analytics",
+    category: "Analytics & Growth",
+    title: "Enterprise Analytics",
+    description: "Modern analytics and reporting for business growth, executive visibility, and operational efficiency.",
+    image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=900&q=80",
+    href: "/contact-us?service=Enterprise%20Analytics",
+    features: ["Predictive Analytics", "Operational Visibility", "KPI Monitoring"]
+  },
+  {
+    id: "cloud-data-solutions",
+    category: "Cloud Infrastructure",
+    title: "Cloud Data Solutions",
+    description: "Cloud-based data platforms and engineering for scalable, future-ready enterprise applications.",
+    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=900&q=80",
+    href: "/contact-us?service=Cloud%20Data%20Solutions",
+    features: ["Multi-Cloud Architecture", "Distributed Data Scaling", "SLA Guarantees"]
   }
 ];
 
 export const solutions = [
-  {
-    id: "digital-transformation",
-    category: "Modernization",
-    title: "Digital Transformation",
-    description: "In a digital world that is evolving quickly, digital transformation helps firms become more competitive, efficient, and customer-centric through cloud, API, and workflow innovation.",
-    href: "/services",
-    icon: "Sparkles",
-    features: ["Cloud Migration", "API Integration", "Legacy Modernization"]
-  },
-  {
-    id: "erp-solutions",
-    category: "Enterprise Systems",
-    title: "ERP Solutions",
-    description: "Expert ERP solutions across SAP S/4 HANA, Oracle Fusion, and Microsoft Dynamics 365. We optimize core enterprise resource planning for peak operational efficiency.",
-    href: "/services",
-    icon: "Database",
-    features: ["SAP S/4 HANA", "Oracle Fusion", "Microsoft Dynamics"]
-  },
-  {
-    id: "managed-services",
-    category: "Support & SLA",
-    title: "Managed Services",
-    description: "By partnering with our dedicated 24/7 managed IT services, enterprises reduce downtime, maintain continuous system health, and free in-house teams to focus on strategy.",
-    href: "/services",
-    icon: "ShieldCheck",
-    features: ["24/7 Monitoring", "SLA Guarantees", "Application Maintenance"]
-  },
-  {
-    id: "cyber-security",
-    category: "Defense & Risk",
-    title: "Cyber Security",
-    description: "Safeguard networks, critical systems, and confidential data against evolving threats with real-time risk assessment, AI threat detection, and rigorous compliance governance.",
-    href: "/services",
-    icon: "Lock",
-    features: ["Threat Monitoring", "Penetration Testing", "SOC2 Compliance"]
-  },
-  {
-    id: "automation",
-    category: "AI & Workflows",
-    title: "Intelligent Automation",
-    description: "Leverage advanced technologies like AI predictive analytics, Robotic Process Automation (RPA), and NLP to eliminate repetitive tasks and create an agile automation ecosystem.",
-    href: "/services",
-    icon: "Zap",
-    features: ["Robotic Process Automation", "Predictive AI", "PEGA Low-Code"]
-  },
-  {
-    id: "data-bi",
-    category: "Analytics & Cloud",
-    title: "Data Engineering & BI",
-    description: "Enterprise data pipelines, Power BI & Microsoft Fabric dashboards, SQL warehouse architectures, and seamless migration from legacy platforms like Qlik to Power BI.",
-    href: "/services",
-    icon: "BarChart3",
-    features: ["Power BI Dashboards", "Data Pipelines", "Qlik Migration"]
-  }
+  ...comprehensiveServices,
+  ...specializedStaffing
 ];
 
 export const industries = [

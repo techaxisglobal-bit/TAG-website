@@ -18,7 +18,6 @@ export default function AboutUs() {
           { label: 'Journey', id: 'journey' },
           { label: 'Values', id: 'values' },
           { label: 'Collaborations', id: 'partnerships' },
-          { label: 'Experts', id: 'experts' },
         ]} 
       />
       <div id="overview" className="pb-0 scroll-mt-[100px]">
@@ -203,37 +202,6 @@ export default function AboutUs() {
                   </div>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* Experts */}
-        <section id="experts" className="relative py-[160px] px-6 scroll-mt-[100px]">
-          <div className="absolute inset-0 bg-[radial-gradient(#D2D2D7_1px,transparent_1px)] [background-size:16px_16px] opacity-20 mask-image:radial-gradient(circle_at_center,black,transparent_80%)"></div>
-          <div className="max-w-[1200px] mx-auto relative z-10">
-            <div className="text-center max-w-[800px] mx-auto mb-16">
-              <h2 className="text-h2 text-apple-text mb-6">Meet Our Experts</h2>
-              <p className="text-[21px] text-apple-text-sec leading-relaxed">
-                TAG's leadership and consultants bring decades of enterprise IT, analytics, and staffing experience. Our team's diverse expertise drives client success across industries.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { name: "Priya Sharma", role: "Principal Consultant" },
-                { name: "Arjun Patel", role: "Lead Data Architect" },
-                { name: "Samantha Lee", role: "BI Solutions Manager" },
-                { name: "Rahul Singh", role: "IT Staffing Director" },
-              ].map(expert => (
-                <div key={expert.name} className="card bg-apple-surface text-center px-4 py-12">
-                  <div className="w-32 h-32 mx-auto rounded-full bg-apple-hairline flex items-center justify-center mb-6 overflow-hidden">
-                    <span className="text-[32px] font-semibold text-apple-text-sec">
-                      {expert.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                  <h3 className="text-[21px] font-semibold text-apple-text mb-1">{expert.name}</h3>
-                  <p className="text-[17px] text-apple-text-sec">{expert.role}</p>
-                </div>
-              ))}
             </div>
           </div>
         </section>

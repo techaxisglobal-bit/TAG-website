@@ -19,7 +19,7 @@ import {
   Award,
   Maximize,
   ChevronRight,
-  Server,
+  ChevronDown,
   Check,
   Send,
   ExternalLink,
@@ -31,11 +31,15 @@ import {
   heroStats,
   valueProps,
   solutions,
+  comprehensiveServices,
+  specializedStaffing,
   vendorEcosystem,
   clientPartners,
   consultationBenefits,
   consultationSteps
 } from "@/data/content";
+import StandardModal from "@/components/StandardModal";
+import HeroBackgroundVideo from "@/components/HeroBackgroundVideo";
 
 const iconMap: Record<string, any> = {
   Sparkles,
@@ -52,6 +56,27 @@ const iconMap: Record<string, any> = {
 
 export default function Home() {
   const [activeVendorTab, setActiveVendorTab] = useState(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [selectedStandardId, setSelectedStandardId] = useState<string | null>(null);
+
+  const faqs = [
+    {
+      question: "What enterprise platforms and clouds does TechAxis Global support?",
+      answer: "We specialize in end-to-end integration and managed services for SAP (S/4HANA & ECC), Oracle Fusion Cloud, Microsoft Dynamics 365, Power BI, AWS, Azure, and PEGA platforms."
+    },
+    {
+      question: "What SLA commitments does TechAxis Global provide?",
+      answer: "We deliver guaranteed 24/7 multi-tiered SLAs with critical issue response times as fast as 15 minutes, supported by our dual-continent global engineering centers across the USA and India."
+    },
+    {
+      question: "What does 'An E-Verified US Firm' mean for our enterprise partnership?",
+      answer: "TechAxis Global LLC is an official participant in the U.S. Department of Homeland Security E-Verify program. This ensures complete federal workforce compliance, full visa and STEM OPT support, and zero legal risk for clients partnering with us."
+    },
+    {
+      question: "How does the introductory architectural consultation work?",
+      answer: "Our engagement begins with a complimentary 30-minute discovery session with a lead enterprise architect. We evaluate your existing infrastructure, pain points, and roadmap targets to deliver an actionable blueprint within 48 hours."
+    }
+  ];
 
   // Form State
   const [formData, setFormData] = useState({
@@ -85,148 +110,67 @@ export default function Home() {
       {/* =========================================================
           SECTION 1: HERO SECTION (Apple Standard Typography & Depth)
           ========================================================= */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#F5F5F7]/80 via-white to-white pt-12 pb-16 lg:pt-20 lg:pb-28">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F5F5F7]/80 via-white to-white pt-16 pb-20 lg:pt-24 lg:pb-32">
+        {/* Full-screen looping background video (Home Page Hero only) */}
+        <HeroBackgroundVideo />
+
         {/* Subtle ambient light glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-radial from-[#B42318]/8 via-[#D97706]/4 to-transparent blur-3xl pointer-events-none -z-10" />
         
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
-            {/* Left Column: Headlines & Call to Actions */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 250 }}
-              className="lg:col-span-7 space-y-7"
-            >
-              {/* Apple-style Capsule Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/[0.04] border border-black/[0.08] text-[#1D1D1F] text-[12px] font-medium tracking-wide">
-                <span className="w-2 h-2 rounded-full bg-[#B42318] animate-pulse"></span>
-                <span className="font-semibold text-[#B42318]">Complexity Simplified</span>
-                <span className="text-black/20">•</span>
-                <span className="text-[#86868B]">Enterprise IT Architecture</span>
+        <div className="max-w-[1040px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 250 }}
+            className="flex flex-col items-center space-y-7 mx-auto"
+          >
+            {/* Master Display Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-bold text-[#1D1D1F] leading-[1.08] tracking-[-0.03em] max-w-4xl mx-auto">
+              We manage your IT,<br />
+              <span className="text-[#B42318]">so you can manage</span><br />
+              your business.
+            </h1>
+
+            {/* Refined Subhead */}
+            <p className="text-lg sm:text-xl text-[#3A3A3C] max-w-2xl font-normal leading-relaxed tracking-tight mx-auto">
+              Take charge of your business continuity with innovative IT solutions. We optimize enterprise workflows, safeguard mission-critical data, and engineer scalable digital transformations.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+              <Link
+                href="/contact-us"
+                className="bg-[#B42318] hover:bg-[#8E1010] text-white text-[15px] font-semibold px-7 py-3.5 rounded-full transition-all duration-200 shadow-xs hover:shadow-md flex items-center justify-center gap-2 group cursor-pointer active:scale-95"
+              >
+                <span>Schedule a Free Consultation</span>
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+
+              <Link
+                href="/services"
+                className="border border-black/[0.12] bg-white/85 hover:bg-white text-[#1D1D1F] text-[15px] font-medium px-6 py-3.5 rounded-full transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-95 backdrop-blur-sm shadow-2xs"
+              >
+                <span>Explore Solutions</span>
+                <ChevronRight className="w-4 h-4 text-[#86868B]" />
+              </Link>
+            </div>
+
+            {/* Trust Badge line */}
+            <div className="flex flex-wrap items-center justify-center gap-6 pt-3 text-[13px] font-medium text-[#3A3A3C]">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#B42318]" />
+                <span>Certified Enterprise Architects</span>
               </div>
-
-              {/* Master Display Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-[62px] font-bold text-[#1D1D1F] leading-[1.06] tracking-[-0.03em]">
-                We manage your IT,<br />
-                <span className="text-[#B42318]">so you can manage</span><br />
-                your business.
-              </h1>
-
-              {/* Refined Subhead */}
-              <p className="text-lg sm:text-xl text-[#86868B] max-w-xl font-normal leading-relaxed tracking-tight">
-                Take charge of your business continuity with innovative IT solutions. We optimize enterprise workflows, safeguard mission-critical data, and engineer scalable digital transformations.
-              </p>
-
-              {/* Apple Action Pills */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
-                <Link
-                  href="/contact-us"
-                  className="bg-[#B42318] hover:bg-[#8E1010] text-white text-[15px] font-semibold px-7 py-3.5 rounded-full transition-all duration-200 shadow-xs hover:shadow-md flex items-center justify-center gap-2 group cursor-pointer active:scale-95"
-                >
-                  <span>Schedule a Free Consultation</span>
-                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-                </Link>
-
-                <Link
-                  href="/services"
-                  className="border border-black/[0.12] bg-white/70 hover:bg-black/[0.04] text-[#1D1D1F] text-[15px] font-medium px-6 py-3.5 rounded-full transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-95 backdrop-blur-sm"
-                >
-                  <span>Explore Solutions</span>
-                  <ChevronRight className="w-4 h-4 text-[#86868B]" />
-                </Link>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#D97706]" />
+                <span>24/7 SLA Guarantee</span>
               </div>
-
-              {/* Trust Badge line */}
-              <div className="flex flex-wrap items-center gap-6 pt-3 text-[13px] font-medium text-[#86868B]">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#B42318]" />
-                  <span>Certified Enterprise Architects</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#D97706]" />
-                  <span>24/7 SLA Guarantee</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                  <span className="font-semibold text-[#1D1D1F]">An E-Verified US Firm</span>
-                </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span className="font-semibold text-[#1D1D1F]">An E-Verified US Firm</span>
               </div>
-            </motion.div>
-
-            {/* Right Column: Apple-grade Hardware & Operations Bento Tile */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200, delay: 0.15 }}
-              className="lg:col-span-5 relative"
-            >
-              <div className="relative mx-auto max-w-[480px] lg:max-w-none">
-                {/* Main Showcase Bento Card */}
-                <div className="relative rounded-[28px] overflow-hidden border border-black/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-white group">
-                  <div className="relative h-[380px] sm:h-[440px] w-full">
-                    <Image
-                      src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
-                      alt="TechAxis Global Enterprise Team Collaborating"
-                      fill
-                      priority
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#161617]/95 via-[#161617]/30 to-transparent" />
-                  </div>
-
-                  {/* Overlay Banner on Image */}
-                  <div className="absolute bottom-6 left-6 right-6 text-white">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold uppercase tracking-wider mb-2.5 border border-white/20">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                      Enterprise Operations
-                    </div>
-                    <h3 className="text-2xl font-bold text-white tracking-tight">Unified IT Management</h3>
-                    <p className="text-[13px] text-white/80 mt-1 line-clamp-2 leading-relaxed">
-                      Continuous monitoring, cloud governance, and multi-tier SLAs across SAP, Oracle, and Microsoft platforms.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Floating Micro-Card 1: Top Left Liquid Glass Badge */}
-                <motion.div
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ type: "spring", damping: 25, stiffness: 250, delay: 0.3 }}
-                  className="hidden sm:flex absolute -top-4 -left-4 bg-white border border-slate-200/90 shadow-[0_12px_32px_rgba(0,0,0,0.08)] rounded-2xl p-3.5 items-center gap-3 z-20"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#D97706]/10 text-[#D97706] flex items-center justify-center flex-shrink-0">
-                    <Server className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold tracking-wider text-[#86868B]">System Availability</p>
-                    <p className="text-[14px] font-bold text-[#1D1D1F] flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                      99.98% High SLA
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Floating Micro-Card 2: Bottom Right Liquid Glass Badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", damping: 25, stiffness: 250, delay: 0.4 }}
-                  className="hidden sm:flex absolute -bottom-5 -right-5 bg-white border border-slate-200/90 shadow-[0_12px_32px_rgba(0,0,0,0.08)] rounded-2xl p-3.5 items-center gap-3 z-20"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#B42318]/10 text-[#B42318] flex items-center justify-center flex-shrink-0">
-                    <ShieldCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold tracking-wider text-[#86868B]">Security Posture</p>
-                    <p className="text-[14px] font-bold text-[#1D1D1F]">Zero-Trust Compliant</p>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -287,10 +231,20 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ type: "spring", damping: 25, stiffness: 250, delay: index * 0.08 }}
-                  className="apple-card p-8 group flex flex-col justify-between"
+                  onClick={() => setSelectedStandardId(item.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedStandardId(item.id);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  className="apple-card p-8 group flex flex-col justify-between cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-black/[0.14] focus-visible:outline-2 focus-visible:outline-[#B42318] select-none"
+                  aria-label={`Learn more about ${item.title} standard`}
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-black/[0.04] text-[#B42318] flex items-center justify-center mb-6 group-hover:bg-[#B42318] group-hover:text-white transition-colors duration-200">
+                    <div className="w-12 h-12 rounded-2xl bg-black/[0.04] text-[#B42318] flex items-center justify-center mb-6 group-hover:bg-[#B42318] group-hover:text-white transition-all duration-200 shadow-2xs group-hover:scale-105">
                       <IconComp className="w-6 h-6" />
                     </div>
                     <h3 className="text-lg font-bold text-[#1D1D1F] mb-2.5 group-hover:text-[#B42318] transition-colors tracking-tight">
@@ -300,9 +254,15 @@ export default function Home() {
                       {item.description}
                     </p>
                   </div>
-                  <div className="mt-6 pt-4 border-t border-black/[0.04] flex items-center gap-1.5 text-xs font-semibold text-[#0066CC] group-hover:text-[#B42318] transition-colors">
-                    <span>Learn standard</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+
+                  <div className="mt-6 pt-4 border-t border-black/[0.05] flex items-center justify-between w-full">
+                    <span className="flex items-center gap-1.5 text-xs font-semibold text-[#0066CC] group-hover:text-[#B42318] transition-colors">
+                      <span>Learn standard</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1.5" />
+                    </span>
+                    <span className="text-[11px] font-semibold text-[#86868B] opacity-0 group-hover:opacity-100 transition-opacity bg-black/[0.04] px-2 py-0.5 rounded-full">
+                      Specifications
+                    </span>
                   </div>
                 </motion.div>
               );
@@ -320,15 +280,25 @@ export default function Home() {
           </div>
 
         </div>
+
+        {/* Interactive Standard Details Modal */}
+        <StandardModal
+          isOpen={Boolean(selectedStandardId)}
+          onClose={() => setSelectedStandardId(null)}
+          standards={valueProps as any}
+          activeId={selectedStandardId}
+          onSelectStandard={(id) => setSelectedStandardId(id)}
+        />
       </section>
 
       {/* =========================================================
-          SECTION 4: SOLUTIONS SHOWCASE (Apple Bento Architecture)
+          SECTION 4: ENTERPRISE SOLUTIONS & SERVICES (Matching Screenshots 2 & 3)
           ========================================================= */}
       <section id="solutions" className="py-24 lg:py-32 bg-[#F5F5F7] scroll-mt-20">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 space-y-20 lg:space-y-24">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          {/* Main Section Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-black/[0.06]">
             <div className="max-w-2xl">
               <span className="badge-tag mb-3.5">HOW WE DO</span>
               <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1D1D1F] tracking-[-0.025em] leading-tight">
@@ -343,65 +313,169 @@ export default function Home() {
               href="/services"
               className="inline-flex items-center gap-2 bg-[#B42318] hover:bg-[#8E1010] text-white text-sm font-semibold px-6 py-3 rounded-full transition-all shadow-xs flex-shrink-0 active:scale-95"
             >
-              <span>View All Solutions</span>
+              <span>View All Services</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {solutions.map((item, index) => {
-              const IconComp = iconMap[item.icon] || Sparkles;
+          {/* Group 1: Comprehensive Enterprise IT Services (Screenshot 2) */}
+          <div className="space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B42318] mb-1.5 block">
+                  What We Offer
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F] tracking-tight">
+                  Comprehensive Enterprise IT Services
+                </h3>
+              </div>
+              <p className="text-sm text-[#86868B] max-w-md">
+                Modern BI, cloud data engineering, and agile reporting migrations built for enterprise scale.
+              </p>
+            </div>
 
-              return (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {comprehensiveServices.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", damping: 25, stiffness: 250, delay: index * 0.06 }}
+                  className="bg-white rounded-[24px] overflow-hidden border border-black/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+                >
+                  <div>
+                    {/* Visual Photo Banner */}
+                    <div className="relative h-[190px] w-full overflow-hidden bg-slate-100">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                      <div className="absolute top-3.5 left-3.5">
+                        <span className="text-[11px] font-semibold bg-white/90 backdrop-blur-md text-[#1D1D1F] px-2.5 py-1 rounded-full shadow-2xs border border-white/60">
+                          {service.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Card Content Body */}
+                    <div className="p-6">
+                      <h4 className="text-[17px] font-bold text-[#1D1D1F] group-hover:text-[#B42318] transition-colors tracking-tight leading-snug mb-2.5 min-h-[44px]">
+                        {service.title}
+                      </h4>
+                      <p className="text-[13.5px] text-[#86868B] leading-relaxed line-clamp-3">
+                        {service.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1.5 mt-4">
+                        {service.features.map((feat) => (
+                          <span
+                            key={feat}
+                            className="text-[10.5px] font-medium text-[#1D1D1F] bg-[#F5F5F7] px-2 py-0.5 rounded-md border border-black/[0.04]"
+                          >
+                            {feat}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Bottom CTA Link */}
+                  <div className="px-6 pb-6 pt-2">
+                    <Link
+                      href={service.href}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0066CC] group-hover:text-[#B42318] transition-colors pt-3 border-t border-black/[0.05] w-full cursor-pointer select-none"
+                    >
+                      <span>Learn More</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Group 2: Specialized Consulting & Staffing (Screenshot 3) */}
+          <div className="space-y-8 pt-4">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#B42318] mb-1.5 block">
+                  Talent & Architecture
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F] tracking-tight">
+                  Specialized Consulting & Staffing
+                </h3>
+              </div>
+              <p className="text-sm text-[#86868B] max-w-md">
+                TAG offers tailored consulting and IT staffing solutions for enterprise projects, ensuring the right expertise and ongoing support.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+              {specializedStaffing.map((item, index) => (
                 <motion.div
                   key={item.id}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ type: "spring", damping: 25, stiffness: 250, delay: index * 0.06 }}
-                  className="bg-white rounded-[24px] p-8 sm:p-9 border border-black/[0.06] shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.07)] hover:border-black/[0.12] transition-all duration-300 flex flex-col justify-between group"
+                  transition={{ type: "spring", damping: 25, stiffness: 250, delay: index * 0.08 }}
+                  className="bg-white rounded-[26px] overflow-hidden border border-black/[0.08] shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_24px_50px_rgba(0,0,0,0.09)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="w-12 h-12 rounded-2xl bg-[#B42318]/10 text-[#B42318] flex items-center justify-center group-hover:bg-[#B42318] group-hover:text-white transition-colors duration-200">
-                        <IconComp className="w-6 h-6" />
+                    {/* Visual Photo Banner */}
+                    <div className="relative h-[210px] w-full overflow-hidden bg-slate-100">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                      <div className="absolute top-3.5 left-3.5">
+                        <span className="text-[11px] font-semibold bg-white/90 backdrop-blur-md text-[#1D1D1F] px-2.5 py-1 rounded-full shadow-2xs border border-white/60">
+                          {item.category}
+                        </span>
                       </div>
-                      <span className="text-[11px] uppercase tracking-wider font-bold text-[#86868B] bg-[#F5F5F7] px-3 py-1 rounded-full">
-                        {item.category}
-                      </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-[#1D1D1F] mb-3 group-hover:text-[#B42318] transition-colors tracking-tight">
-                      {item.title}
-                    </h3>
+                    {/* Card Content Body */}
+                    <div className="p-7">
+                      <h4 className="text-xl font-bold text-[#1D1D1F] group-hover:text-[#B42318] transition-colors tracking-tight leading-snug mb-2.5">
+                        {item.title}
+                      </h4>
+                      <p className="text-[14px] text-[#86868B] leading-relaxed mb-5">
+                        {item.description}
+                      </p>
 
-                    <p className="text-[14px] text-[#86868B] leading-relaxed mb-6">
-                      {item.description}
-                    </p>
-
-                    {/* Feature tags */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {item.features.map((feat) => (
-                        <span
-                          key={feat}
-                          className="text-[11px] font-medium text-[#1D1D1F] bg-[#F5F5F7] border border-black/[0.04] px-2.5 py-1 rounded-full"
-                        >
-                          {feat}
-                        </span>
-                      ))}
+                      <div className="flex flex-wrap gap-1.5">
+                        {item.features.map((feat) => (
+                          <span
+                            key={feat}
+                            className="text-[11px] font-medium text-[#1D1D1F] bg-[#F5F5F7] px-2.5 py-1 rounded-md border border-black/[0.04]"
+                          >
+                            {feat}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  <Link
-                    href={`/services#${item.id}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0066CC] hover:text-[#B42318] transition-colors pt-4 border-t border-black/[0.04]"
-                  >
-                    <span>Explore details</span>
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-                  </Link>
+                  {/* Card Bottom Button Action */}
+                  <div className="p-7 pt-2 border-t border-black/[0.04]">
+                    <Link
+                      href={item.href}
+                      className="w-full bg-[#B42318] hover:bg-[#8E1010] text-white text-[13px] font-semibold py-3 px-5 rounded-full transition-all duration-200 shadow-xs flex items-center justify-center gap-2 group/btn cursor-pointer active:scale-95"
+                    >
+                      <span>Contact Us</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />
+                    </Link>
+                  </div>
                 </motion.div>
-              );
-            })}
+              ))}
+            </div>
           </div>
 
         </div>
@@ -618,7 +692,66 @@ export default function Home() {
       </section>
 
       {/* =========================================================
-          SECTION 7: CONSULTATION & CONTACT (Apple Form Aesthetics)
+          SECTION 7: FREQUENTLY ASKED QUESTIONS (Linear/Stripe Accordion)
+          ========================================================= */}
+      <section className="py-24 lg:py-28 bg-[#FAFAFA] border-b border-black/[0.06]">
+        <div className="max-w-[900px] mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center mb-14">
+            <span className="badge-tag mb-3">FAQ</span>
+            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-950 tracking-tight">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-zinc-600 text-base sm:text-lg mt-3 max-w-xl mx-auto leading-relaxed">
+              Straightforward answers regarding our enterprise consulting, platform partnerships, and engagement models.
+            </p>
+          </div>
+
+          <div className="space-y-3.5">
+            {faqs.map((faq, index) => {
+              const isOpen = openFaq === index;
+              return (
+                <div
+                  key={faq.question}
+                  className="bg-white rounded-2xl border border-black/[0.07] overflow-hidden transition-all duration-200 hover:border-black/[0.14] shadow-xs"
+                >
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : index)}
+                    className="w-full px-6 py-5 text-left flex items-center justify-between font-semibold text-zinc-950 text-[16px] tracking-tight cursor-pointer select-none"
+                    aria-expanded={isOpen}
+                  >
+                    <span>{faq.question}</span>
+                    <ChevronDown
+                      className={`w-4 h-4 text-zinc-500 transition-transform duration-200 flex-shrink-0 ml-4 ${
+                        isOpen ? "rotate-180 text-[#B42318]" : ""
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-6 pt-1 text-zinc-600 text-[14.5px] leading-relaxed border-t border-black/[0.03]">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      {/* =========================================================
+          SECTION 8: CONSULTATION & CONTACT (Apple Form Aesthetics)
           ========================================================= */}
       <section id="consultation" className="py-24 lg:py-32 bg-white scroll-mt-20">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
