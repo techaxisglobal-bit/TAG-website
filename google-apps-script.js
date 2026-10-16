@@ -25,7 +25,7 @@
  */
 
 // Put your HR destination email here (or leave as is to receive it in your own Gmail)
-var HR_EMAIL = "careers@techaxisglobal.com"; 
+var HR_EMAIL = "techaxisglobal@gmail.com"; 
 
 function doGet(e) {
   return ContentService.createTextOutput(JSON.stringify({ status: "active", message: "TAG Careers Webhook is live and ready" }))
