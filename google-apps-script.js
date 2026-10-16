@@ -80,17 +80,28 @@ function doPost(e) {
       resumeDriveUrl = driveFile.getUrl();
     }
 
-    // 3. Append Candidate Record to Google Sheet
+    // 3. Insert Candidate Record at TOP (Row 2, right below header) so new applications appear first!
     var formattedDate = Utilities.formatDate(new Date(), "America/New_York", "yyyy-MM-dd HH:mm:ss");
-    sheet.appendRow([
+    var resumeCellValue = resumeDriveUrl !== "No file attached" 
+      ? '=HYPERLINK("' + resumeDriveUrl + '", "View Resume 📄")'
+      : "No file attached";
+
+    var newCandidateRow = [
       formattedDate,
       data.role || "N/A",
       data.name || "N/A",
       data.email || "N/A",
       data.phone || "N/A",
-      resumeDriveUrl,
+      resumeCellValue,
       data.message || ""
-    ]);
+    ];
+
+    if (sheet.getLastRow() <= 1) {
+      sheet.appendRow(newCandidateRow);
+    } else {
+      sheet.insertRowBefore(2);
+      sheet.getRange(2, 1, 1, 7).setValues([newCandidateRow]);
+    }
 
     // 4. Send Email Notification to HR with Resume Attached
     var destinationHR = HR_EMAIL || Session.getActiveUser().getEmail();
