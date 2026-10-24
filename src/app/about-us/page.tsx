@@ -1,12 +1,61 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight, ArrowUpRight } from "lucide-react";
+import { ChevronRight, ArrowUpRight, Rocket, Globe2, BarChart3, Cloud, Award } from "lucide-react";
 import LocalNav from "@/components/LocalNav";
 import BackgroundMedia from "@/components/BackgroundMedia";
 import MediaFrame from "@/components/MediaFrame";
 import DataNetwork from "@/components/DataNetwork";
 import { clientPartners } from "@/data/content";
+
+const journeyMilestones = [
+  {
+    year: "2012",
+    phase: "Phase 01",
+    badge: "Inception",
+    title: "TAG Founded",
+    desc: "Launched in Virginia with a mission to deliver specialized, agile, data-driven IT solutions and architecture for enterprises.",
+    highlight: "Richmond, VA HQ",
+    icon: Rocket,
+  },
+  {
+    year: "2015",
+    phase: "Phase 02",
+    badge: "Global Reach",
+    title: "Expansion to India",
+    desc: "Established a dedicated global delivery center in India, enabling 24/7 delivery governance and international scale.",
+    highlight: "Dual-Continent Model",
+    icon: Globe2,
+  },
+  {
+    year: "2018",
+    phase: "Phase 03",
+    badge: "Enterprise Scale",
+    title: "Analytics Modernization",
+    desc: "Delivered large-scale analytics modernization and mission-critical BI migrations for Fortune 500 enterprises.",
+    highlight: "Fortune 500 Reach",
+    icon: BarChart3,
+  },
+  {
+    year: "2021",
+    phase: "Phase 04",
+    badge: "Cloud Era",
+    title: "Cloud Data Solutions",
+    desc: "Expanded enterprise offerings to cloud data engineering, modern lakehouses, and Qlik to Power BI migrations.",
+    highlight: "Cloud & AI Ecosystems",
+    icon: Cloud,
+  },
+  {
+    year: "2024",
+    phase: "Phase 05",
+    badge: "Today & Beyond",
+    title: "Continued Growth",
+    desc: "Accelerating AI-ready analytics, hybrid cloud IT services, and E-Verified enterprise staffing partnerships worldwide.",
+    highlight: "Enterprise Leadership",
+    icon: Award,
+    isCurrent: true,
+  },
+];
 
 export default function AboutUs() {
   return (
@@ -55,26 +104,118 @@ export default function AboutUs() {
         </section>
 
         {/* Journey */}
-        <section id="journey" className="relative py-[160px] px-6 scroll-mt-[100px] overflow-hidden">
-          <DataNetwork className="opacity-30" />
-          <div className="max-w-[1200px] mx-auto relative z-10">
-            <div className="text-center max-w-[800px] mx-auto mb-16">
-              <h2 className="text-h2 text-apple-text">Our Journey</h2>
+        <section id="journey" className="relative py-20 md:py-28 px-4 sm:px-6 lg:px-8 scroll-mt-[100px] overflow-hidden bg-gradient-to-b from-white via-slate-50/60 to-white">
+          <DataNetwork className="opacity-25" />
+          <div className="max-w-[1280px] mx-auto relative z-10">
+            {/* Section Header */}
+            <div className="text-center max-w-[800px] mx-auto mb-14 md:mb-16">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#B42318]/8 border border-[#B42318]/20 text-[#B42318] text-[12px] font-bold tracking-wider uppercase mb-4">
+                <span className="w-2 h-2 rounded-full bg-[#B42318] animate-pulse"></span>
+                12+ Years of Growth & Innovation
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight">
+                Our Journey
+              </h2>
+              <p className="text-slate-600 text-[16px] sm:text-[18px] mt-4 leading-relaxed">
+                From our inception in 2012 to a premier global enterprise technology partner delivering mission-critical analytics and IT solutions.
+              </p>
             </div>
-            <div className="flex overflow-x-auto md:grid md:grid-cols-5 gap-6 pb-8 snap-x">
-              {[
-                { year: "2012", title: "TAG Founded", desc: "Launched with a vision to deliver data-driven IT solutions for enterprises." },
-                { year: "2015", title: "Expansion to India", desc: "Established a global delivery center in India to support international clients." },
-                { year: "2018", title: "Enterprise Analytics Milestone", desc: "Delivered analytics modernization for Fortune 500 organizations." },
-                { year: "2021", title: "Cloud Data Solutions", desc: "Expanded offerings to include cloud data engineering and BI migration." },
-                { year: "2024", title: "Continued Growth", desc: "Trusted by enterprise clients for IT consulting, analytics, and staffing expertise." }
-              ].map((item, i) => (
-                <div key={item.year} className="min-w-[280px] md:min-w-0 snap-start card bg-white/80 backdrop-blur-md">
-                  <div className="text-[48px] font-semibold tracking-tighter text-apple-text-sec mb-4">{item.year}</div>
-                  <h3 className="text-[21px] font-semibold text-apple-text mb-3">{item.title}</h3>
-                  <p className="text-[17px] text-apple-text-sec leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
+
+            {/* Desktop Milestone Visual Progress Track */}
+            <div className="hidden lg:block relative mb-8 px-6">
+              <div className="absolute top-4 left-14 right-14 h-[2px] bg-gradient-to-r from-[#B42318]/30 via-slate-300 to-[#B42318] -z-0" />
+              <div className="grid grid-cols-5 gap-6">
+                {journeyMilestones.map((item, idx) => (
+                  <div key={item.year} className="flex flex-col items-center">
+                    <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center font-bold text-[12px] transition-transform duration-300 shadow-sm ${
+                      item.isCurrent
+                        ? "bg-[#B42318] text-white ring-4 ring-[#B42318]/20 scale-110"
+                        : "bg-white text-[#B42318] border-2 border-[#B42318]/50"
+                    }`}>
+                      {item.isCurrent ? (
+                        <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                      ) : (
+                        <span>0{idx + 1}</span>
+                      )}
+                    </div>
+                    <span className="mt-2 text-[11px] font-bold tracking-wider uppercase text-slate-400">
+                      {item.phase}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Milestone Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 items-stretch">
+              {journeyMilestones.map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <div
+                    key={item.year}
+                    className={`rounded-2xl p-6 sm:p-6.5 bg-white/95 backdrop-blur-md border transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${
+                      item.isCurrent
+                        ? "border-[#B42318]/35 shadow-[0_4px_24px_rgba(180,35,24,0.08)] ring-1 ring-[#B42318]/20 hover:shadow-[0_16px_36px_rgba(180,35,24,0.12)] hover:-translate-y-1"
+                        : "border-slate-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-[#B42318]/30 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1"
+                    }`}
+                  >
+                    {/* Top Accent Gradient Bar */}
+                    <div className={`absolute top-0 left-0 right-0 h-1 transition-opacity duration-300 ${
+                      item.isCurrent
+                        ? "bg-gradient-to-r from-[#B42318] via-[#D97706] to-[#B42318] opacity-100"
+                        : "bg-gradient-to-r from-[#B42318] to-[#D97706] opacity-0 group-hover:opacity-100"
+                    }`} />
+
+                    <div>
+                      {/* Card Header: Year & Icon */}
+                      <div className="flex items-center justify-between gap-3 mb-3">
+                        <div className="text-3xl sm:text-[34px] font-black tracking-tight text-[#0F172A] group-hover:text-[#B42318] transition-colors">
+                          {item.year}
+                        </div>
+                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
+                          item.isCurrent 
+                            ? "bg-[#B42318]/10 text-[#B42318]" 
+                            : "bg-slate-100 text-slate-600 group-hover:bg-[#B42318]/10 group-hover:text-[#B42318]"
+                        }`}>
+                          <IconComponent className="w-4 h-4" />
+                        </div>
+                      </div>
+
+                      {/* Phase / Milestone Badge */}
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider mb-2.5 transition-colors ${
+                        item.isCurrent
+                          ? "bg-[#B42318]/10 text-[#B42318]"
+                          : "bg-slate-100 text-slate-600 group-hover:bg-[#B42318]/8 group-hover:text-[#B42318]"
+                      }`}>
+                        {item.badge}
+                      </span>
+
+                      {/* Title with consistent height */}
+                      <h3 className="text-[17px] sm:text-[18px] font-bold text-[#0F172A] tracking-tight leading-snug min-h-[46px] flex items-center group-hover:text-[#B42318] transition-colors">
+                        {item.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-[13px] sm:text-[13.5px] text-slate-600 leading-relaxed mt-2 font-normal">
+                        {item.desc}
+                      </p>
+                    </div>
+
+                    {/* Card Footer: Metadata Highlight */}
+                    <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
+                      <span>{item.highlight}</span>
+                      {item.isCurrent ? (
+                        <span className="text-emerald-600 flex items-center gap-1 font-bold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          Active
+                        </span>
+                      ) : (
+                        <span className="text-slate-400 font-medium">Milestone</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
