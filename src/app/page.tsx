@@ -33,7 +33,6 @@ import {
   solutions,
   comprehensiveServices,
   specializedStaffing,
-  vendorEcosystem,
   clientPartners,
   consultationBenefits,
   consultationSteps
@@ -55,7 +54,6 @@ const iconMap: Record<string, any> = {
 };
 
 export default function Home() {
-  const [activeVendorTab, setActiveVendorTab] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [selectedStandardId, setSelectedStandardId] = useState<string | null>(null);
 
@@ -481,104 +479,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =========================================================
-          SECTION 5: TECHNOLOGY ECOSYSTEM (Apple Segmented Control Tabs)
-          ========================================================= */}
-      <section className="py-24 lg:py-32 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="max-w-2xl mb-14">
-            <span className="badge-tag mb-3.5">WHAT WE USE</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1D1D1F] tracking-[-0.025em] leading-tight">
-              Bringing the best IT vendors to you.
-            </h2>
-            <p className="text-[#86868B] text-base sm:text-lg mt-3 leading-relaxed tracking-tight">
-              Working only with industry benchmarks to guarantee enterprise performance, platform resilience, and modern cloud scalability.
-            </p>
-          </div>
-
-          {/* Apple Segmented Tab Frame */}
-          <div className="bg-[#F5F5F7] rounded-[28px] border border-black/[0.06] p-2.5 sm:p-4 shadow-sm">
-            {/* Sliding Pill Header */}
-            <div className="flex gap-1 overflow-x-auto scrollbar-none p-1.5 bg-black/[0.04] rounded-2xl mb-6">
-              {vendorEcosystem.map((vendor, idx) => {
-                const isActive = activeVendorTab === idx;
-                return (
-                  <button
-                    key={vendor.category}
-                    onClick={() => setActiveVendorTab(idx)}
-                    className={`relative px-5 py-3 text-[13px] font-semibold whitespace-nowrap transition-colors flex items-center gap-2 cursor-pointer rounded-xl select-none active:scale-95 ${
-                      isActive ? "text-[#1D1D1F]" : "text-[#86868B] hover:text-[#1D1D1F]"
-                    }`}
-                  >
-                    <span>{vendor.category}</span>
-                    <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-black/[0.06] text-[#86868B]">
-                      {vendor.badge}
-                    </span>
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeVendorPill"
-                        className="absolute inset-0 bg-white rounded-xl shadow-xs -z-10"
-                        transition={{ type: "spring", damping: 25, stiffness: 350 }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Tab Body */}
-            <div className="bg-white rounded-[22px] p-8 sm:p-12 border border-black/[0.04]">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                <div className="lg:col-span-7 space-y-4">
-                  <span className="badge-tag text-[11px]">
-                    {vendorEcosystem[activeVendorTab].badge}
-                  </span>
-                  
-                  <h3 className="text-2xl font-bold text-[#1D1D1F] tracking-tight">
-                    {vendorEcosystem[activeVendorTab].lead}
-                  </h3>
-
-                  <p className="text-[15px] text-[#86868B] leading-relaxed">
-                    {vendorEcosystem[activeVendorTab].description}
-                  </p>
-
-                  <div className="pt-2">
-                    <Link
-                      href="/services"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#0066CC] hover:text-[#B42318] transition-colors"
-                    >
-                      <span>Explore technical architecture</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Technologies List */}
-                <div className="lg:col-span-5 bg-[#F5F5F7] rounded-2xl p-6 border border-black/[0.04] space-y-3">
-                  <p className="text-[11px] uppercase font-bold tracking-wider text-[#86868B] mb-2">
-                    Ecosystem Components:
-                  </p>
-                  {vendorEcosystem[activeVendorTab].technologies.map((tech) => (
-                    <div
-                      key={tech.name}
-                      className="bg-white p-3.5 rounded-xl border border-black/[0.04] flex items-center justify-between shadow-2xs"
-                    >
-                      <span className="text-[14px] font-semibold text-[#1D1D1F]">{tech.name}</span>
-                      <span className="text-[11px] text-[#B42318] font-medium bg-[#B42318]/10 px-2.5 py-0.5 rounded-full">
-                        {tech.role}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
 
       {/* =========================================================
           SECTION 6: CLIENT RECOGNITION & COLLABORATIONS (Apple HIG Grid)
