@@ -158,15 +158,15 @@ export default function Home() {
             {/* Trust Badge line */}
             <div className="flex flex-wrap items-center justify-center gap-6 pt-3 text-[13px] font-medium text-[#3A3A3C]">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#B42318]" />
+                <span className="w-2 h-2 rounded-full bg-[#B42318] flex-shrink-0" />
                 <span>Certified Enterprise Architects</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#D97706]" />
+                <span className="w-2 h-2 rounded-full bg-[#D97706] flex-shrink-0" />
                 <span>24/7 SLA Guarantee</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
                 <span className="font-semibold text-[#1D1D1F]">An E-Verified US Firm</span>
               </div>
             </div>
