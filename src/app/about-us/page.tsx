@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronRight, ArrowUpRight, Rocket, Globe2, BarChart3, Cloud, Award } from "lucide-react";
+import { ChevronRight, ArrowUpRight, Rocket, Globe2, BarChart3, Cloud, Award, Sparkles } from "lucide-react";
 import LocalNav from "@/components/LocalNav";
 import BackgroundMedia from "@/components/BackgroundMedia";
 import MediaFrame from "@/components/MediaFrame";
@@ -48,11 +48,20 @@ const journeyMilestones = [
   {
     year: "2024",
     phase: "Phase 05",
-    badge: "Today & Beyond",
-    title: "Continued Growth",
-    desc: "Accelerating AI-ready analytics, hybrid cloud IT services, and E-Verified enterprise staffing partnerships worldwide.",
-    highlight: "Enterprise Leadership",
+    badge: "Scale & Trust",
+    title: "Enterprise Expansion",
+    desc: "Achieved E-Verified federal standing, expanded multi-cloud consulting, and strengthened global IT staffing partnerships.",
+    highlight: "E-Verified US Firm",
     icon: Award,
+  },
+  {
+    year: "2026",
+    phase: "Phase 06",
+    badge: "Next-Gen AI",
+    title: "AI & Smart Automation",
+    desc: "Spearheading agentic AI integrations, intelligent analytics automation, and next-generation enterprise digital platforms.",
+    highlight: "Active Flagship Era",
+    icon: Sparkles,
     isCurrent: true,
   },
 ];
@@ -111,7 +120,7 @@ export default function AboutUs() {
             <div className="text-center max-w-[800px] mx-auto mb-14 md:mb-16">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#B42318]/8 border border-[#B42318]/20 text-[#B42318] text-[12px] font-bold tracking-wider uppercase mb-4">
                 <span className="w-2 h-2 rounded-full bg-[#B42318] animate-pulse"></span>
-                12+ Years of Growth & Innovation
+                14+ Years of Growth & Innovation
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight">
                 Our Journey
@@ -122,9 +131,9 @@ export default function AboutUs() {
             </div>
 
             {/* Desktop Milestone Visual Progress Track */}
-            <div className="hidden lg:block relative mb-8 px-6">
-              <div className="absolute top-4 left-14 right-14 h-[2px] bg-gradient-to-r from-[#B42318]/30 via-slate-300 to-[#B42318] -z-0" />
-              <div className="grid grid-cols-5 gap-6">
+            <div className="hidden xl:block relative mb-8 px-6">
+              <div className="absolute top-4 left-12 right-12 h-[2px] bg-gradient-to-r from-[#B42318]/30 via-slate-300 to-[#B42318] -z-0" />
+              <div className="grid grid-cols-6 gap-6">
                 {journeyMilestones.map((item, idx) => (
                   <div key={item.year} className="flex flex-col items-center">
                     <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center font-bold text-[12px] transition-transform duration-300 shadow-sm ${
@@ -146,16 +155,16 @@ export default function AboutUs() {
               </div>
             </div>
 
-            {/* Milestone Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 items-stretch">
+            {/* Milestone Cards Grid (1 col on mobile, 2 on sm/md, 3 on lg, 6 on xl) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-4.5 items-stretch">
               {journeyMilestones.map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div
                     key={item.year}
-                    className={`rounded-2xl p-6 sm:p-6.5 bg-white/95 backdrop-blur-md border transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${
+                    className={`rounded-2xl p-5 sm:p-5.5 xl:p-5 bg-white/95 backdrop-blur-md border transition-all duration-300 flex flex-col justify-between group relative overflow-hidden ${
                       item.isCurrent
-                        ? "border-[#B42318]/35 shadow-[0_4px_24px_rgba(180,35,24,0.08)] ring-1 ring-[#B42318]/20 hover:shadow-[0_16px_36px_rgba(180,35,24,0.12)] hover:-translate-y-1"
+                        ? "border-[#B42318]/40 shadow-[0_4px_24px_rgba(180,35,24,0.08)] ring-1 ring-[#B42318]/20 hover:shadow-[0_16px_36px_rgba(180,35,24,0.12)] hover:-translate-y-1"
                         : "border-slate-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-[#B42318]/30 hover:shadow-[0_12px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1"
                     }`}
                   >
@@ -168,11 +177,11 @@ export default function AboutUs() {
 
                     <div>
                       {/* Card Header: Year & Icon */}
-                      <div className="flex items-center justify-between gap-3 mb-3">
-                        <div className="text-3xl sm:text-[34px] font-black tracking-tight text-[#0F172A] group-hover:text-[#B42318] transition-colors">
+                      <div className="flex items-center justify-between gap-2.5 mb-3">
+                        <div className="text-2xl sm:text-3xl font-black tracking-tight text-[#0F172A] group-hover:text-[#B42318] transition-colors">
                           {item.year}
                         </div>
-                        <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${
+                        <div className={`w-8.5 h-8.5 rounded-xl flex items-center justify-center transition-colors ${
                           item.isCurrent 
                             ? "bg-[#B42318]/10 text-[#B42318]" 
                             : "bg-slate-100 text-slate-600 group-hover:bg-[#B42318]/10 group-hover:text-[#B42318]"
@@ -191,18 +200,18 @@ export default function AboutUs() {
                       </span>
 
                       {/* Title with consistent height */}
-                      <h3 className="text-[17px] sm:text-[18px] font-bold text-[#0F172A] tracking-tight leading-snug min-h-[46px] flex items-center group-hover:text-[#B42318] transition-colors">
+                      <h3 className="text-[16px] sm:text-[17px] font-bold text-[#0F172A] tracking-tight leading-snug min-h-[44px] flex items-center group-hover:text-[#B42318] transition-colors">
                         {item.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-[13px] sm:text-[13.5px] text-slate-600 leading-relaxed mt-2 font-normal">
+                      <p className="text-[12.5px] sm:text-[13px] text-slate-600 leading-relaxed mt-2 font-normal">
                         {item.desc}
                       </p>
                     </div>
 
                     {/* Card Footer: Metadata Highlight */}
-                    <div className="mt-6 pt-3.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
+                    <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-500">
                       <span>{item.highlight}</span>
                       {item.isCurrent ? (
                         <span className="text-emerald-600 flex items-center gap-1 font-bold">
