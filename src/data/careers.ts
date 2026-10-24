@@ -4,6 +4,11 @@ export interface JobPosition {
   department: string;
   location: string;
   type: string;
+  experienceLevel: string;
+  overview: string;
+  responsibilities: string[];
+  requirements: string[];
+  skills: string[];
 }
 
 export const OPEN_POSITIONS: JobPosition[] = [
@@ -12,349 +17,1446 @@ export const OPEN_POSITIONS: JobPosition[] = [
     title: "CyberArk operational Engineer",
     department: "Identity & Security",
     location: "Remote / Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "TechAxis Global is seeking a CyberArk Operational Engineer to manage, maintain, and monitor enterprise Privileged Access Management (PAM) infrastructure across multi-cloud and hybrid environments.",
+    responsibilities: [
+      "Administer and maintain CyberArk PAS core components including EPV Vault, CPM, PVWA, PSM, and PSMP.",
+      "Manage privileged account onboarding, safe permissions, platform policies, and periodic credential rotations.",
+      "Troubleshoot vault replication issues, agent connectivity failures, and execute DR vault failover drills.",
+      "Partner with SOC and audit teams to monitor privileged session recordings and access anomaly alerts.",
+    ],
+    requirements: [
+      "3+ years of hands-on experience supporting CyberArk PAM in enterprise multi-cloud networks.",
+      "Strong knowledge of Active Directory, LDAP, Windows Server, Linux permissions, and SSH/RDP protocols.",
+      "CyberArk Certified Defender or Sentry credential strongly preferred.",
+      "Bachelor's degree in Computer Science, Information Security, or equivalent professional experience.",
+    ],
+    skills: [
+      "CyberArk PAS",
+      "PAM",
+      "Active Directory",
+      "Vault Security",
+      "Linux/Windows",
+      "PSM",
+    ]
   },
   {
     id: "ai-architect",
     title: "AI Architect",
     department: "AI & Data Solutions",
     location: "Remote / Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "8+ Years / Lead Architect",
+    overview: "We are seeking a visionary AI Architect to design and guide enterprise generative AI, LLM fine-tuning, and scalable multi-modal machine learning architectures for global client accounts.",
+    responsibilities: [
+      "Architect scalable Generative AI systems, Retrieval-Augmented Generation (RAG) pipelines, and agentic workflows.",
+      "Establish enterprise model governance, data security, content safety guardrails, and latency/cost benchmarks.",
+      "Select and optimize cloud-native AI/ML services across AWS Bedrock, Azure OpenAI, and GCP Vertex AI.",
+      "Collaborate with executive stakeholders to align technical AI roadmaps with high-impact business transformations.",
+    ],
+    requirements: [
+      "8+ years in software engineering with 3+ years leading AI/ML and deep learning architectures in production.",
+      "Deep proficiency in Python, PyTorch, LangChain, LlamaIndex, Hugging Face, and vector databases.",
+      "Proven track record deploying low-latency, high-availability enterprise LLM applications.",
+      "Master's or Ph.D. in Computer Science, Artificial Intelligence, or related technical discipline.",
+    ],
+    skills: [
+      "Generative AI",
+      "LLMs",
+      "RAG Pipelines",
+      "Vector DBs",
+      "AWS / Azure AI",
+      "PyTorch",
+    ]
   },
   {
     id: "cpm-solutions-engineer",
     title: "CPM Solutions Engineer",
     department: "Enterprise Solutions",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "Join TAG as a CPM Solutions Engineer implementing and optimizing Corporate Performance Management, financial planning, consolidation, and reporting solutions.",
+    responsibilities: [
+      "Design and configure multi-dimensional financial planning models, budgeting cycles, and consolidation rules.",
+      "Build automated data pipelines and ETL workflows between ERP source systems (SAP, Oracle) and CPM tools.",
+      "Develop executive management reports, cash flow forecasts, and variance analysis dashboards.",
+      "Provide post-implementation support, end-user training, and performance tuning for finance partners.",
+    ],
+    requirements: [
+      "4+ years of hands-on experience with CPM platforms such as OneStream, Anaplan, Oracle Hyperion, or Board.",
+      "Strong grasp of financial accounting standards (US GAAP/IFRS), consolidation, and general ledger reconciliation.",
+      "Proficiency in SQL, relational data modeling, and scripting business rules.",
+      "Bachelor's degree in Finance, Accounting, Management Information Systems, or related field.",
+    ],
+    skills: [
+      "CPM",
+      "OneStream",
+      "Anaplan",
+      "Financial Consolidation",
+      "SQL",
+      "ETL",
+    ]
   },
   {
     id: "voice-product-owner",
     title: "Voice Product Owner",
     department: "Product & Management",
     location: "Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "5 - 8 Years",
+    overview: "TAG is looking for a Voice Product Owner to spearhead next-generation enterprise telephony, cloud contact center (CCaaS), and conversational voice AI platforms.",
+    responsibilities: [
+      "Own the product vision, roadmap priorities, and backlog for enterprise voice and contact center solutions.",
+      "Collaborate with business leaders and engineers to design omnichannel routing, IVR, and voicebot flows.",
+      "Monitor call quality metrics, MOS scores, SLA adherence, and agent productivity benchmarks.",
+      "Partner with cloud CCaaS providers and telecom vendors (Genesys, Cisco Webex, Twilio) to drive releases.",
+    ],
+    requirements: [
+      "5+ years of Product Owner / Manager experience in VoIP, telecom, SIP trunking, or CCaaS platforms.",
+      "Familiarity with conversational AI engines, speech-to-text (STT), and telephony APIs.",
+      "Certified Scrum Product Owner (CSPO) or Agile equivalent credential.",
+      "Exceptional stakeholder communication and cross-functional leadership capabilities.",
+    ],
+    skills: [
+      "CCaaS",
+      "VoIP / SIP",
+      "Product Ownership",
+      "IVR Flows",
+      "Agile / Scrum",
+      "Conversational AI",
+    ]
   },
   {
     id: "google-workspace-engineer",
     title: "Google Workspace Engineer",
     department: "Cloud & Infrastructure",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "Seeking a Google Workspace Engineer to manage, secure, and optimize enterprise Google Workspace (G Suite) environments, collaboration tools, and identity integrations.",
+    responsibilities: [
+      "Administer Google Workspace core services (Gmail, Drive, Meet, Chat, Admin Console, and Vault).",
+      "Implement zero-trust security postures, context-aware access, DLP policies, and email security (SPF, DKIM, DMARC).",
+      "Automate admin tasks, user lifecycle provisioning, and reporting using GAM CLI and Google Apps Script.",
+      "Lead seamless tenant-to-tenant email migrations and cloud collaboration integrations.",
+    ],
+    requirements: [
+      "3+ years of enterprise Google Workspace administration and engineering experience.",
+      "Proficient in scripting with Python, Bash, or Apps Script; expert knowledge of GAM / GAMADV-XTD3.",
+      "Deep understanding of SSO, SAML 2.0, SCIM provisioning, and Identity Providers (Okta, Entra ID).",
+      "Google Cloud Certified Professional Google Workspace Administrator preferred.",
+    ],
+    skills: [
+      "Google Workspace",
+      "GAM CLI",
+      "Google Apps Script",
+      "DLP / DMARC",
+      "SAML SSO",
+      "Identity",
+    ]
   },
   {
     id: "next-js-developer",
     title: "Next JS Developer",
     department: "Software Engineering",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 5 Years",
+    overview: "TAG is seeking a passionate Next.js Developer to build responsive, blazing-fast web applications, client portals, and modern interactive digital experiences.",
+    responsibilities: [
+      "Develop performant web applications using Next.js App Router, React Server Components, and TypeScript.",
+      "Implement responsive UI components adhering strictly to clean design systems and mobile-first principles.",
+      "Integrate REST and GraphQL APIs, handle server actions, and manage client-side state smoothly.",
+      "Optimize Core Web Vitals, page load speeds, SEO meta tags, and accessibility compliance (WCAG 2.1 AA).",
+    ],
+    requirements: [
+      "3+ years of professional front-end web development with React, Next.js, and TypeScript.",
+      "Strong mastery of modern CSS (Tailwind CSS, CSS Modules), HTML5, and micro-interactions.",
+      "Solid understanding of SSR, SSG, ISR, client hydration, and Next.js caching mechanics.",
+      "Experience with automated testing (Jest, Playwright) and Git version control workflows.",
+    ],
+    skills: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Core Web Vitals",
+      "API Integration",
+    ]
   },
   {
     id: "olap-anaplan-architect-developer",
-    title: "OLAP – Anaplan | Architect / Developer / Operations",
+    title: "OLAP \u2013 Anaplan | Architect / Developer / Operations",
     department: "Enterprise Analytics",
     location: "Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "5 - 9 Years",
+    overview: "We are seeking an Anaplan / OLAP Architect to lead multi-dimensional modeling, supply chain planning, and operational forecasting architecture for enterprise engagements.",
+    responsibilities: [
+      "Architect and build complex Anaplan models following DISCO standards for supply chain, sales, and finance.",
+      "Design automated data integration pipelines between ERP databases, data lakes, and Anaplan via Anaplan Connect.",
+      "Perform model audits, formula efficiency optimization, and workspace size management.",
+      "Facilitate user design workshops, translate business requirements into sprint stories, and mentor developers.",
+    ],
+    requirements: [
+      "5+ years of Anaplan model design and OLAP architectural experience (Certified Master Anaplanner preferred).",
+      "Deep expertise in multi-dimensional data modeling, calculation engines, and business forecasting.",
+      "Solid knowledge of SQL, RESTful API integrations, and ETL tools.",
+      "Bachelor's degree in Computer Science, Engineering, Finance, or equivalent practical experience.",
+    ],
+    skills: [
+      "Anaplan",
+      "OLAP",
+      "DISCO Methodology",
+      "Anaplan Connect",
+      "Data Modeling",
+      "ETL",
+    ]
   },
   {
     id: "infrastructure-wiring-technician",
     title: "Infrastructure Wiring Technician",
     department: "Infrastructure & Hardware",
     location: "Onsite - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "2 - 5 Years",
+    overview: "Seeking an Infrastructure Wiring Technician to install, terminate, test, and document structured cabling and physical network infrastructure across mission-critical facilities.",
+    responsibilities: [
+      "Pull, route, dress, and terminate Cat6, Cat6A, and single/multimode fiber optic cabling per TIA/EIA standards.",
+      "Install server racks, patch panels, cable trays, switches, PDUs, and server hardware.",
+      "Perform comprehensive continuity and loss testing using Fluke cable analyzers and OTDRs; maintain cable labels.",
+      "Assist network engineering teams with hardware swaps, cross-connect patching, and physical rack audits.",
+    ],
+    requirements: [
+      "2+ years of commercial low-voltage structured cabling or data center technician experience.",
+      "Hands-on experience with copper termination (RJ45, 110 punch-down) and fiber splicing/termination.",
+      "BICSI Installer/Technician or OSHA 10/30 certification is a strong advantage.",
+      "Ability to lift 50 lbs, work on ladders/lifts, and interpret cabling schematics and architectural blueprints.",
+    ],
+    skills: [
+      "Structured Cabling",
+      "Fiber Optics",
+      "Cat6A",
+      "Fluke Testers",
+      "Rack & Stack",
+      "BICSI",
+    ]
   },
   {
     id: "pim-project-product-manager",
     title: "PIM - Project / Product Manager",
     department: "Product & Management",
     location: "Remote / Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "5 - 8 Years",
+    overview: "TAG is hiring a PIM Project / Product Manager to oversee Product Information Management transformations, master catalog syndication, and digital commerce data governance.",
+    responsibilities: [
+      "Manage the end-to-end lifecycle of enterprise PIM implementations (Akeneo, inRiver, Salsify, Informatica MDM).",
+      "Define product attribution models, digital asset taxonomy, channel syndication feeds, and approval workflows.",
+      "Coordinate between e-commerce merchandisers, digital marketing, supply chain, and IT engineering.",
+      "Drive Agile sprint cadences, manage backlog prioritization, track project milestones, and mitigate delivery risks.",
+    ],
+    requirements: [
+      "5+ years managing enterprise PIM, MDM, or e-commerce catalog delivery projects.",
+      "Demonstrated experience aligning multi-brand product data with Amazon, Walmart, and retailer syndication specs.",
+      "PMP, CSM, or equivalent Agile Product Management credential.",
+      "Strong executive presentation and cross-functional leadership capabilities.",
+    ],
+    skills: [
+      "PIM / MDM",
+      "Product Taxonomy",
+      "Agile / Scrum",
+      "E-Commerce",
+      "Data Syndication",
+    ]
   },
   {
     id: "java-full-stack-developer",
     title: "Java Full Stack Developer",
     department: "Software Engineering",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "We are seeking a Senior Java Full Stack Developer to engineer resilient, high-volume microservices and dynamic user portals for enterprise clients.",
+    responsibilities: [
+      "Design and develop high-performance Java microservices utilizing Spring Boot, Spring Cloud, and Hibernate.",
+      "Build responsive, accessible frontend web interfaces using React, TypeScript, and modern state management.",
+      "Implement event streaming pipelines with Apache Kafka, RabbitMQ, and distributed caching with Redis.",
+      "Create automated test suites (JUnit, Mockito, Cypress) and deploy through CI/CD pipelines (Jenkins, GitHub Actions).",
+    ],
+    requirements: [
+      "4+ years of professional full-stack development experience with Java (8/11/17+) and modern JavaScript/TypeScript.",
+      "Strong command of relational databases (PostgreSQL, Oracle) and query optimization.",
+      "Hands-on experience with containerization (Docker, Kubernetes) and cloud deployments (AWS or Azure).",
+      "Bachelor's degree in Computer Science, Software Engineering, or related field.",
+    ],
+    skills: [
+      "Java",
+      "Spring Boot",
+      "React",
+      "TypeScript",
+      "Kafka",
+      "PostgreSQL",
+      "Docker",
+    ]
   },
   {
     id: "oracle-cdm-cloud-solution-architect",
-    title: "Oracle CDM Cloud – Solution Architect",
+    title: "Oracle CDM Cloud \u2013 Solution Architect",
     department: "Enterprise Applications",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "7 - 10+ Years",
+    overview: "Join TAG as an Oracle CDM Cloud Solution Architect to lead Customer Data Management, B2B/B2C master customer data consolidation, and CX Cloud integrations.",
+    responsibilities: [
+      "Architect Oracle Customer Data Management (CDM) Cloud solutions including data deduplication, survivorship, and enrichment.",
+      "Integrate Oracle CDM Cloud with Oracle CX, ERP Cloud, Salesforce, and third-party data providers (D&B, Experian).",
+      "Design data validation, cleansing, and matching rules to establish an accurate Customer 360 view.",
+      "Lead architectural review boards, migration strategies, and technical governance with client leaders.",
+    ],
+    requirements: [
+      "7+ years in enterprise customer data architecture with 3+ years specifically on Oracle CDM / CX Cloud.",
+      "In-depth understanding of Oracle Integration Cloud (OIC), REST/SOAP web services, and Oracle DB.",
+      "Proven track record delivering large-scale master data management (MDM) transformations.",
+      "Oracle Cloud Certified Architect or Specialist credential preferred.",
+    ],
+    skills: [
+      "Oracle CDM Cloud",
+      "Customer 360",
+      "Oracle CX",
+      "OIC Integration",
+      "Master Data Management",
+    ]
   },
   {
     id: "sap-automation-engineer",
     title: "SAP Automation Engineer",
     department: "Enterprise Applications",
     location: "Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "TAG is seeking an SAP Automation Engineer to design, script, and implement test automation and business process RPA workflows across SAP S/4HANA landscapes.",
+    responsibilities: [
+      "Develop and maintain automated test scripts for SAP GUI, SAP Fiori, and API layers using Worksoft Certify, Tosca, or Selenium.",
+      "Automate repetitive SAP business transactions and data entry workflows using UiPath or Power Automate.",
+      "Integrate automated regression testing into CI/CD pipelines to validate monthly SAP service releases.",
+      "Analyze test failure logs, collaborate with functional SAP consultants, and maintain test coverage traceability.",
+    ],
+    requirements: [
+      "3+ years automating SAP processes and regression test suites across ECC or S/4HANA environments.",
+      "Proficiency with test automation frameworks (Worksoft Certify, Tricentis Tosca, or Selenium with Java/Python).",
+      "Familiarity with core SAP modules (FI/CO, MM, SD) and SAP Fiori architecture.",
+      "Strong problem-solving skills and passion for quality engineering.",
+    ],
+    skills: [
+      "SAP S/4HANA",
+      "Worksoft Certify",
+      "Tricentis Tosca",
+      "SAP Fiori",
+      "Test Automation",
+      "RPA",
+    ]
   },
   {
     id: "senior-application-solutions-architect-aws",
-    title: "Senior Application / Solutions Architect – AWS",
+    title: "Senior Application / Solutions Architect \u2013 AWS",
     department: "Cloud & Architecture",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "8+ Years / Senior Architect",
+    overview: "We are seeking a Senior AWS Application / Solutions Architect to design, modernize, and migrate mission-critical enterprise applications to AWS cloud native architectures.",
+    responsibilities: [
+      "Architect multi-tier cloud applications utilizing AWS serverless (Lambda, API Gateway), container (ECS, EKS), and database services.",
+      "Formulate cloud migration roadmaps (re-host, re-platform, re-architect) aligned with the AWS Well-Architected Framework.",
+      "Design high-availability, disaster recovery, auto-scaling, and infrastructure-as-code (Terraform, AWS CDK) pipelines.",
+      "Lead executive technical workshops and mentor cloud engineering teams on cloud-native best practices.",
+    ],
+    requirements: [
+      "8+ years in enterprise software architecture, with 4+ years designing production AWS cloud ecosystems.",
+      "AWS Certified Solutions Architect \u2013 Professional certification is strongly preferred.",
+      "Extensive experience with Terraform, containerization, microservices, and modern security patterns.",
+      "Bachelor's or Master's degree in Computer Science, Engineering, or equivalent experience.",
+    ],
+    skills: [
+      "AWS Cloud",
+      "AWS Well-Architected",
+      "Terraform",
+      "Kubernetes / ECS",
+      "Serverless",
+      "Microservices",
+    ]
   },
   {
     id: "desktop-helpdesk-support",
     title: "Desktop / Helpdesk support",
     department: "IT Support & Ops",
     location: "Onsite / Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "2 - 4 Years",
+    overview: "Seeking a responsive Desktop / Helpdesk Support Specialist to deliver top-tier hardware, operating system, and SaaS application support to enterprise users.",
+    responsibilities: [
+      "Provide Tier 1/2 technical support for Windows 10/11, macOS, mobile devices, and peripherals via ticketing systems.",
+      "Configure, deploy, and image corporate laptops and desktops using Microsoft Intune, SCCM, or Jamf.",
+      "Manage user accounts, password resets, and security access in Active Directory and Microsoft 365.",
+      "Troubleshoot network connectivity, VPN client issues, printer configurations, and conference room AV.",
+    ],
+    requirements: [
+      "2+ years in corporate IT helpdesk, desktop support, or technician roles.",
+      "Hands-on experience with Microsoft 365, Active Directory, hardware troubleshooting, and remote support tools.",
+      "CompTIA A+, Network+, or Microsoft MD-102 certification is a plus.",
+      "Friendly, customer-centric attitude with clear verbal and written communication.",
+    ],
+    skills: [
+      "Desktop Support",
+      "Windows 11 / macOS",
+      "Intune / Jamf",
+      "Active Directory",
+      "M365",
+      "Hardware",
+    ]
   },
   {
     id: "security-engineer",
     title: "Security Engineer",
     department: "Cybersecurity & Governance",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "TAG is seeking a Security Engineer to protect enterprise networks, endpoints, and cloud environments through proactive threat detection, vulnerability management, and defense-in-depth.",
+    responsibilities: [
+      "Implement, configure, and monitor security controls across SIEM platforms (Splunk, Microsoft Sentinel), EDR, and firewalls.",
+      "Perform periodic vulnerability scans, coordinate patch remediation, and conduct tabletop incident response drills.",
+      "Collaborate with DevOps teams to integrate static and dynamic code security testing (SAST/DAST) into CI/CD pipelines.",
+      "Investigate security alerts, triage potential indicators of compromise (IOCs), and document forensic root causes.",
+    ],
+    requirements: [
+      "4+ years of professional cybersecurity engineering experience.",
+      "Strong grasp of network security protocols, TLS, zero-trust network access, and cloud security postures.",
+      "Industry certifications like CISSP, CompTIA Security+, CEH, or AWS Security Specialty preferred.",
+      "Familiarity with Python or PowerShell for automating threat hunting and alert aggregation.",
+    ],
+    skills: [
+      "Cybersecurity",
+      "SIEM / Sentinel",
+      "EDR",
+      "Vulnerability Management",
+      "Zero Trust",
+      "Firewalls",
+    ]
   },
   {
     id: "platform-engineer",
     title: "Platform Engineer",
     department: "Cloud & Platform",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 8 Years",
+    overview: "Join TAG as a Platform Engineer building developer platforms, self-service infrastructure, and automated Kubernetes orchestration to empower product teams.",
+    responsibilities: [
+      "Build and manage internal developer platforms (IDP), GitOps workflows (ArgoCD), and self-service infrastructure.",
+      "Manage multi-cluster Kubernetes environments on AWS EKS or Azure AKS with auto-scaling and service meshes (Istio).",
+      "Provision cloud resources using Infrastructure as Code (Terraform, Terragrunt, Crossplane).",
+      "Set up centralized observability, metrics collection, and alerting stacks (Prometheus, Grafana, OpenTelemetry).",
+    ],
+    requirements: [
+      "4+ years in platform engineering, SRE, or DevOps roles supporting distributed systems.",
+      "Deep expertise in Kubernetes (CKA/CKS preferred), Linux system internals, and networking.",
+      "Proficiency in Go, Python, or Bash for platform tool development and automation.",
+      "Solid understanding of container security, secrets management (Vault), and cloud governance.",
+    ],
+    skills: [
+      "Kubernetes",
+      "Platform Engineering",
+      "Terraform",
+      "GitOps / ArgoCD",
+      "Prometheus",
+      "Go / Python",
+    ]
   },
   {
     id: "data-engineer",
     title: "Data Engineer",
     department: "AI & Data Solutions",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "Seeking a Data Engineer to design, build, and optimize robust enterprise data pipelines, lakehouse architectures, and analytics data models.",
+    responsibilities: [
+      "Design and build batch and real-time streaming data ingestion pipelines using Apache Spark, Kafka, and Airflow.",
+      "Model and maintain curated data warehouse tables in Snowflake, Databricks, or BigQuery following dimensional design.",
+      "Ensure high data quality through automated testing, schema enforcement, and lineage tracking (dbt, Great Expectations).",
+      "Partner with data scientists and BI analysts to deliver production-ready datasets for reporting and ML modeling.",
+    ],
+    requirements: [
+      "3+ years of hands-on data engineering experience building production-scale data pipelines.",
+      "Expert level SQL and Python programming skills; solid experience with PySpark.",
+      "Demonstrated proficiency with modern cloud data platforms (Snowflake, Databricks, or Redshift).",
+      "Bachelor's degree in Computer Science, Data Engineering, Mathematics, or equivalent field.",
+    ],
+    skills: [
+      "Data Engineering",
+      "Apache Spark",
+      "Python",
+      "SQL",
+      "Snowflake / Databricks",
+      "dbt",
+      "Airflow",
+    ]
   },
   {
     id: "azure-devops-engineer",
     title: "Azure DevOps Engineer",
     department: "DevOps & Cloud",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "TAG is looking for an Azure DevOps Engineer to architect automated CI/CD pipelines, release gates, and cloud infrastructure on Microsoft Azure.",
+    responsibilities: [
+      "Design and maintain automated Azure DevOps YAML multi-stage pipelines for continuous build and deployment.",
+      "Provision Azure cloud services using Bicep, ARM templates, or Terraform with state governance.",
+      "Implement security scanning (SonarQube, Mend, Microsoft Defender for Cloud) directly within build pipelines.",
+      "Manage Azure Kubernetes Service (AKS), App Services, Container Registries, and Virtual Networks.",
+    ],
+    requirements: [
+      "4+ years of dedicated DevOps and infrastructure automation experience on Microsoft Azure.",
+      "Microsoft Certified: DevOps Engineer Expert (AZ-400) or Azure Solutions Architect (AZ-305) preferred.",
+      "Strong scripting skills in PowerShell, Azure CLI, and Bash.",
+      "Experience with branch policies, pull request workflows, and artifact repository management.",
+    ],
+    skills: [
+      "Azure DevOps",
+      "CI/CD YAML",
+      "Bicep / Terraform",
+      "AKS",
+      "PowerShell",
+      "Security Gates",
+    ]
   },
   {
     id: "ibm-middleware-engineer",
     title: "IBM - Middleware Engineer",
     department: "Enterprise Infrastructure",
     location: "Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 8 Years",
+    overview: "We are seeking an IBM Middleware Engineer to administer, configure, and maintain enterprise integration middleware such as IBM MQ, WebSphere, and IIB/App Connect.",
+    responsibilities: [
+      "Install, configure, and maintain IBM MQ, IBM WebSphere Application Server (WAS), and IBM Integration Bus (IIB/ACE).",
+      "Design queue managers, channels, clusters, listener definitions, and SSL/TLS certificates for secure message exchange.",
+      "Troubleshoot message queuing bottlenecks, application server heap dumps, and integration transaction failures.",
+      "Execute DR failover tests, high-availability cluster patching, and automated configuration scripting.",
+    ],
+    requirements: [
+      "4+ years administering IBM Middleware suites in mission-critical financial or retail environments.",
+      "Strong understanding of Linux/AIX system administration, shell scripting, and network topologies.",
+      "Experience migrating on-premise middleware workloads to containerized platforms (OpenShift) is a plus.",
+      "Bachelor's degree in Information Systems, Computer Science, or related field.",
+    ],
+    skills: [
+      "IBM MQ",
+      "WebSphere WAS",
+      "IBM App Connect (IIB)",
+      "Linux / AIX",
+      "SSL / TLS",
+      "Middleware",
+    ]
   },
   {
     id: "iam-sailpoint-architect",
     title: "IAM Sailpoint Architect",
     department: "Identity & Security (IAM)",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "8+ Years / Lead Architect",
+    overview: "TechAxis Global is seeking an IAM SailPoint Architect to lead enterprise Identity Governance and Administration (IGA) architecture, compliance, and lifecycle automation.",
+    responsibilities: [
+      "Architect comprehensive SailPoint IdentityIQ (IIQ) and IdentityNow (IDN) solutions for complex enterprise clients.",
+      "Design identity lifecycle workflows (joiner, mover, leaver), certification campaigns, and role-based access control (RBAC).",
+      "Engineer custom connectors, application onboarding frameworks, and integration with HR source systems (Workday, SAP).",
+      "Establish SOD policies, compliance reporting, and audit trails aligned with SOX, HIPAA, and GDPR frameworks.",
+    ],
+    requirements: [
+      "8+ years in Identity and Access Management with 5+ years leading SailPoint IIQ/IDN architectural engagements.",
+      "SailPoint Certified IdentityIQ Architect or IdentityNow Architect credential.",
+      "Expertise in Java, BeanShell, XML, REST APIs, and directory services (Active Directory, LDAP).",
+      "Excellent client-facing advisory and technical leadership presence.",
+    ],
+    skills: [
+      "SailPoint IIQ",
+      "SailPoint IdentityNow",
+      "IAM / IGA",
+      "RBAC / SOD",
+      "Java / BeanShell",
+      "Workday Connector",
+    ]
   },
   {
     id: "lead-iam-sailpoint-developer-1",
     title: "Lead IAM SailPoint Developer",
     department: "Identity & Security (IAM)",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "5 - 8 Years",
+    overview: "TAG is seeking a Lead IAM SailPoint Developer to design, customize, and implement SailPoint IdentityIQ solutions for enterprise client identity ecosystems.",
+    responsibilities: [
+      "Develop and customize SailPoint IIQ components including custom rules, workflows, forms, quicklinks, and UI enhancements.",
+      "Build and test connectors for target systems using SCIM, JDBC, Web Services, and flat file integration.",
+      "Configure access certifications, password management, and automated segregation of duties (SOD) matrices.",
+      "Lead code reviews, mentor junior developers, and ensure alignment with development best practices.",
+    ],
+    requirements: [
+      "5+ years of hands-on SailPoint IdentityIQ development and implementation experience.",
+      "Proficient in Core Java, BeanShell, XML, SQL, and Git repository management.",
+      "SailPoint Certified IdentityIQ Engineer certification is highly advantageous.",
+      "Strong debugging skills and experience troubleshooting connector synchronization failures.",
+    ],
+    skills: [
+      "SailPoint IIQ",
+      "Java / BeanShell",
+      "Custom Connectors",
+      "SCIM",
+      "Workflows",
+      "Access Certifications",
+    ]
   },
   {
     id: "databricks-lead-data-engineer-architect",
     title: "Databricks Lead Data Engineer / Architect",
     department: "AI & Data Solutions",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "7 - 10 Years",
+    overview: "We are seeking a Databricks Lead Data Engineer / Architect to build scalable lakehouse architectures, real-time data ingestion pipelines, and ML-ready features on Databricks.",
+    responsibilities: [
+      "Architect Lakehouse platforms on Databricks utilizing Delta Lake, Unity Catalog, and Delta Live Tables (DLT).",
+      "Design large-scale data ingestion and streaming pipelines using PySpark, Auto Loader, and Apache Spark Structured Streaming.",
+      "Implement enterprise data governance, access controls, and data lineage through Databricks Unity Catalog.",
+      "Tune Spark cluster performance, optimize photon engine workloads, and control cloud compute costs.",
+    ],
+    requirements: [
+      "7+ years in data engineering with 3+ years leading Databricks lakehouse implementations.",
+      "Databricks Certified Data Engineer Professional or Databricks Certified Solutions Architect preferred.",
+      "Mastery of Python, PySpark, advanced SQL, and lakehouse storage formats (Delta, Parquet).",
+      "Strong background integrating Databricks with AWS (S3, EMR) or Azure (ADLS Gen2, Synapse).",
+    ],
+    skills: [
+      "Databricks",
+      "Delta Lake",
+      "Unity Catalog",
+      "PySpark",
+      "Delta Live Tables",
+      "Cloud Lakehouse",
+    ]
   },
   {
     id: "fraud-aml-technical-analyst",
     title: "Fraud & AML Technical Analyst",
     department: "Financial Crime & Tech",
     location: "Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "TAG is seeking a Fraud & AML Technical Analyst to implement, configure, and maintain financial crime detection, transaction monitoring, and anti-money laundering platforms.",
+    responsibilities: [
+      "Configure and fine-tune AML transaction monitoring scenarios, sanction screening rules, and fraud detection models.",
+      "Analyze transactional data streams and alert outputs using SQL, Python, and statistical anomaly detection techniques.",
+      "Collaborate with financial intelligence units (FIU) to translate regulatory policies (BSA, FinCEN, FATF) into rules.",
+      "Implement data mapping between core banking systems and AML platforms (Actimize, SAS AML, Fenergo).",
+    ],
+    requirements: [
+      "3+ years of technical experience supporting AML, Fraud, or Sanctions systems in banking or financial services.",
+      "Proficiency with SQL querying, data profiling, and AML rule optimization.",
+      "Familiarity with vendor platforms like NICE Actimize, Oracle Mantas, or SAS Anti-Money Laundering.",
+      "ACAMS (CAMS) or related compliance certification is a valuable plus.",
+    ],
+    skills: [
+      "AML / BSA",
+      "Fraud Detection",
+      "NICE Actimize",
+      "SQL Analytics",
+      "Sanctions Screening",
+      "FinTech",
+    ]
   },
   {
     id: "teamcenter-security-expert",
     title: "Teamcenter Security Expert",
     department: "Cybersecurity & PLM",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "5 - 8 Years",
+    overview: "Seeking a Siemens Teamcenter Security Expert to architect, configure, and enforce cybersecurity controls and export compliance for enterprise Product Lifecycle Management (PLM).",
+    responsibilities: [
+      "Architect and configure Teamcenter PLM security rules, access managers (AM), and project-level authorization trees.",
+      "Implement ITAR, EAR, and proprietary IP export control restrictions across engineering CAD datasets.",
+      "Integrate Teamcenter with enterprise Single Sign-On (SAML/OAuth), LDAP directories, and Multi-Factor Authentication.",
+      "Perform security audits, access reviews, and penetration remediation for Teamcenter web (Active Workspace) tiers.",
+    ],
+    requirements: [
+      "5+ years of Teamcenter PLM administration and security architecture experience.",
+      "Deep understanding of Siemens Teamcenter Access Manager, Rule Tree configurations, and Active Workspace.",
+      "Knowledge of aerospace/defense export compliance regulations (ITAR/EAR) and NIST 800-171.",
+      "Bachelor's degree in Engineering, Computer Science, or equivalent technical background.",
+    ],
+    skills: [
+      "Siemens Teamcenter",
+      "PLM Security",
+      "Active Workspace",
+      "ITAR Compliance",
+      "Access Manager",
+      "CAD Data",
+    ]
   },
   {
     id: "devops-support-engineer",
     title: "DevOps Support Engineer",
     department: "DevOps & Cloud",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "2 - 4 Years",
+    overview: "TAG is hiring a DevOps Support Engineer to maintain CI/CD pipelines, troubleshoot deployment failures, and monitor cloud infrastructure health.",
+    responsibilities: [
+      "Provide operational Tier 2 support for build and release pipelines across Jenkins, GitHub Actions, or GitLab CI.",
+      "Investigate deployment failures, container crashes, and environment configuration drifts.",
+      "Monitor cloud applications and services using Datadog, New Relic, CloudWatch, and PagerDuty.",
+      "Assist developers with environment provisioning, Docker container troubleshooting, and secrets management.",
+    ],
+    requirements: [
+      "2+ years in DevOps support, SRE, or sysadmin roles supporting cloud environments.",
+      "Hands-on experience with Docker, Linux command line, Bash/Python scripting, and Git.",
+      "Familiarity with cloud platforms (AWS or Azure) and basic Terraform usage.",
+      "Proactive troubleshooting mindset with dedication to maintaining high system uptime.",
+    ],
+    skills: [
+      "DevOps Support",
+      "CI/CD Pipelines",
+      "Docker",
+      "Linux",
+      "Datadog / CloudWatch",
+      "Git",
+    ]
   },
   {
     id: "azure-lead-developer-architect",
     title: "Azure Lead Developer / Architect",
     department: "Cloud & Architecture",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "7 - 10 Years",
+    overview: "We are seeking an Azure Lead Developer / Architect to design modern enterprise cloud applications, distributed microservices, and serverless architectures on Microsoft Azure.",
+    responsibilities: [
+      "Architect resilient, scalable enterprise applications utilizing Azure App Services, Functions, Service Bus, and Cosmos DB.",
+      "Lead technical engineering teams through agile sprints, code reviews, and architectural spikes.",
+      "Define API architecture, microservice communication patterns, and distributed event-driven paradigms.",
+      "Collaborate with enterprise security teams to implement Azure Key Vault, Managed Identities, and Azure Entra ID.",
+    ],
+    requirements: [
+      "7+ years in enterprise software engineering with 3+ years architecting on Microsoft Azure.",
+      "Microsoft Certified: Azure Solutions Architect Expert (AZ-305) preferred.",
+      "Expertise in C# / .NET Core or Java, RESTful APIs, and Azure PaaS services.",
+      "Strong background with infrastructure as code (Terraform or Bicep) and CI/CD automation.",
+    ],
+    skills: [
+      "Azure Architecture",
+      "C# / .NET Core",
+      "Azure Functions",
+      "Cosmos DB",
+      "Microservices",
+      "Event-Driven",
+    ]
   },
   {
     id: "technical-iam-program-manager",
     title: "Technical IAM program manager",
     department: "Identity & Security (IAM)",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "8 - 12+ Years",
+    overview: "TAG is looking for a Technical IAM Program Manager to steer multi-year enterprise Identity and Access Management transformation programs for global enterprise clients.",
+    responsibilities: [
+      "Lead program planning, governance, milestone tracking, and cross-workstream delivery for complex IAM initiatives.",
+      "Align technical delivery across IGA (SailPoint), PAM (CyberArk), and Access Management (Okta / Ping).",
+      "Manage executive steering committee updates, program budgets, scope changes, and strategic risks.",
+      "Facilitate technical workshops, requirement gathering sessions, and stakeholder consensus across IT and business units.",
+    ],
+    requirements: [
+      "8+ years in IT program management with at least 4 years dedicated to enterprise IAM / cybersecurity programs.",
+      "Strong technical fluency in identity governance, privileged access, zero trust, and compliance standards.",
+      "PMP, PgMP, or Agile certification (PMI-ACP, SAFe Agilist) preferred.",
+      "Outstanding executive communication, relationship building, and team leadership skills.",
+    ],
+    skills: [
+      "IAM Program Management",
+      "SailPoint / CyberArk",
+      "Executive Governance",
+      "Zero Trust",
+      "PMP / Agile",
+    ]
   },
   {
     id: "iam-siteminder-consultant",
     title: "IAM - SiteMinder Consultant",
     department: "Identity & Security (IAM)",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "Seeking an IAM SiteMinder Consultant to maintain, upgrade, and support legacy and modern enterprise Web Access Management (WAM) and Single Sign-On (SSO) infrastructure.",
+    responsibilities: [
+      "Administer and support Broadcom / CA SiteMinder (Symantec SiteMinder / Single Sign-On) policy servers and web agents.",
+      "Configure authentication schemes, authorization rules, realm definitions, and response attributes.",
+      "Support federated SSO integrations using SAML 2.0, WS-Federation, and OAuth with modern identity providers.",
+      "Assist in legacy WAM migration initiatives to modern cloud identity platforms (Ping, Okta, Azure AD).",
+    ],
+    requirements: [
+      "4+ years of hands-on experience administering and troubleshooting CA SiteMinder / Symantec SSO.",
+      "Strong knowledge of Apache, IIS, and Nginx web servers and SiteMinder web agent integrations.",
+      "Proficiency with LDAP directories, Active Directory, and federated identity protocols (SAML 2.0).",
+      "Bachelor's degree in Computer Science, Information Technology, or equivalent experience.",
+    ],
+    skills: [
+      "CA SiteMinder",
+      "Web Access Management",
+      "SAML 2.0 SSO",
+      "Policy Server",
+      "IIS / Apache",
+      "LDAP",
+    ]
   },
   {
     id: "ai-engineer-aws-bedrock",
     title: "AI Engineer - AWS Bedrock",
     department: "AI & Data Solutions",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "Join TAG as an AI Engineer specializing in AWS Bedrock to build enterprise GenAI applications, foundational model orchestrations, and intelligent automation agents.",
+    responsibilities: [
+      "Develop generative AI applications using AWS Bedrock foundation models (Anthropic Claude, Amazon Titan, Meta Llama).",
+      "Build RAG pipelines integrating Amazon Bedrock Knowledge Bases and vector databases (OpenSearch Serverless).",
+      "Implement prompt engineering, few-shot tuning, model evaluation metrics, and Bedrock Guardrails.",
+      "Deploy scalable serverless APIs using AWS Lambda, API Gateway, and Step Functions for AI workflows.",
+    ],
+    requirements: [
+      "3+ years of software development experience with at least 1+ year building production LLM apps on AWS.",
+      "Strong proficiency in Python, LangChain, LlamaIndex, and the AWS SDK (Boto3).",
+      "Experience with vector search, embeddings, and prompt optimization strategies.",
+      "AWS Certified AI Practitioner or AWS Certified Machine Learning Specialty is a bonus.",
+    ],
+    skills: [
+      "AWS Bedrock",
+      "Anthropic Claude",
+      "Python / Boto3",
+      "RAG Pipelines",
+      "OpenSearch",
+      "Prompt Engineering",
+    ]
   },
   {
     id: "etl-analyst",
     title: "ETL Analyst",
     department: "AI & Data Solutions",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 5 Years",
+    overview: "TAG is seeking an ETL Analyst to analyze data mappings, build batch transformation routines, and validate data integrity across enterprise data warehouses.",
+    responsibilities: [
+      "Develop and maintain automated ETL/ELT workflows using tools like Informatica, SSIS, Talend, or dbt.",
+      "Analyze source system data schemas, create source-to-target mapping specifications, and document transformation logic.",
+      "Write complex SQL queries to validate data consistency, detect reconciliation variances, and profile data quality.",
+      "Collaborate with business intelligence analysts to ensure data staging tables support business KPIs.",
+    ],
+    requirements: [
+      "3+ years of hands-on experience in ETL development, data analysis, and warehouse data modeling.",
+      "Advanced SQL querying skills across Oracle, SQL Server, or Snowflake databases.",
+      "Solid understanding of relational database normalization, star schemas, and slowly changing dimensions (SCD).",
+      "Bachelor's degree in Computer Science, Information Systems, or related field.",
+    ],
+    skills: [
+      "ETL / ELT",
+      "SQL Querying",
+      "Data Mapping",
+      "Informatica / SSIS",
+      "Star Schema",
+      "Data Quality",
+    ]
   },
   {
     id: "dotnet-developer-ny-ga",
-    title: ".NET Developer – New York / Alpharetta, GA",
+    title: ".NET Developer \u2013 New York / Alpharetta, GA",
     department: "Software Engineering",
     location: "New York / Alpharetta, GA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "Seeking a senior .NET Developer based in New York or Alpharetta, GA to build high-performance distributed backends, REST APIs, and microservices for fintech and corporate clients.",
+    responsibilities: [
+      "Design and build scalable web APIs and backend services using C#, .NET 8 / .NET Core, and Entity Framework Core.",
+      "Implement microservices architectures, asynchronous messaging (RabbitMQ, Azure Service Bus), and caching (Redis).",
+      "Optimize database interactions, write stored procedures, and profile query execution plans in MS SQL Server.",
+      "Participate in agile sprint ceremonies, lead code reviews, and drive automated unit/integration testing.",
+    ],
+    requirements: [
+      "4+ years of professional backend software development with C# and .NET Core.",
+      "Strong knowledge of RESTful API design, dependency injection, and clean architecture principles.",
+      "Solid experience with Microsoft SQL Server or PostgreSQL and ORM frameworks.",
+      "Experience deploying applications to Microsoft Azure or AWS cloud environments.",
+    ],
+    skills: [
+      ".NET 8 / C#",
+      "Entity Framework",
+      "SQL Server",
+      "REST APIs",
+      "Microservices",
+      "Azure",
+    ]
   },
   {
     id: "qa-manual-functional-tester",
     title: "QA Manual / Functional Tester",
     department: "Quality Assurance",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 5 Years",
+    overview: "We are seeking a QA Manual / Functional Tester to execute thorough functional, regression, integration, and user acceptance testing across enterprise web and mobile platforms.",
+    responsibilities: [
+      "Analyze functional specifications, user stories, and acceptance criteria to design detailed test cases and test plans.",
+      "Execute manual functional, sanity, exploratory, and regression test suites across browsers and mobile devices.",
+      "Log detailed bug reports with clear reproduction steps, screenshots, and network logs in Jira or Azure DevOps.",
+      "Validate backend API responses using Postman and inspect database state using SQL verification queries.",
+    ],
+    requirements: [
+      "3+ years of dedicated manual and functional software quality assurance experience.",
+      "Proficiency with test management tools (Jira, Zephyr, TestRail, or Azure Test Plans).",
+      "Hands-on experience testing REST APIs with Postman and writing basic SQL queries.",
+      "ISTQB Certified Tester Foundation Level (CTFL) is a plus.",
+    ],
+    skills: [
+      "Manual Testing",
+      "Functional QA",
+      "Jira / TestRail",
+      "Postman API",
+      "SQL Verification",
+      "Regression",
+    ]
   },
   {
     id: "api-gateway-engineer",
     title: "API Gateway Engineer",
     department: "Cloud & Platform",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "TAG is seeking an API Gateway Engineer to architect, secure, and manage enterprise API Gateway platforms (Kong, Apigee, AWS API Gateway) for high-traffic microservices.",
+    responsibilities: [
+      "Deploy and configure enterprise API Gateways (Apigee, Kong Gateway, or AWS API Gateway).",
+      "Implement rate limiting, OAuth 2.0 / mTLS security policies, CORS headers, and request/response transformations.",
+      "Establish centralized API logging, distributed tracing, and SLA monitoring dashboards.",
+      "Automate API proxy deployment via OpenAPI specs (Swagger) and GitOps CI/CD pipelines.",
+    ],
+    requirements: [
+      "4+ years of experience engineering API management and gateway solutions.",
+      "Deep understanding of REST, GraphQL, gRPC, OAuth2, OpenID Connect, and TLS certificates.",
+      "Experience with Kubernetes ingress controllers, service meshes (Istio), and Linux networking.",
+      "Scripting proficiency in Python, JavaScript/Node.js, or Lua.",
+    ],
+    skills: [
+      "API Gateway",
+      "Apigee",
+      "Kong Gateway",
+      "OAuth 2.0 / mTLS",
+      "OpenAPI",
+      "Kubernetes Ingress",
+    ]
   },
   {
     id: "lead-iam-sailpoint-developer-2",
     title: "Lead IAM SailPoint Developer",
     department: "Identity & Security (IAM)",
     location: "Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "5 - 8 Years",
+    overview: "TAG is seeking a Lead IAM SailPoint Developer to design, customize, and implement SailPoint IdentityIQ solutions for enterprise client identity ecosystems.",
+    responsibilities: [
+      "Develop and customize SailPoint IIQ components including custom rules, workflows, forms, quicklinks, and UI enhancements.",
+      "Build and test connectors for target systems using SCIM, JDBC, Web Services, and flat file integration.",
+      "Configure access certifications, password management, and automated segregation of duties (SOD) matrices.",
+      "Lead code reviews, mentor junior developers, and ensure alignment with development best practices.",
+    ],
+    requirements: [
+      "5+ years of hands-on SailPoint IdentityIQ development and implementation experience.",
+      "Proficient in Core Java, BeanShell, XML, SQL, and Git repository management.",
+      "SailPoint Certified IdentityIQ Engineer certification is highly advantageous.",
+      "Strong debugging skills and experience troubleshooting connector synchronization failures.",
+    ],
+    skills: [
+      "SailPoint IIQ",
+      "Java / BeanShell",
+      "Custom Connectors",
+      "SCIM",
+      "Workflows",
+      "Access Certifications",
+    ]
   },
   {
     id: "oracle-exadata-dba",
     title: "Oracle Exadata DBA",
     department: "Enterprise Applications",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "6 - 10 Years",
+    overview: "Seeking an experienced Oracle Exadata DBA to administer, tune, and maintain mission-critical Oracle Exadata Database Machine environments.",
+    responsibilities: [
+      "Administer and maintain Oracle Exadata X8/X9/X10 hardware, storage cells, compute nodes, and InfiniBand/RoCE fabrics.",
+      "Manage Oracle Real Application Clusters (RAC), Automatic Storage Management (ASM), and Data Guard DR replication.",
+      "Diagnose and optimize database performance using AWR, ASH reports, Smart Scans, and SQL Plan Baselines.",
+      "Execute quarterly Oracle release updates (RU), firmware patching, and automated backup strategies via RMAN.",
+    ],
+    requirements: [
+      "6+ years as an Oracle DBA with at least 3+ years hands-on experience supporting Oracle Exadata environments.",
+      "Oracle Certified Professional (OCP) or Oracle Exadata Database Machine Certified Implementation Specialist.",
+      "Expertise with Linux OS administration, shell scripting, and storage cell offloading mechanisms.",
+      "Proven track record managing zero-downtime database upgrades and high-availability systems.",
+    ],
+    skills: [
+      "Oracle Exadata",
+      "Oracle RAC",
+      "Data Guard",
+      "Smart Scan",
+      "ASM / RMAN",
+      "AWR Performance Tuning",
+    ]
   },
   {
     id: "oracle-fdi-lead-architect-1",
     title: "Oracle FDI Lead/ Architect",
     department: "Enterprise Analytics",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "7 - 10+ Years",
+    overview: "TAG is hiring an Oracle FDI (Fusion Data Intelligence / Fusion Analytics Warehouse) Lead Architect to design cloud analytics pipelines for ERP, HCM, and SCM data.",
+    responsibilities: [
+      "Architect Oracle Fusion Data Intelligence (FDI / FAW) implementations extracting from Oracle Cloud Applications.",
+      "Customize data models, semantic layers, and subject areas using FDI extensibility framework.",
+      "Build executive dashboards and data stories in Oracle Analytics Cloud (OAC) for finance and operations leaders.",
+      "Optimize data sync pipelines, manage autonomous data warehouse (ADW) storage, and govern security.",
+    ],
+    requirements: [
+      "7+ years in enterprise analytics and BI architecture with 3+ years specifically in Oracle FDI / FAW / OAC.",
+      "Deep understanding of Oracle Cloud ERP/HCM data structures and Oracle Autonomous Database (ADW).",
+      "Oracle Cloud Infrastructure (OCI) or Oracle Analytics Cloud certifications preferred.",
+      "Strong consulting, client presentation, and team mentoring skills.",
+    ],
+    skills: [
+      "Oracle FDI",
+      "Fusion Analytics (FAW)",
+      "Oracle Analytics Cloud (OAC)",
+      "Oracle Autonomous DB",
+      "Cloud ERP",
+    ]
   },
   {
     id: "snowflake-developer",
     title: "Snowflake Developer",
     department: "AI & Data Solutions",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "Join TAG as a Snowflake Developer to engineer scalable cloud data warehouses, optimize complex analytical queries, and build automated ingestion pipelines.",
+    responsibilities: [
+      "Design and build high-performance data pipelines utilizing Snowflake Snowpipe, Streams, Tasks, and External Tables.",
+      "Optimize SQL queries, clustering keys, materialized views, and virtual warehouse sizing for cost efficiency.",
+      "Implement data masking, role-based access control (RBAC), and secure data sharing across business units.",
+      "Develop transformation models using dbt (data build tool) and orchestrate runs via Airflow.",
+    ],
+    requirements: [
+      "3+ years of dedicated Snowflake data warehouse development experience.",
+      "SnowPro Core or SnowPro Advanced Data Engineer certification is preferred.",
+      "Advanced SQL writing skills and proficiency in Python or Snowpark.",
+      "Familiarity with cloud object storage (AWS S3, Azure Blob, Google Cloud Storage).",
+    ],
+    skills: [
+      "Snowflake",
+      "Snowpipe",
+      "dbt",
+      "SQL Optimization",
+      "Snowpark",
+      "Data Warehousing",
+    ]
   },
   {
     id: "sap-mes-consultant",
     title: "SAP - MES Consultant",
     department: "Enterprise Applications",
     location: "Remote / Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 8 Years",
+    overview: "TAG is seeking an SAP MES Consultant to design, configure, and deploy SAP Manufacturing Execution (ME) and Manufacturing Integration and Intelligence (MII) solutions.",
+    responsibilities: [
+      "Implement SAP ME / MII to automate shop floor operations, machine data collection, and work order tracking.",
+      "Design integration interfaces between SAP S/4HANA (PP/QM/PM) and plant floor PLC/SCADA control systems.",
+      "Configure manufacturing dashboards, OEE (Overall Equipment Effectiveness) reports, and quality inspection workflows.",
+      "Lead user workshops, functional testing, and go-live floor support in manufacturing plant environments.",
+    ],
+    requirements: [
+      "4+ years of consulting experience implementing SAP ME, SAP MII, or SAP Digital Manufacturing Cloud (DMC).",
+      "Understanding of manufacturing production processes, discrete/process manufacturing, and shop floor automation.",
+      "Familiarity with industrial standards such as ISA-95 and OPC-UA connectivity.",
+      "Bachelor's degree in Engineering, Operations Management, or related field.",
+    ],
+    skills: [
+      "SAP MES",
+      "SAP MII",
+      "Shop Floor Integration",
+      "SAP PP/QM",
+      "ISA-95",
+      "Industrial IoT",
+    ]
   },
   {
     id: "oracle-fdi-lead-architect-2",
     title: "Oracle FDI Lead/ Architect",
     department: "Enterprise Analytics",
     location: "Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "7 - 10+ Years",
+    overview: "TAG is hiring an Oracle FDI (Fusion Data Intelligence / Fusion Analytics Warehouse) Lead Architect to design cloud analytics pipelines for ERP, HCM, and SCM data.",
+    responsibilities: [
+      "Architect Oracle Fusion Data Intelligence (FDI / FAW) implementations extracting from Oracle Cloud Applications.",
+      "Customize data models, semantic layers, and subject areas using FDI extensibility framework.",
+      "Build executive dashboards and data stories in Oracle Analytics Cloud (OAC) for finance and operations leaders.",
+      "Optimize data sync pipelines, manage autonomous data warehouse (ADW) storage, and govern security.",
+    ],
+    requirements: [
+      "7+ years in enterprise analytics and BI architecture with 3+ years specifically in Oracle FDI / FAW / OAC.",
+      "Deep understanding of Oracle Cloud ERP/HCM data structures and Oracle Autonomous Database (ADW).",
+      "Oracle Cloud Infrastructure (OCI) or Oracle Analytics Cloud certifications preferred.",
+      "Strong consulting, client presentation, and team mentoring skills.",
+    ],
+    skills: [
+      "Oracle FDI",
+      "Fusion Analytics (FAW)",
+      "Oracle Analytics Cloud (OAC)",
+      "Oracle Autonomous DB",
+      "Cloud ERP",
+    ]
   },
   {
     id: "cloud-operations-manager",
     title: "Cloud Operations Manager",
     department: "Cloud & Infrastructure",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "7 - 10+ Years",
+    overview: "We are seeking a Cloud Operations Manager to lead enterprise cloud infrastructure operations, ensure 24/7 reliability, and govern FinOps cost optimization.",
+    responsibilities: [
+      "Oversee 24/7 cloud operations, incident management, and infrastructure reliability across multi-cloud environments (AWS/Azure).",
+      "Lead a team of cloud engineers and SREs, establishing shift coverage, on-call rotations, and incident runbooks.",
+      "Drive cloud FinOps practices to monitor spending, eliminate idle resources, and optimize reserved instances.",
+      "Ensure compliance with ITIL service management frameworks, SOC2 controls, and ISO 27001 standards.",
+    ],
+    requirements: [
+      "7+ years in IT infrastructure and cloud operations with 3+ years managing engineering teams.",
+      "Broad technical knowledge of AWS/Azure cloud architectures, Kubernetes, monitoring, and DR failovers.",
+      "ITIL 4 Foundation certification and Cloud Practitioner / Solutions Architect certification preferred.",
+      "Strong crisis management, vendor negotiation, and SLA accountability capabilities.",
+    ],
+    skills: [
+      "Cloud Operations",
+      "FinOps",
+      "AWS / Azure",
+      "Incident Management",
+      "SRE",
+      "ITIL Governance",
+    ]
   },
   {
     id: "grc-consultant",
     title: "GRC Consultant",
     department: "Cybersecurity & Governance",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "Seeking a GRC Consultant to guide enterprise Governance, Risk, and Compliance programs, audit readiness, and cybersecurity framework implementations.",
+    responsibilities: [
+      "Conduct enterprise risk assessments, vendor security reviews, and gap analyses against NIST CSF, ISO 27001, and SOC2.",
+      "Configure and maintain enterprise GRC platforms (ServiceNow GRC, Archer, OneTrust) for automated compliance.",
+      "Partner with legal, IT, and internal audit to document security controls, remediation plans, and policy updates.",
+      "Coordinate evidence collection for external audits, regulatory inquiries, and customer security questionnaires.",
+    ],
+    requirements: [
+      "4+ years in IT risk management, information security compliance, or technology advisory consulting.",
+      "Certifications such as CISA, CRISC, CISM, or ISO 27001 Lead Auditor preferred.",
+      "Deep understanding of federal regulations (HIPAA, SOX, GLBA) and data privacy frameworks (GDPR, CCPA).",
+      "Excellent analytical writing and stakeholder management skills.",
+    ],
+    skills: [
+      "GRC",
+      "NIST CSF",
+      "ISO 27001",
+      "SOC2 Compliance",
+      "ServiceNow GRC",
+      "Risk Assessment",
+    ]
   },
   {
     id: "ai-engineer",
     title: "AI Engineer",
     department: "AI & Data Solutions",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "Join TAG as an AI Engineer to build, evaluate, and deploy machine learning models and intelligent automation services for client enterprise systems.",
+    responsibilities: [
+      "Develop and deploy machine learning algorithms, NLP pipelines, and computer vision models using Python and PyTorch.",
+      "Build data pre-processing and feature engineering pipelines using Pandas, NumPy, and Scikit-Learn.",
+      "Containerize ML models (Docker) and deploy real-time prediction endpoints with FastAPI and Triton Inference Server.",
+      "Monitor model drift, latency, and throughput in production using MLOps practices (MLflow).",
+    ],
+    requirements: [
+      "3+ years of professional machine learning engineering and software development experience.",
+      "Solid foundation in data structures, algorithms, linear algebra, and statistical modeling.",
+      "Experience deploying production ML services on AWS (SageMaker), Azure ML, or GCP Vertex AI.",
+      "Bachelor's or Master's degree in Computer Science, Data Science, or related field.",
+    ],
+    skills: [
+      "Machine Learning",
+      "Python",
+      "PyTorch",
+      "NLP",
+      "FastAPI",
+      "MLOps / MLflow",
+    ]
   },
   {
     id: "technical-product-owner",
     title: "Technical Product Owner",
     department: "Product & Management",
     location: "Remote / Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "TAG is seeking a Technical Product Owner to drive backend architecture roadmaps, API platforms, and enterprise data integrations for global clients.",
+    responsibilities: [
+      "Own technical product backlogs, write detailed architectural user stories, and define acceptance criteria.",
+      "Collaborate closely with technical architects and software engineers during sprint planning and daily standups.",
+      "Deconstruct complex business requirements into clear technical deliverables and API contract definitions.",
+      "Manage release schedules, prioritize technical debt reduction, and track development velocity.",
+    ],
+    requirements: [
+      "4+ years of experience as a Technical Product Owner or Systems Analyst in enterprise software environments.",
+      "Strong technical fluency with REST APIs, cloud microservices, and database systems.",
+      "Certified Scrum Product Owner (CSPO) or Professional Scrum Product Owner (PSPO) certification.",
+      "Exceptional ability to bridge communication between business leaders and technical engineering teams.",
+    ],
+    skills: [
+      "Product Ownership",
+      "Technical Backlog",
+      "REST APIs",
+      "Agile / Scrum",
+      "Jira",
+      "System Architecture",
+    ]
   },
   {
     id: "informatica-etl-lead",
     title: "Informatica ETL Lead",
     department: "AI & Data Solutions",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "7 - 10+ Years",
+    overview: "We are seeking an Informatica ETL Lead to direct the design, development, and maintenance of large-scale data warehouse integration architectures.",
+    responsibilities: [
+      "Lead the design and development of complex ETL mappings, mapplets, and workflows using Informatica PowerCenter / IDMC.",
+      "Architect data integration pipelines connecting enterprise ERPs, cloud data warehouses, and legacy mainframe feeds.",
+      "Tune ETL sessions, SQL queries, and database indexes for high-throughput batch window processing.",
+      "Enforce data quality standards, audit logging, error handling frameworks, and code migration procedures.",
+    ],
+    requirements: [
+      "7+ years in enterprise data integration with extensive expertise in Informatica PowerCenter or Informatica Cloud (IDMC).",
+      "Strong mastery of Oracle, Teradata, or Snowflake SQL query optimization.",
+      "Proven experience leading offshore/onshore development teams and managing client delivery.",
+      "Bachelor's degree in Computer Science, Engineering, or related technical field.",
+    ],
+    skills: [
+      "Informatica PowerCenter",
+      "Informatica Cloud (IDMC)",
+      "ETL Architecture",
+      "Data Warehousing",
+      "Performance Tuning",
+    ]
   },
   {
     id: "qa-automation-engineer",
     title: "QA Automation Engineer",
     department: "Quality Assurance",
     location: "Remote / Hybrid",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "3 - 6 Years",
+    overview: "TAG is hiring a QA Automation Engineer to design, build, and maintain scalable automated testing frameworks for enterprise web and API applications.",
+    responsibilities: [
+      "Develop and maintain robust test automation frameworks using Playwright, Cypress, or Selenium with TypeScript/Java.",
+      "Build automated API test suites using REST Assured, Supertest, or Postman Newman.",
+      "Integrate automated regression test suites into CI/CD pipelines (GitHub Actions, Jenkins, Azure DevOps).",
+      "Analyze automated test results, report defects, and collaborate with developers on rapid triage and resolution.",
+    ],
+    requirements: [
+      "3+ years of experience building and scaling software test automation frameworks.",
+      "Proficiency in TypeScript, JavaScript, Python, or Java.",
+      "Hands-on experience with Playwright, Cypress, or Selenium WebDriver.",
+      "Understanding of modern web application architectures and continuous integration practices.",
+    ],
+    skills: [
+      "Test Automation",
+      "Playwright",
+      "Cypress",
+      "Selenium",
+      "API Testing",
+      "CI/CD Integration",
+    ]
   },
   {
     id: "devsecops-engineer",
     title: "DevSecOps Engineer",
     department: "DevOps & Security",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "4 - 7 Years",
+    overview: "Seeking a DevSecOps Engineer to integrate automated security scanning, compliance gates, and container security into CI/CD software pipelines.",
+    responsibilities: [
+      "Embed static (SAST) and dynamic (DAST) application security testing into CI/CD pipelines using SonarQube, Snyk, and OWASP ZAP.",
+      "Implement Software Bill of Materials (SBOM) generation and open-source dependency vulnerability scanning.",
+      "Enforce Kubernetes and container image security policies using tools like Trivy, Falco, and Kyverno.",
+      "Automate cloud security posture management (CSPM) and secret detection (GitGuardian) across source repositories.",
+    ],
+    requirements: [
+      "4+ years of experience bridging software engineering, DevOps, and application security.",
+      "Strong knowledge of CI/CD pipeline automation (GitHub Actions, GitLab, Azure DevOps) and containerization.",
+      "Familiarity with OWASP Top 10 vulnerabilities and modern cloud security architectures.",
+      "Industry certifications such as Certified DevSecOps Professional (CDP) or AWS Security Specialty preferred.",
+    ],
+    skills: [
+      "DevSecOps",
+      "SAST / DAST",
+      "Snyk / SonarQube",
+      "Container Security",
+      "CI/CD Security",
+      "OWASP",
+    ]
   },
   {
     id: "power-bi-architect-pharma-1",
-    title: "Power BI Architect – Pharma Analytics",
+    title: "Power BI Architect \u2013 Pharma Analytics",
     department: "Enterprise Analytics",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "6 - 10 Years",
+    overview: "TAG is seeking a Power BI Architect with pharmaceutical industry expertise to design enterprise commercial analytics, clinical trial reporting, and executive BI dashboards.",
+    responsibilities: [
+      "Architect end-to-end Power BI solutions incorporating complex DAX measures, calculation groups, and tabular data models.",
+      "Design compliant data models for pharmaceutical commercial sales, prescription analytics (IMS/IQVIA), and patient outcomes.",
+      "Implement enterprise Power BI workspace governance, row-level security (RLS), and automated dataset refreshes.",
+      "Collaborate with life sciences business stakeholders to translate complex clinical metrics into intuitive visual stories.",
+    ],
+    requirements: [
+      "6+ years in business intelligence architecture with 4+ years specializing in Microsoft Power BI.",
+      "Proven domain expertise in pharmaceutical, biotech, or healthcare commercial analytics and IQVIA data.",
+      "Mastery of advanced DAX, Power Query (M), and dimensional modeling concepts.",
+      "Microsoft Certified: Power BI Data Analyst Associate (PL-300) or Fabric Analytics Engineer (DP-600) preferred.",
+    ],
+    skills: [
+      "Power BI",
+      "Pharma Analytics",
+      "Advanced DAX",
+      "Tabular Modeling",
+      "IQVIA Data",
+      "Row-Level Security",
+    ]
   },
   {
     id: "power-bi-architect-pharma-2",
-    title: "Power BI Architect – Pharma Analytics",
+    title: "Power BI Architect \u2013 Pharma Analytics",
     department: "Enterprise Analytics",
     location: "Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "6 - 10 Years",
+    overview: "TAG is seeking a Power BI Architect with pharmaceutical industry expertise to design enterprise commercial analytics, clinical trial reporting, and executive BI dashboards.",
+    responsibilities: [
+      "Architect end-to-end Power BI solutions incorporating complex DAX measures, calculation groups, and tabular data models.",
+      "Design compliant data models for pharmaceutical commercial sales, prescription analytics (IMS/IQVIA), and patient outcomes.",
+      "Implement enterprise Power BI workspace governance, row-level security (RLS), and automated dataset refreshes.",
+      "Collaborate with life sciences business stakeholders to translate complex clinical metrics into intuitive visual stories.",
+    ],
+    requirements: [
+      "6+ years in business intelligence architecture with 4+ years specializing in Microsoft Power BI.",
+      "Proven domain expertise in pharmaceutical, biotech, or healthcare commercial analytics and IQVIA data.",
+      "Mastery of advanced DAX, Power Query (M), and dimensional modeling concepts.",
+      "Microsoft Certified: Power BI Data Analyst Associate (PL-300) or Fabric Analytics Engineer (DP-600) preferred.",
+    ],
+    skills: [
+      "Power BI",
+      "Pharma Analytics",
+      "Advanced DAX",
+      "Tabular Modeling",
+      "IQVIA Data",
+      "Row-Level Security",
+    ]
   },
   {
     id: "ai-product-manager",
     title: "AI Product Manager",
     department: "Product & Management",
     location: "Remote - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "5 - 8 Years",
+    overview: "We are seeking an AI Product Manager to define the strategic vision, product requirements, and go-to-market strategy for enterprise AI/ML solutions.",
+    responsibilities: [
+      "Define product roadmaps and feature requirements for enterprise AI platforms, predictive models, and GenAI copilots.",
+      "Work closely with data scientists, AI engineers, and UX designers to build intuitive, trustworthy AI experiences.",
+      "Conduct customer interviews, evaluate competitive market landscapes, and quantify ROI impact of AI solutions.",
+      "Establish metrics for model efficacy, hallucination reduction, user trust, and product adoption.",
+    ],
+    requirements: [
+      "5+ years of product management experience, with at least 2+ years leading AI, ML, or data products.",
+      "Strong conceptual understanding of LLMs, neural networks, computer vision, and machine learning lifecycles.",
+      "Demonstrated ability to communicate complex algorithmic concepts to executive and non-technical audiences.",
+      "Bachelor's or Master's degree in Business, Computer Science, or engineering field.",
+    ],
+    skills: [
+      "AI Product Management",
+      "Generative AI",
+      "Product Strategy",
+      "ML Lifecycle",
+      "Roadmapping",
+      "UX for AI",
+    ]
   },
   {
     id: "golang-tech-lead",
     title: "GoLang Tech Lead",
     department: "Software Engineering",
     location: "Remote / Hybrid - USA",
-    type: "Full-Time"
+    type: "Full-Time",
+    experienceLevel: "7 - 10+ Years",
+    overview: "Seeking a GoLang Tech Lead to guide the architecture and development of ultra-low latency, distributed microservices and cloud-native backend systems.",
+    responsibilities: [
+      "Architect and implement high-throughput distributed microservices using Go (GoLang), gRPC, and REST APIs.",
+      "Guide technical design decisions around concurrency, goroutine lifecycle, memory allocation, and networking.",
+      "Implement message streaming using Apache Kafka and distributed datastores (PostgreSQL, Cassandra, Redis).",
+      "Lead engineering sprint planning, mentor junior/mid-level Go developers, and conduct rigorous code reviews.",
+    ],
+    requirements: [
+      "7+ years in backend software engineering with 4+ years architecting production services in Go (GoLang).",
+      "Deep understanding of Go concurrency patterns, channels, garbage collection tuning, and profiling (pprof).",
+      "Experience building distributed systems, fault-tolerant networks, and microservices in Kubernetes environments.",
+      "Bachelor's or Master's degree in Computer Science, Software Engineering, or equivalent experience.",
+    ],
+    skills: [
+      "Go (GoLang)",
+      "gRPC / Protobuf",
+      "Concurrency",
+      "Kafka",
+      "PostgreSQL",
+      "Kubernetes",
+      "Microservices",
+    ]
   }
 ];
