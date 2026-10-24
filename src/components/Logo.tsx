@@ -24,12 +24,13 @@ export default function Logo({ variant = 'full', className = '', showText = true
           : "p-0.5"
       }`}>
         <Image
-          src="/tag-logo-emblem.png"
+          src="/tag-logo-emblem-v2.png"
           alt="TAG - TechAxis Global Logo"
           width={220}
           height={100}
-          className="h-[44px] sm:h-[50px] md:h-[54px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+          className="h-[44px] sm:h-[50px] md:h-[54px] w-auto object-contain transition-transform duration-300 group-hover:scale-105 mix-blend-multiply"
           priority
+          unoptimized
         />
       </div>
 
