@@ -12,8 +12,7 @@ import {
   ArrowRight, 
   X, 
   Sparkles,
-  Send,
-  Clock
+  Send
 } from "lucide-react";
 import LocalNav from "@/components/LocalNav";
 import BackgroundMedia from "@/components/BackgroundMedia";
@@ -259,7 +258,7 @@ export default function Careers() {
                         </div>
                         {pos.experienceLevel && (
                           <div className="flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5 text-zinc-400" />
+                            <Briefcase className="w-3.5 h-3.5 text-zinc-400" />
                             <span>{pos.experienceLevel}</span>
                           </div>
                         )}

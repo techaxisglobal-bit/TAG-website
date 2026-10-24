@@ -11,7 +11,6 @@ import {
   ArrowRight, 
   Briefcase, 
   MapPin, 
-  Clock, 
   ShieldCheck, 
   Check, 
   ChevronLeft,
@@ -223,7 +222,7 @@ export default function JobApplicationModal({
               {/* Meta Tags Row */}
               <div className="flex items-center gap-2 mb-1.5 flex-wrap">
                 <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#B42318]/10 text-[#B42318]">
-                  <Briefcase className="w-3 h-3" />
+                  <Building2 className="w-3 h-3" />
                   {position.department}
                 </span>
                 <span className="inline-flex items-center gap-1 text-[11.5px] text-zinc-500 font-medium">
@@ -235,7 +234,7 @@ export default function JobApplicationModal({
                 </span>
                 {position.experienceLevel && (
                   <span className="inline-flex items-center gap-1 text-[11.5px] text-zinc-500 font-medium bg-zinc-100 px-2 py-0.5 rounded-full">
-                    <Clock className="w-3 h-3 text-zinc-400" />
+                    <Briefcase className="w-3 h-3 text-zinc-400" />
                     {position.experienceLevel}
                   </span>
                 )}
