@@ -610,7 +610,7 @@ export default function Home() {
                     <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-600/15 rounded-full blur-2xl pointer-events-none" />
                     
                     <div className="relative z-10 flex-1 flex flex-col">
-                      <div className="flex items-center justify-between gap-2 mb-3">
+                      <div className="flex items-center justify-between gap-2 mb-2">
                         <span className="text-[11px] font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-2.5 py-0.5 rounded-full border border-emerald-400/20">
                           {partner.badge}
                         </span>
@@ -618,9 +618,9 @@ export default function Home() {
                       </div>
 
                       {/* Official E-Verify Emblem Container */}
-                      <div className="relative w-full h-12 bg-black/40 rounded-xl border border-white/10 p-1.5 my-2 flex items-center justify-center shadow-inner">
+                      <div className="relative w-full h-14 bg-black/40 rounded-xl border border-white/10 p-2 my-2 flex items-center justify-center shadow-inner group-hover:border-white/20 transition-all">
                         <Image
-                          src="/e-verify.png"
+                          src={partner.logo}
                           alt="Official E-Verify Federal Employment Verification Program"
                           width={140}
                           height={45}
@@ -656,22 +656,33 @@ export default function Home() {
                   className="h-full bg-white hover:bg-white rounded-2xl p-6 border border-black/[0.08] hover:border-black/[0.16] hover:shadow-lg transition-all duration-300 flex flex-col justify-between group cursor-default"
                 >
                   <div className="flex-1 flex flex-col">
-                    <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center justify-between gap-2 mb-2">
                       <span className="text-[11px] font-semibold uppercase tracking-wider text-[#B42318] bg-[#B42318]/8 px-2.5 py-0.5 rounded-full">
                         {partner.badge || partner.category}
                       </span>
                       <span className="text-[11px] text-[#86868B] font-medium">Enterprise</span>
                     </div>
 
-                    <h3 className="font-bold text-[#1D1D1F] group-hover:text-[#B42318] transition-colors text-[20px] tracking-tight">
+                    {/* Official Partner Brand Logo Container */}
+                    <div className="relative w-full h-14 bg-[#FAFAFA] rounded-xl border border-black/[0.04] p-2 my-2 flex items-center justify-center group-hover:border-black/[0.09] group-hover:bg-[#F5F5F7] transition-all">
+                      <Image
+                        src={partner.logo}
+                        alt={`${partner.name} logo`}
+                        width={140}
+                        height={40}
+                        className="object-contain max-h-7.5 sm:max-h-8 max-w-[130px] w-auto transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+
+                    <h3 className="font-bold text-[#1D1D1F] group-hover:text-[#B42318] transition-colors text-[18px] sm:text-[19px] tracking-tight mt-1">
                       {partner.name}
                     </h3>
 
-                    <p className="text-[11px] text-[#86868B] font-semibold uppercase tracking-wider mt-1">
+                    <p className="text-[11px] text-[#86868B] font-semibold uppercase tracking-wider mt-0.5">
                       {partner.category}
                     </p>
 
-                    <p className="text-[13px] text-[#515154] mt-2 leading-relaxed">
+                    <p className="text-[12.5px] sm:text-[13px] text-[#515154] mt-2 leading-relaxed">
                       {partner.role}
                     </p>
                   </div>

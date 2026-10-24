@@ -323,43 +323,50 @@ export const clientPartners = [
     name: "Microsoft",
     category: "Cloud, AI & Solutions",
     role: "Azure Cloud, Microsoft 365, Power BI & Enterprise Modernization",
-    badge: "Cloud & AI Partner"
+    badge: "Cloud & AI Partner",
+    logo: "/assets/logos/microsoft.svg"
   },
   {
     name: "Nvidia",
     category: "AI Computing & GPUs",
     role: "Accelerated Enterprise AI Computing & High-Performance Infrastructure",
-    badge: "AI Partner"
+    badge: "AI Partner",
+    logo: "/assets/logos/nvidia.svg"
   },
   {
     name: "AWS",
     category: "Cloud Infrastructure",
     role: "Amazon Web Services Scalable Architecture, Serverless & DevOps",
-    badge: "Cloud Partner"
+    badge: "Cloud Partner",
+    logo: "/assets/logos/aws.svg"
   },
   {
     name: "Ekipit",
     category: "Strategic Alliance",
     role: "Global Enterprise Delivery & Scalable IT Infrastructure Services",
-    badge: "Strategic Partner"
+    badge: "Strategic Partner",
+    logo: "/assets/logos/ekipit.png"
   },
   {
     name: "HCL Tech",
     category: "Digital Engineering",
     role: "Enterprise Technology Consulting & Large-Scale Systems Integration",
-    badge: "Technology Partner"
+    badge: "Technology Partner",
+    logo: "/assets/logos/hcltech.svg"
   },
   {
     name: "Cognizant",
     category: "Core Modernization",
     role: "Business Architecture Transformation & Enterprise Advisory",
-    badge: "Enterprise Partner"
+    badge: "Enterprise Partner",
+    logo: "/assets/logos/cognizant.svg"
   },
   {
     name: "Capgemini",
     category: "Global Transformation",
     role: "Cloud Engineering, Systems Modernization & Industry Solutions",
-    badge: "Global Partner"
+    badge: "Global Partner",
+    logo: "/assets/logos/capgemini.svg"
   },
   {
     name: "An E-verified US Firm",
