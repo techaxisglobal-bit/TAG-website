@@ -23,6 +23,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://techaxisglobal.com",
   },
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/favicon-32x32.png",
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     title: "TechAxis Global | Enterprise IT Consulting & Solutions",
     description: "We manage your IT so you can manage your business. Enterprise IT consulting delivering digital transformation, ERP platforms, managed services, and cybersecurity.",
