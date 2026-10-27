@@ -5,9 +5,11 @@ import { getConsultationRecords, getApplicationRecords } from "@/lib/storage";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const smtpStatus = await testSmtpConnection();
+    const { searchParams } = new URL(request.url);
+    const shouldCheckNetwork = searchParams.get("check") === "true";
+    const smtpStatus = await testSmtpConnection(!shouldCheckNetwork);
     const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL || "";
     const hasWebhook = Boolean(webhookUrl && webhookUrl.startsWith("http"));
     

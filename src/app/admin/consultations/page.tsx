@@ -86,15 +86,35 @@ export default function AdminConsultationsPage() {
   const [testEmailAddress, setTestEmailAddress] = useState("contact@techaxisglobal.com");
   const [testEmailSending, setTestEmailSending] = useState(false);
   const [testEmailResult, setTestEmailResult] = useState<{ success: boolean; message: string } | null>(null);
+  const [emailLoading, setEmailLoading] = useState(false);
+
+  const fetchEmailStatus = async (checkLiveConnection = false) => {
+    setEmailLoading(true);
+    try {
+      const res = await fetch(`/api/admin/email-status${checkLiveConnection ? "?check=true" : ""}`);
+      if (res.ok) {
+        const eData = await res.json();
+        setEmailStatus(eData.emailSystem || null);
+      }
+    } catch (err) {
+      console.error("Failed to load email system diagnostics:", err);
+    } finally {
+      setEmailLoading(false);
+    }
+  };
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [cRes, aRes, eRes] = await Promise.all([
+      const [cRes, aRes] = await Promise.all([
         fetch("/api/admin/consultations"),
-        fetch("/api/admin/applications"),
-        fetch("/api/admin/email-status")
+        fetch("/api/admin/applications")
       ]);
+
+      if (cRes.status === 401 || aRes.status === 401) {
+        window.location.href = "/admin/login?from=/admin/consultations";
+        return;
+      }
 
       if (cRes.ok) {
         const cData = await cRes.json();
@@ -104,15 +124,14 @@ export default function AdminConsultationsPage() {
         const aData = await aRes.json();
         setApplications(aData.applications || []);
       }
-      if (eRes.ok) {
-        const eData = await eRes.json();
-        setEmailStatus(eData.emailSystem || null);
-      }
     } catch (err) {
       console.error("Failed to load admin data:", err);
     } finally {
       setLoading(false);
     }
+
+    // Fast load email config in background without delaying table view
+    fetchEmailStatus(false);
   };
 
   useEffect(() => {
@@ -341,7 +360,10 @@ export default function AdminConsultationsPage() {
           </button>
 
           <button
-            onClick={() => setActiveTab("email-setup")}
+            onClick={() => {
+              setActiveTab("email-setup");
+              fetchEmailStatus(true);
+            }}
             className={`py-3 text-sm font-semibold border-b-2 flex items-center gap-2 transition-all ${
               activeTab === "email-setup"
                 ? "border-[#B42318] text-white"
@@ -350,8 +372,12 @@ export default function AdminConsultationsPage() {
           >
             <Mail className="w-4 h-4" />
             <span>Email Delivery & Setup Guide</span>
-            {emailStatus && !emailStatus.smtp.connected && (
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+            {emailLoading ? (
+              <RefreshCw className="w-3 h-3 text-red-400 animate-spin" />
+            ) : (
+              emailStatus && !emailStatus.smtp.connected && (
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+              )
             )}
           </button>
         </div>

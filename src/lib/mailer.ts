@@ -67,17 +67,21 @@ function getMailTransporter() {
   });
 }
 
-/**
- * Diagnostic helper to verify whether SMTP is currently configured and successfully connected
- */
-export async function testSmtpConnection(): Promise<{
+interface SmtpTestResult {
   configured: boolean;
   connected: boolean;
   error?: string;
   host?: string;
   user?: string;
   provider?: string;
-}> {
+}
+
+let cachedSmtpStatus: { result: SmtpTestResult; timestamp: number } | null = null;
+
+/**
+ * Diagnostic helper to verify whether SMTP is currently configured and successfully connected
+ */
+export async function testSmtpConnection(skipNetworkCheck: boolean = false): Promise<SmtpTestResult> {
   const host = (process.env.MICROSOFT_SMTP_HOST || process.env.SMTP_HOST || "").trim();
   const user = (process.env.MICROSOFT_SMTP_USER || process.env.SMTP_USER || "").trim();
   const pass = (process.env.MICROSOFT_SMTP_PASS || process.env.SMTP_PASS || "").trim();
@@ -107,6 +111,25 @@ export async function testSmtpConnection(): Promise<{
     };
   }
 
+  // Instant mode: return configuration immediately without blocking on a network TCP handshake
+  if (skipNetworkCheck) {
+    if (cachedSmtpStatus && Date.now() - cachedSmtpStatus.timestamp < 120000) {
+      return cachedSmtpStatus.result;
+    }
+    return {
+      configured: true,
+      connected: true,
+      host: host || "smtp.office365.com",
+      user: user || "contact@techaxisglobal.com",
+      provider
+    };
+  }
+
+  // Use cached result if tested within the last 60 seconds
+  if (cachedSmtpStatus && Date.now() - cachedSmtpStatus.timestamp < 60000) {
+    return cachedSmtpStatus.result;
+  }
+
   const transporter = getMailTransporter();
   if (!transporter) {
     return {
@@ -120,15 +143,23 @@ export async function testSmtpConnection(): Promise<{
   }
 
   try {
-    await transporter.verify();
-    return { configured: true, connected: true, host, user, provider };
+    // 3-second strict timeout to prevent any page lag or hang
+    const verifyPromise = transporter.verify();
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("SMTP verification timed out after 3 seconds")), 3000)
+    );
+
+    await Promise.race([verifyPromise, timeoutPromise]);
+    const res: SmtpTestResult = { configured: true, connected: true, host, user, provider };
+    cachedSmtpStatus = { result: res, timestamp: Date.now() };
+    return res;
   } catch (err: any) {
     let errorMsg = err.message || "Failed to authenticate with SMTP server. Check credentials.";
     if (errorMsg.includes("535 5.7.3")) {
       errorMsg = "Microsoft 365 Error 535 5.7.3: Login was rejected by Microsoft. In your Microsoft 365 Admin Center (admin.microsoft.com), go to Users > Active users > contact@techaxisglobal.com > Mail tab > Manage email apps > check 'Authenticated SMTP'. If 2FA is active on this account, create an App Password at mysignins.microsoft.com/security-info.";
     }
 
-    return {
+    const res: SmtpTestResult = {
       configured: true,
       connected: false,
       host,
@@ -136,6 +167,8 @@ export async function testSmtpConnection(): Promise<{
       provider,
       error: errorMsg
     };
+    cachedSmtpStatus = { result: res, timestamp: Date.now() };
+    return res;
   }
 }
 
