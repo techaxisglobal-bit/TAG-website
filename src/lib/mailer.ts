@@ -269,3 +269,306 @@ https://techaxisglobal.com
   console.log(`[Mailer] Confirmation email sent to applicant ${email} for ${role}`);
   return { sent: true, simulated: false };
 }
+
+export interface SendContactEmailParams {
+  name: string;
+  email: string;
+  company: string;
+  phone?: string;
+  service: string;
+  message: string;
+  timestamp: string;
+}
+
+/**
+ * 3. Sends incoming client consultation inquiry to TAG team
+ */
+export async function sendContactInquiryToTAG(params: SendContactEmailParams): Promise<{ sent: boolean; simulated?: boolean }> {
+  const { name, email, company, phone, service, message, timestamp } = params;
+
+  const contactEmail = process.env.CONTACT_EMAIL || process.env.HR_EMAIL || "contact@techaxisglobal.com";
+  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global Inquiries" <${contactEmail}>`;
+  const subject = `New Consultation Request: ${service} – ${name} (${company})`;
+
+  const formattedDate = new Date(timestamp).toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    dateStyle: "full",
+    timeStyle: "medium"
+  });
+
+  const textBody = `
+==================================================
+NEW CONSULTATION INQUIRY RECEIVED
+==================================================
+
+Client Name:         ${name}
+Work Email:          ${email}
+Company:             ${company}
+Phone Number:        ${phone || "Not provided"}
+Service of Interest: ${service}
+Submission Time:     ${formattedDate} (EST)
+
+Client Message:
+${message}
+
+==================================================
+To reply directly to ${name}, click 'Reply' in your email client.
+`.trim();
+
+  const htmlBody = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #F8F9FA; margin: 0; padding: 24px; color: #1D1D1F; }
+    .container { max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+    .header { background: #0F172A; padding: 28px 32px; color: #ffffff; border-bottom: 3px solid #B42318; }
+    .badge { display: inline-block; background: #B42318; color: #ffffff; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 6px; margin-bottom: 10px; }
+    .header h1 { margin: 0; font-size: 21px; font-weight: 700; letter-spacing: -0.02em; }
+    .header p { margin: 6px 0 0; font-size: 13.5px; color: #94A3B8; }
+    .content { padding: 32px; }
+    .field-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+    .field-table td { padding: 11px 0; border-bottom: 1px solid #F1F5F9; font-size: 14px; }
+    .field-table .label { color: #64748B; width: 150px; font-weight: 500; }
+    .field-table .value { color: #0F172A; font-weight: 600; }
+    .message-box { background: #F8FAFC; border-radius: 12px; padding: 18px 20px; border-left: 4px solid #B42318; border-top: 1px solid #E2E8F0; border-right: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0; font-size: 14px; line-height: 1.6; color: #334155; white-space: pre-wrap; margin-top: 10px; }
+    .footer { padding: 20px 32px; background: #F8FAFC; border-top: 1px solid #E2E8F0; font-size: 12px; color: #64748B; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="badge">TechAxis Global • Consultation Request</div>
+      <h1>New Client Inquiry Received</h1>
+      <p>Submitted via techaxisglobal.com/contact-us</p>
+    </div>
+    <div class="content">
+      <table class="field-table">
+        <tr>
+          <td class="label">Service Focus</td>
+          <td class="value" style="color: #B42318;">${service}</td>
+        </tr>
+        <tr>
+          <td class="label">Client Name</td>
+          <td class="value">${name}</td>
+        </tr>
+        <tr>
+          <td class="label">Company / Organization</td>
+          <td class="value">${company}</td>
+        </tr>
+        <tr>
+          <td class="label">Work Email</td>
+          <td class="value"><a href="mailto:${email}" style="color: #B42318; text-decoration: none;">${email}</a></td>
+        </tr>
+        <tr>
+          <td class="label">Phone Number</td>
+          <td class="value">${phone ? `<a href="tel:${phone}" style="color: #0F172A; text-decoration: none;">${phone}</a>` : "<em>Not provided</em>"}</td>
+        </tr>
+        <tr>
+          <td class="label">Submission Date</td>
+          <td class="value">${formattedDate} (EST)</td>
+        </tr>
+      </table>
+
+      <h3 style="font-size: 14px; color: #0F172A; margin: 24px 0 6px;">Client Message & Objectives:</h3>
+      <div class="message-box">${message}</div>
+    </div>
+    <div class="footer">
+      This notification was generated automatically by the TechAxis Global website.<br />
+      Reply directly to this email to respond to <strong>${name}</strong> at <strong>${email}</strong>.
+    </div>
+  </div>
+</body>
+</html>
+`.trim();
+
+  const transporter = getMailTransporter();
+
+  if (!transporter) {
+    console.log("[Mailer: Simulated Contact Inquiry] No SMTP credentials in .env.local; message logged:");
+    console.log(` -> To: ${contactEmail}`);
+    console.log(` -> Subject: ${subject}`);
+    console.log(` -> Client: ${name} (${email}) - ${company}`);
+    console.log(` -> Service: ${service}`);
+    console.log(` -> Message: ${message}`);
+    return { sent: true, simulated: true };
+  }
+
+  await transporter.sendMail({
+    from: fromEmail,
+    to: contactEmail,
+    replyTo: email,
+    subject,
+    text: textBody,
+    html: htmlBody
+  });
+
+  console.log(`[Mailer] Contact inquiry dispatched to ${contactEmail} for ${name} (${company})`);
+  return { sent: true, simulated: false };
+}
+
+/**
+ * 4. Sends polite "Thank you for consulting / contacting" confirmation to the client
+ */
+export async function sendConsultationConfirmationToUser(params: SendContactEmailParams): Promise<{ sent: boolean; simulated?: boolean }> {
+  const { name, email, company, service, phone } = params;
+
+  const contactEmail = process.env.CONTACT_EMAIL || process.env.HR_EMAIL || "contact@techaxisglobal.com";
+  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global" <${contactEmail}>`;
+  const subject = `Thank You for Contacting TechAxis Global – Consultation Request Received`;
+
+  const textBody = `
+Dear ${name},
+
+Thank you for reaching out to TechAxis Global LLC.
+
+We have received your consultation inquiry regarding "${service}" for ${company}. One of our principal solution architects is currently reviewing your project details and requirements.
+
+What Happens Next:
+1. Architectural Review: Our technical leads analyze your submission to align our domain expertise.
+2. Prompt Response: We will reach out to you within 24 hours (Monday–Friday, 9:00 AM – 6:00 PM EST).
+3. Complimentary Architecture Discussion: We will schedule a focused consultation to discuss your milestones, timeline, and deliverables.
+
+Inquiry Summary:
+- Service Area: ${service}
+- Company: ${company}
+- Contact Email: ${email}
+${phone ? `- Contact Phone: ${phone}` : ""}
+
+If you have urgent inquiries, feel free to call our US headquarters directly at +1 434-285-4949.
+
+Warm regards,
+Enterprise Solutions Team
+TechAxis Global LLC
+8401 Mayland Dr, Ste S, Richmond, VA 23294, USA
+contact@techaxisglobal.com | https://techaxisglobal.com
+`.trim();
+
+  const htmlBody = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #F8FAFC; margin: 0; padding: 28px 16px; color: #1E293B; }
+    .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 18px; overflow: hidden; border: 1px solid rgba(0,0,0,0.07); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+    .header { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 36px 36px 30px; color: #ffffff; text-align: left; border-bottom: 3px solid #B42318; }
+    .header h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+    .header p { margin: 6px 0 0; font-size: 14px; color: #CBD5E1; }
+    .content { padding: 36px; }
+    .lead { font-size: 16px; line-height: 1.6; color: #334155; margin-bottom: 24px; }
+    .summary-card { background: #F8FAFC; border-radius: 14px; padding: 20px 24px; border: 1px solid #E2E8F0; margin: 24px 0; }
+    .summary-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 14px; border-bottom: 1px solid #EDF2F7; }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-label { color: #64748B; font-weight: 500; }
+    .summary-val { color: #0F172A; font-weight: 600; text-align: right; }
+    .next-steps { background: #FFFBF5; border: 1px solid #FED7AA; border-radius: 14px; padding: 20px 24px; margin: 28px 0; }
+    .next-step-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; font-size: 13.5px; color: #7C2D12; }
+    .next-step-item:last-child { margin-bottom: 0; }
+    .step-number { background: #D97706; color: #ffffff; font-size: 11px; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .footer { padding: 24px 36px; background: #F8FAFC; border-top: 1px solid #E2E8F0; font-size: 12.5px; color: #64748B; line-height: 1.6; }
+    .cta-btn { display: inline-block; background: #B42318; color: #ffffff !important; text-decoration: none; font-size: 13.5px; font-weight: 600; padding: 10px 22px; border-radius: 9999px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #D97706; margin-bottom: 8px;">
+        Consultation Request Received
+      </div>
+      <h1>Thank You, ${name}!</h1>
+      <p>We've received your inquiry and our team is already reviewing it.</p>
+    </div>
+
+    <div class="content">
+      <p class="lead">
+        Thank you for contacting <strong>TechAxis Global</strong> regarding enterprise IT solutions for <strong>${company}</strong>. We appreciate the opportunity to collaborate.
+      </p>
+
+      <div class="summary-card">
+        <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: #B42318; letter-spacing: 0.05em; margin-bottom: 12px;">
+          Inquiry Overview
+        </div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 13.5px;">
+          <tr>
+            <td style="padding: 6px 0; color: #64748B;">Service Area:</td>
+            <td style="padding: 6px 0; color: #0F172A; font-weight: 600; text-align: right;">${service}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748B;">Company:</td>
+            <td style="padding: 6px 0; color: #0F172A; font-weight: 600; text-align: right;">${company}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748B;">Work Email:</td>
+            <td style="padding: 6px 0; color: #0F172A; font-weight: 600; text-align: right;">${email}</td>
+          </tr>
+          ${phone ? `
+          <tr>
+            <td style="padding: 6px 0; color: #64748B;">Phone:</td>
+            <td style="padding: 6px 0; color: #0F172A; font-weight: 600; text-align: right;">${phone}</td>
+          </tr>
+          ` : ""}
+        </table>
+      </div>
+
+      <div class="next-steps">
+        <div style="font-size: 12.5px; font-weight: 700; text-transform: uppercase; color: #9A3412; letter-spacing: 0.05em; margin-bottom: 12px;">
+          What Happens Next
+        </div>
+        <div class="next-step-item">
+          <div class="step-number">1</div>
+          <div><strong>Requirement Review:</strong> A principal enterprise solutions architect is reviewing your inquiry.</div>
+        </div>
+        <div class="next-step-item">
+          <div class="step-number">2</div>
+          <div><strong>Direct Follow-up:</strong> You will receive a direct reply or call within 24 hours (Mon–Fri, 9am–6pm EST).</div>
+        </div>
+        <div class="next-step-item">
+          <div class="step-number">3</div>
+          <div><strong>Architecture Consultation:</strong> We will schedule a dedicated discovery session to outline technical strategies and timelines.</div>
+        </div>
+      </div>
+
+      <p style="font-size: 14px; line-height: 1.6; color: #475569;">
+        Need immediate assistance? You can reach our US headquarters team directly at <a href="tel:+14342854949" style="color: #B42318; font-weight: 600; text-decoration: none;">+1 434-285-4949</a>.
+      </p>
+
+      <p style="margin-top: 28px; font-size: 14px; line-height: 1.6; color: #334155;">
+        Warm regards,<br />
+        <strong>Enterprise Solutions Team</strong><br />
+        TechAxis Global LLC<br />
+        <a href="https://techaxisglobal.com" style="color: #B42318; text-decoration: none;">techaxisglobal.com</a>
+      </p>
+    </div>
+
+    <div class="footer">
+      <strong>TechAxis Global LLC (TAG)</strong><br />
+      8401 Mayland Dr, Ste S, Richmond, VA 23294, USA<br />
+      © ${new Date().getFullYear()} TechAxis Global LLC. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
+`.trim();
+
+  const transporter = getMailTransporter();
+
+  if (!transporter) {
+    console.log(`[Mailer: Simulated Consultation Confirmation] Sent thank you email to client: ${email} for ${service}`);
+    return { sent: true, simulated: true };
+  }
+
+  await transporter.sendMail({
+    from: fromEmail,
+    to: email,
+    replyTo: contactEmail,
+    subject,
+    text: textBody,
+    html: htmlBody
+  });
+
+  console.log(`[Mailer] Thank you confirmation email sent to ${email} (${company})`);
+  return { sent: true, simulated: false };
+}
+
