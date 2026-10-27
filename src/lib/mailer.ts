@@ -29,6 +29,9 @@ function getMailTransporter() {
   // Microsoft 365 / Office 365 / Outlook (port 587 with STARTTLS)
   if (lowerHost.includes("office365") || lowerHost.includes("outlook") || lowerHost.includes("microsoft")) {
     return nodemailer.createTransport({
+      pool: true,
+      maxConnections: 3,
+      maxMessages: 100,
       host: host || "smtp.office365.com",
       port: port || 587,
       secure: false, // Office 365 requires STARTTLS

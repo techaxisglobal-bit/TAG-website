@@ -152,27 +152,28 @@ export async function POST(request: Request) {
       console.error("[GoogleSheet] Webhook dispatch error:", sheetErr);
     }
 
-    // 7. Deliver email via SMTP if configured
-    await sendApplicationToHR({
-      name,
-      email,
-      phone,
-      role,
-      message,
-      resumeFileName,
-      resumeBuffer,
-      resumeContentType,
-      timestamp
-    });
-
-    // 8. Send automatic confirmation email to applicant via SMTP if configured
-    sendConfirmationToApplicant({
-      name,
-      email,
-      role
-    }).catch((confErr) => {
-      console.error("[Mailer] Non-blocking applicant confirmation email error:", confErr);
-    });
+    // 7. Deliver emails via SMTP asynchronously in background
+    Promise.allSettled([
+      sendApplicationToHR({
+        name,
+        email,
+        phone,
+        role,
+        message,
+        resumeFileName,
+        resumeBuffer,
+        resumeContentType,
+        timestamp
+      }),
+      sendConfirmationToApplicant({
+        name,
+        email,
+        role
+      })
+    ]).then(([hrRes, appRes]) => {
+      if (hrRes.status === "rejected") console.error("[Apply API] Error sending to HR:", hrRes.reason);
+      if (appRes.status === "rejected") console.error("[Apply API] Error sending to applicant:", appRes.reason);
+    }).catch(err => console.error("[Apply API] Email dispatch error:", err));
 
     return NextResponse.json(
       {

@@ -91,23 +91,29 @@ export async function POST(request: Request) {
       console.error("[Contact API] Google Sheet webhook dispatch error:", sheetErr);
     });
 
-    // 5. Dispatch Emails concurrently:
+    // 5. Dispatch Emails asynchronously in background so client receives instant response:
     // a) Notification to TAG team (contact@techaxisglobal.com)
     // b) Thank you confirmation to client
-    const [tagEmailResult, clientEmailResult] = await Promise.allSettled([
+    Promise.allSettled([
       sendContactInquiryToTAG(emailParams),
       sendConsultationConfirmationToUser(emailParams)
-    ]);
+    ]).then(([tagEmailResult, clientEmailResult]) => {
+      if (tagEmailResult.status === "rejected") {
+        console.error("[Contact API] Error sending inquiry to TAG team:", tagEmailResult.reason);
+      } else {
+        console.log("[Contact API] Notification email dispatched successfully to TAG team.");
+      }
 
-    if (tagEmailResult.status === "rejected") {
-      console.error("[Contact API] Error sending inquiry to TAG team:", tagEmailResult.reason);
-    }
+      if (clientEmailResult.status === "rejected") {
+        console.error("[Contact API] Error sending confirmation to client:", clientEmailResult.reason);
+      } else {
+        console.log("[Contact API] Client confirmation email dispatched successfully to", email);
+      }
+    }).catch(err => {
+      console.error("[Contact API] Email dispatch error:", err);
+    });
 
-    if (clientEmailResult.status === "rejected") {
-      console.error("[Contact API] Error sending confirmation to client:", clientEmailResult.reason);
-    }
-
-    // 6. Return success response
+    // 6. Return immediate success response
     return NextResponse.json({
       success: true,
       message: "Thank you for consulting with TechAxis Global! Your message has been received, and a confirmation email has been sent to your inbox. An enterprise architect will be in touch shortly.",
