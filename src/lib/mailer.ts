@@ -23,15 +23,102 @@ function getMailTransporter() {
     return null;
   }
 
+  const cleanPass = pass.trim().replace(/\s+/g, "");
+
+  if (host.includes("gmail")) {
+    return nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: user.trim(),
+        pass: cleanPass
+      }
+    });
+  }
+
   return nodemailer.createTransport({
-    host,
+    host: host.trim(),
     port,
     secure,
     auth: {
-      user,
-      pass
+      user: user.trim(),
+      pass: cleanPass
     }
   });
+}
+
+/**
+ * Diagnostic helper to verify whether SMTP is currently configured and successfully connected
+ */
+export async function testSmtpConnection(): Promise<{ configured: boolean; connected: boolean; error?: string; host?: string; user?: string }> {
+  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (!host || !user || !pass) {
+    return {
+      configured: false,
+      connected: false,
+      error: "SMTP credentials (SMTP_HOST, SMTP_USER, SMTP_PASS) are not configured in environment variables.",
+      host: host || "Not set",
+      user: user || "Not set"
+    };
+  }
+
+  const transporter = getMailTransporter();
+  if (!transporter) {
+    return { configured: false, connected: false, error: "Failed to initialize mail transporter." };
+  }
+
+  try {
+    await transporter.verify();
+    return { configured: true, connected: true, host, user };
+  } catch (err: any) {
+    return {
+      configured: true,
+      connected: false,
+      host,
+      user,
+      error: err.message || "Failed to authenticate with SMTP server. Check credentials."
+    };
+  }
+}
+
+/**
+ * Sends a test email to verify live delivery
+ */
+export async function sendTestEmail(targetEmail: string): Promise<{ success: boolean; message: string }> {
+  const transporter = getMailTransporter();
+  if (!transporter) {
+    return {
+      success: false,
+      message: "Cannot send test email: SMTP credentials (SMTP_HOST, SMTP_USER, SMTP_PASS) are empty in .env.local."
+    };
+  }
+
+  const hrEmail = process.env.HR_EMAIL || process.env.CONTACT_EMAIL || "contact@techaxisglobal.com";
+  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global" <${hrEmail}>`;
+
+  try {
+    await transporter.sendMail({
+      from: fromEmail,
+      to: targetEmail,
+      subject: "TechAxis Global – SMTP Test Email [Successful Delivery]",
+      text: "Congratulations! Your email system is properly configured and successfully delivering messages from TechAxis Global.",
+      html: `
+        <div style="font-family: sans-serif; max-width: 520px; padding: 24px; border: 1px solid #E2E8F0; border-radius: 12px; margin: 20px auto;">
+          <h2 style="color: #0F172A; margin-top: 0;">Email System Operational</h2>
+          <p style="color: #334155; line-height: 1.5;">This test message confirms that your SMTP mailer is fully functioning and capable of delivering client consultation and job application notifications to inboxes.</p>
+          <div style="background: #F1F5F9; padding: 12px 16px; border-radius: 8px; font-size: 13px; color: #475569;">
+            <strong>Delivered At:</strong> ${new Date().toUTCString()}
+          </div>
+          <p style="color: #64748B; font-size: 12px; margin-top: 20px;">TechAxis Global • Automated System Check</p>
+        </div>
+      `
+    });
+    return { success: true, message: `Test email successfully sent to ${targetEmail}!` };
+  } catch (err: any) {
+    return { success: false, message: `Email failed to send: ${err.message || String(err)}` };
+  }
 }
 
 /**

@@ -1,0 +1,71 @@
+import { NextResponse } from "next/server";
+import { testSmtpConnection, sendTestEmail } from "@/lib/mailer";
+import { getConsultationRecords, getApplicationRecords } from "@/lib/storage";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
+export async function GET() {
+  try {
+    const smtpStatus = await testSmtpConnection();
+    const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL || "";
+    const hasWebhook = Boolean(webhookUrl && webhookUrl.startsWith("http"));
+    
+    const consultations = await getConsultationRecords();
+    const applications = await getApplicationRecords();
+
+    return NextResponse.json({
+      success: true,
+      emailSystem: {
+        smtp: {
+          configured: smtpStatus.configured,
+          connected: smtpStatus.connected,
+          host: smtpStatus.host || "Not set",
+          user: smtpStatus.user || "Not set",
+          error: smtpStatus.error || null
+        },
+        googleWebhook: {
+          configured: hasWebhook,
+          url: hasWebhook ? `${webhookUrl.slice(0, 35)}...` : "Not configured"
+        },
+        destinations: {
+          contactEmail: process.env.CONTACT_EMAIL || "contact@techaxisglobal.com",
+          hrEmail: process.env.HR_EMAIL || "techaxisglobal@gmail.com"
+        }
+      },
+      counts: {
+        consultations: consultations.length,
+        applications: applications.length
+      }
+    });
+  } catch (error: any) {
+    console.error("[Email Status API] Error checking status:", error);
+    return NextResponse.json(
+      { success: false, error: "Failed to evaluate email system status" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const targetEmail = (body.email || process.env.HR_EMAIL || "techaxisglobal@gmail.com").trim();
+
+    if (!targetEmail) {
+      return NextResponse.json(
+        { success: false, error: "Target email address is required" },
+        { status: 400 }
+      );
+    }
+
+    const result = await sendTestEmail(targetEmail);
+    return NextResponse.json(result, { status: result.success ? 200 : 400 });
+  } catch (error: any) {
+    console.error("[Email Test API] Error sending test email:", error);
+    return NextResponse.json(
+      { success: false, message: error.message || "Failed to trigger test email" },
+      { status: 500 }
+    );
+  }
+}

@@ -236,6 +236,12 @@ export default function Footer() {
                   Terms & Conditions
                 </Link>
               </li>
+              <li>
+                <Link href="/admin/consultations" className="text-slate-400 hover:text-red-400 hover:translate-x-1 inline-flex items-center gap-1.5 transition-all text-[13.5px] font-medium">
+                  <span>Client Consultations Hub</span>
+                  <span className="text-[10px] px-1.5 py-0.2 rounded bg-red-950 text-red-300 border border-red-800/40">Admin</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -246,13 +252,17 @@ export default function Footer() {
       <div className="border-t border-white/10 py-6 bg-[#0B1120]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12.5px] text-slate-400">
           <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6">
             <Link href="/terms-and-conditions" className="hover:text-white transition-colors">
               Terms & Conditions
             </Link>
             <span>•</span>
             <Link href="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/admin/consultations" className="text-slate-500 hover:text-white transition-colors">
+              Admin Portal
             </Link>
           </div>
         </div>

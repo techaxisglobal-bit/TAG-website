@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
+import { saveConsultationRecord, ConsultationRecord } from "@/lib/storage";
 import { sendContactInquiryToTAG, sendConsultationConfirmationToUser } from "@/lib/mailer";
+import { sendContactToGoogleSheetWebhook } from "@/lib/googleSheet";
 
 export const runtime = "nodejs";
 
@@ -56,6 +58,23 @@ export async function POST(request: Request) {
     }
 
     const timestamp = new Date().toISOString();
+    const consultationId = `cns_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`;
+
+    // 3. Persist consultation record to local JSON storage (guarantees you never lose leads)
+    const consultationRecord: ConsultationRecord = {
+      id: consultationId,
+      name,
+      email,
+      company,
+      phone,
+      service,
+      message,
+      timestamp,
+      createdAt: new Date().toUTCString(),
+      status: "New"
+    };
+
+    await saveConsultationRecord(consultationRecord);
 
     const emailParams = {
       name,
@@ -67,7 +86,12 @@ export async function POST(request: Request) {
       timestamp
     };
 
-    // 3. Dispatch Emails concurrently:
+    // 4. Dispatch to Google Sheet Webhook (logs row to Google Sheet and triggers Google MailApp if active)
+    sendContactToGoogleSheetWebhook(emailParams).catch((sheetErr) => {
+      console.error("[Contact API] Google Sheet webhook dispatch error:", sheetErr);
+    });
+
+    // 5. Dispatch Emails concurrently:
     // a) Notification to TAG team (contact@techaxisglobal.com)
     // b) Thank you confirmation to client
     const [tagEmailResult, clientEmailResult] = await Promise.allSettled([
@@ -83,11 +107,13 @@ export async function POST(request: Request) {
       console.error("[Contact API] Error sending confirmation to client:", clientEmailResult.reason);
     }
 
-    // 4. Return success response
+    // 6. Return success response
     return NextResponse.json({
       success: true,
       message: "Thank you for consulting with TechAxis Global! Your message has been received, and a confirmation email has been sent to your inbox. An enterprise architect will be in touch shortly.",
+      consultationId,
       data: {
+        id: consultationId,
         name,
         company,
         service,

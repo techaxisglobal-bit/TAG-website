@@ -15,8 +15,23 @@ export interface JobApplicationRecord {
   createdAt: string;
 }
 
+export interface ConsultationRecord {
+  id: string;
+  name: string;
+  email: string;
+  company: string;
+  phone: string;
+  service: string;
+  message: string;
+  timestamp: string;
+  createdAt: string;
+  status: "New" | "Contacted" | "In Review" | "Closed";
+  notes?: string;
+}
+
 const DATA_DIR = path.join(process.cwd(), "data");
 const APPLICATIONS_FILE = path.join(DATA_DIR, "applications.json");
+const CONSULTATIONS_FILE = path.join(DATA_DIR, "consultations.json");
 const RESUMES_DIR = path.join(process.cwd(), "public", "uploads", "resumes");
 
 function ensureDirectories() {
@@ -29,6 +44,9 @@ function ensureDirectories() {
     }
     if (!fs.existsSync(APPLICATIONS_FILE)) {
       fs.writeFileSync(APPLICATIONS_FILE, JSON.stringify([], null, 2), "utf8");
+    }
+    if (!fs.existsSync(CONSULTATIONS_FILE)) {
+      fs.writeFileSync(CONSULTATIONS_FILE, JSON.stringify([], null, 2), "utf8");
     }
   } catch (err) {
     // Gracefully handle read-only filesystems on serverless hosting (Vercel/Netlify/Lambda)
@@ -108,4 +126,109 @@ export async function getApplicationRecords(): Promise<JobApplicationRecord[]> {
     // read-only or empty
   }
   return [];
+}
+
+/**
+ * Persists consultation inquiry to JSON database
+ */
+export async function saveConsultationRecord(
+  record: ConsultationRecord
+): Promise<void> {
+  try {
+    ensureDirectories();
+    let consultations: ConsultationRecord[] = [];
+    if (fs.existsSync(CONSULTATIONS_FILE)) {
+      const content = await fs.promises.readFile(CONSULTATIONS_FILE, "utf8");
+      try {
+        consultations = JSON.parse(content);
+        if (!Array.isArray(consultations)) consultations = [];
+      } catch {
+        consultations = [];
+      }
+    }
+
+    consultations.unshift(record);
+    await fs.promises.writeFile(
+      CONSULTATIONS_FILE,
+      JSON.stringify(consultations, null, 2),
+      "utf8"
+    );
+  } catch (error) {
+    console.log("[Storage: Info] Serverless read-only filesystem; skipping local consultations backup.");
+  }
+}
+
+/**
+ * Retrieves all stored consultations
+ */
+export async function getConsultationRecords(): Promise<ConsultationRecord[]> {
+  try {
+    ensureDirectories();
+    if (fs.existsSync(CONSULTATIONS_FILE)) {
+      const content = await fs.promises.readFile(CONSULTATIONS_FILE, "utf8");
+      const parsed = JSON.parse(content);
+      return Array.isArray(parsed) ? parsed : [];
+    }
+  } catch {
+    // read-only or empty
+  }
+  return [];
+}
+
+/**
+ * Updates status or notes on a consultation record
+ */
+export async function updateConsultationStatus(
+  id: string,
+  status: "New" | "Contacted" | "In Review" | "Closed",
+  notes?: string
+): Promise<boolean> {
+  try {
+    ensureDirectories();
+    if (!fs.existsSync(CONSULTATIONS_FILE)) return false;
+    const content = await fs.promises.readFile(CONSULTATIONS_FILE, "utf8");
+    const consultations: ConsultationRecord[] = JSON.parse(content);
+    const index = consultations.findIndex((c) => c.id === id);
+    if (index === -1) return false;
+
+    consultations[index].status = status;
+    if (notes !== undefined) {
+      consultations[index].notes = notes;
+    }
+
+    await fs.promises.writeFile(
+      CONSULTATIONS_FILE,
+      JSON.stringify(consultations, null, 2),
+      "utf8"
+    );
+    return true;
+  } catch (error) {
+    console.error("[Storage] Failed to update consultation status:", error);
+    return false;
+  }
+}
+
+/**
+ * Deletes a consultation record
+ */
+export async function deleteConsultationRecord(id: string): Promise<boolean> {
+  try {
+    ensureDirectories();
+    if (!fs.existsSync(CONSULTATIONS_FILE)) return false;
+    const content = await fs.promises.readFile(CONSULTATIONS_FILE, "utf8");
+    let consultations: ConsultationRecord[] = JSON.parse(content);
+    const initialLen = consultations.length;
+    consultations = consultations.filter((c) => c.id !== id);
+    if (consultations.length === initialLen) return false;
+
+    await fs.promises.writeFile(
+      CONSULTATIONS_FILE,
+      JSON.stringify(consultations, null, 2),
+      "utf8"
+    );
+    return true;
+  } catch (error) {
+    console.error("[Storage] Failed to delete consultation record:", error);
+    return false;
+  }
 }
