@@ -23,7 +23,8 @@ import {
   Send,
   HelpCircle,
   X,
-  ChevronDown
+  ChevronDown,
+  LogOut
 } from "lucide-react";
 
 interface Consultation {
@@ -207,6 +208,16 @@ export default function AdminConsultationsPage() {
     document.body.removeChild(link);
   };
 
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/auth", { method: "DELETE" });
+    } catch (err) {
+      console.error("Logout request failed:", err);
+    } finally {
+      window.location.href = "/admin/login";
+    }
+  };
+
   // Filtered consultations
   const filteredConsultations = useMemo(() => {
     return consultations.filter((c) => {
@@ -281,6 +292,15 @@ export default function AdminConsultationsPage() {
               <span>Contact Page</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </Link>
+
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/30 transition-all hover:border-red-500/50"
+              title="Sign out of Admin Console"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Sign Out</span>
+            </button>
           </div>
         </div>
 
