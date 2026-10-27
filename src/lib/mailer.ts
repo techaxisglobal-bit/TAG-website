@@ -123,13 +123,18 @@ export async function testSmtpConnection(): Promise<{
     await transporter.verify();
     return { configured: true, connected: true, host, user, provider };
   } catch (err: any) {
+    let errorMsg = err.message || "Failed to authenticate with SMTP server. Check credentials.";
+    if (errorMsg.includes("535 5.7.3")) {
+      errorMsg = "Microsoft 365 Error 535 5.7.3: Login was rejected by Microsoft. In your Microsoft 365 Admin Center (admin.microsoft.com), go to Users > Active users > contact@techaxisglobal.com > Mail tab > Manage email apps > check 'Authenticated SMTP'. If 2FA is active on this account, create an App Password at mysignins.microsoft.com/security-info.";
+    }
+
     return {
       configured: true,
       connected: false,
       host,
       user,
       provider,
-      error: err.message || "Failed to authenticate with SMTP server. Check credentials."
+      error: errorMsg
     };
   }
 }
@@ -170,7 +175,11 @@ export async function sendTestEmail(targetEmail: string): Promise<{ success: boo
     });
     return { success: true, message: `Test email successfully sent to ${targetEmail} via Microsoft 365!` };
   } catch (err: any) {
-    return { success: false, message: `Email failed to send: ${err.message || String(err)}` };
+    let msg = err.message || String(err);
+    if (msg.includes("535 5.7.3")) {
+      msg = "Microsoft 365 Error 535 (Authentication unsuccessful): In your Microsoft 365 Admin Center, enable 'Authenticated SMTP' for contact@techaxisglobal.com (Users > Active users > contact@techaxisglobal.com > Mail > Manage email apps > check 'Authenticated SMTP'). If 2FA is active, generate a Microsoft App Password.";
+    }
+    return { success: false, message: `Email failed to send: ${msg}` };
   }
 }
 
