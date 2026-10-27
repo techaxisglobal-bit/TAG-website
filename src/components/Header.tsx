@@ -41,14 +41,14 @@ export default function Header() {
         isScrolled ? "h-[68px] shadow-[0_2px_12px_rgba(0,0,0,0.04)]" : "h-[76px]"
       }`}
     >
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between gap-2">
         {/* Brand Logo */}
         <div className="flex-shrink-0">
           <Logo variant="full" />
         </div>
 
         {/* Desktop Navigation Links with Dropdowns (1024px+) */}
-        <nav className="hidden lg:flex items-center space-x-1" aria-label="Main Navigation">
+        <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1" aria-label="Main Navigation">
           {navLinks.map((link) => {
             const hasSubmenu = link.submenu && link.submenu.length > 0;
             const isSolutions = link.name === "Solutions";
@@ -63,9 +63,9 @@ export default function Header() {
               >
                 <Link
                   href={link.href}
-                  className={`inline-flex items-center gap-1 px-3.5 py-1.5 text-[13px] font-medium tracking-tight transition-all duration-200 rounded-full whitespace-nowrap ${
+                  className={`inline-flex items-center gap-1 px-2.5 xl:px-3 py-1.5 text-[12.5px] xl:text-[13px] font-medium tracking-tight transition-all duration-200 rounded-full whitespace-nowrap ${
                     isActive
-                      ? "text-[#B42318] bg-black/[0.04]"
+                      ? "text-[#B42318] bg-black/[0.04] font-semibold"
                       : "text-[#1D1D1F] hover:text-[#B42318] hover:bg-black/[0.03]"
                   }`}
                 >
@@ -149,9 +149,10 @@ export default function Header() {
         <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
           <Link
             href="/contact-us"
-            className="hidden sm:inline-flex bg-[#B42318] hover:bg-[#8E1010] text-white text-[13px] font-semibold px-4.5 py-2 rounded-full transition-all duration-200 shadow-xs items-center gap-1.5 group whitespace-nowrap active:scale-95"
+            className="hidden sm:inline-flex bg-[#B42318] hover:bg-[#8E1010] text-white text-[12.5px] xl:text-[13px] font-semibold px-3.5 xl:px-4.5 py-2 rounded-full transition-all duration-200 shadow-xs items-center gap-1.5 group whitespace-nowrap active:scale-95"
           >
-            <span>Schedule a Consultation</span>
+            <span className="hidden xl:inline">Schedule a Consultation</span>
+            <span className="xl:hidden">Consultation</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
           </Link>
 

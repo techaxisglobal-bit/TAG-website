@@ -55,11 +55,15 @@ export const navLinks = [
       { name: "About Us", href: "/about-us" },
       { name: "Why TAG", href: "/about-us#why-us" },
       { name: "Partners & Certifications", href: "/about-us#partnerships" },
-      { name: "Careers", href: "/careers" }
+      { name: "Careers", href: "/careers" },
+      { name: "Privacy Policy", href: "/privacy-policy" },
+      { name: "Terms and Conditions", href: "/terms-and-conditions" }
     ]
   },
   { name: "Careers", href: "/careers" },
-  { name: "Contact Us", href: "/contact-us" }
+  { name: "Contact Us", href: "/contact-us" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+  { name: "Terms and Conditions", href: "/terms-and-conditions" }
 ];
 
 export const heroStats = [
