@@ -13,34 +13,55 @@ interface SendApplicationEmailParams {
 }
 
 function getMailTransporter() {
-  const host = process.env.SMTP_HOST;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const host = (process.env.MICROSOFT_SMTP_HOST || process.env.SMTP_HOST || "").trim();
+  const user = (process.env.MICROSOFT_SMTP_USER || process.env.SMTP_USER || "").trim();
+  const pass = (process.env.MICROSOFT_SMTP_PASS || process.env.SMTP_PASS || "").trim();
+  const port = parseInt(process.env.MICROSOFT_SMTP_PORT || process.env.SMTP_PORT || "587", 10);
   const secure = process.env.SMTP_SECURE === "true" || port === 465;
 
   if (!host || !user || !pass) {
     return null;
   }
 
-  const cleanPass = pass.trim().replace(/\s+/g, "");
+  const cleanPass = pass.replace(/\s+/g, "");
+  const lowerHost = host.toLowerCase();
 
-  if (host.includes("gmail")) {
+  // Microsoft 365 / Office 365 / Outlook (port 587 with STARTTLS)
+  if (lowerHost.includes("office365") || lowerHost.includes("outlook") || lowerHost.includes("microsoft")) {
+    return nodemailer.createTransport({
+      host: host || "smtp.office365.com",
+      port: port || 587,
+      secure: false, // Office 365 requires STARTTLS
+      requireTLS: true,
+      auth: {
+        user,
+        pass: cleanPass
+      },
+      tls: {
+        ciphers: "SSLv3",
+        rejectUnauthorized: false
+      }
+    });
+  }
+
+  // Gmail preset
+  if (lowerHost.includes("gmail")) {
     return nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: user.trim(),
+        user,
         pass: cleanPass
       }
     });
   }
 
+  // Standard SMTP
   return nodemailer.createTransport({
-    host: host.trim(),
+    host,
     port,
     secure,
     auth: {
-      user: user.trim(),
+      user,
       pass: cleanPass
     }
   });
@@ -49,35 +70,65 @@ function getMailTransporter() {
 /**
  * Diagnostic helper to verify whether SMTP is currently configured and successfully connected
  */
-export async function testSmtpConnection(): Promise<{ configured: boolean; connected: boolean; error?: string; host?: string; user?: string }> {
-  const host = process.env.SMTP_HOST;
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+export async function testSmtpConnection(): Promise<{
+  configured: boolean;
+  connected: boolean;
+  error?: string;
+  host?: string;
+  user?: string;
+  provider?: string;
+}> {
+  const host = (process.env.MICROSOFT_SMTP_HOST || process.env.SMTP_HOST || "").trim();
+  const user = (process.env.MICROSOFT_SMTP_USER || process.env.SMTP_USER || "").trim();
+  const pass = (process.env.MICROSOFT_SMTP_PASS || process.env.SMTP_PASS || "").trim();
 
-  if (!host || !user || !pass) {
+  const isMicrosoft = host.toLowerCase().includes("office365") || host.toLowerCase().includes("outlook") || host.toLowerCase().includes("microsoft");
+  const provider = isMicrosoft ? "Microsoft Office 365" : host.toLowerCase().includes("gmail") ? "Google Workspace / Gmail" : "Custom SMTP";
+
+  if (!host && !user) {
     return {
       configured: false,
       connected: false,
-      error: "SMTP credentials (SMTP_HOST, SMTP_USER, SMTP_PASS) are not configured in environment variables.",
-      host: host || "Not set",
-      user: user || "Not set"
+      error: "SMTP credentials are not configured in environment variables.",
+      host: "Not set",
+      user: "Not set",
+      provider
+    };
+  }
+
+  if (!pass) {
+    return {
+      configured: false,
+      connected: false,
+      error: `${provider} host (${host || "smtp.office365.com"}) and user (${user}) are set, but password (MICROSOFT_SMTP_PASS or SMTP_PASS) is empty in .env.local. Add your password to send live emails.`,
+      host: host || "smtp.office365.com",
+      user: user || "Not set",
+      provider
     };
   }
 
   const transporter = getMailTransporter();
   if (!transporter) {
-    return { configured: false, connected: false, error: "Failed to initialize mail transporter." };
+    return {
+      configured: false,
+      connected: false,
+      error: "Failed to initialize mail transporter.",
+      host,
+      user,
+      provider
+    };
   }
 
   try {
     await transporter.verify();
-    return { configured: true, connected: true, host, user };
+    return { configured: true, connected: true, host, user, provider };
   } catch (err: any) {
     return {
       configured: true,
       connected: false,
       host,
       user,
+      provider,
       error: err.message || "Failed to authenticate with SMTP server. Check credentials."
     };
   }
@@ -88,34 +139,36 @@ export async function testSmtpConnection(): Promise<{ configured: boolean; conne
  */
 export async function sendTestEmail(targetEmail: string): Promise<{ success: boolean; message: string }> {
   const transporter = getMailTransporter();
+  const authUser = process.env.MICROSOFT_SMTP_USER || process.env.SMTP_USER || "contact@techaxisglobal.com";
+
   if (!transporter) {
     return {
       success: false,
-      message: "Cannot send test email: SMTP credentials (SMTP_HOST, SMTP_USER, SMTP_PASS) are empty in .env.local."
+      message: `Cannot send test email: SMTP password is empty. Set MICROSOFT_SMTP_PASS in .env.local to send emails with ${authUser}.`
     };
   }
 
-  const hrEmail = process.env.HR_EMAIL || process.env.CONTACT_EMAIL || "contact@techaxisglobal.com";
-  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global" <${hrEmail}>`;
+  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global" <${authUser}>`;
 
   try {
     await transporter.sendMail({
       from: fromEmail,
       to: targetEmail,
-      subject: "TechAxis Global – SMTP Test Email [Successful Delivery]",
-      text: "Congratulations! Your email system is properly configured and successfully delivering messages from TechAxis Global.",
+      subject: "TechAxis Global – Microsoft 365 SMTP Test Email [Successful]",
+      text: "Congratulations! Your Microsoft 365 email system is properly configured and successfully delivering messages from TechAxis Global.",
       html: `
         <div style="font-family: sans-serif; max-width: 520px; padding: 24px; border: 1px solid #E2E8F0; border-radius: 12px; margin: 20px auto;">
-          <h2 style="color: #0F172A; margin-top: 0;">Email System Operational</h2>
-          <p style="color: #334155; line-height: 1.5;">This test message confirms that your SMTP mailer is fully functioning and capable of delivering client consultation and job application notifications to inboxes.</p>
+          <h2 style="color: #0F172A; margin-top: 0;">Microsoft 365 Email Operational</h2>
+          <p style="color: #334155; line-height: 1.5;">This test message confirms that your Microsoft Office 365 SMTP mailer (${authUser}) is fully functioning and capable of delivering client consultation and job application notifications to inboxes.</p>
           <div style="background: #F1F5F9; padding: 12px 16px; border-radius: 8px; font-size: 13px; color: #475569;">
+            <strong>Authenticated User:</strong> ${authUser}<br/>
             <strong>Delivered At:</strong> ${new Date().toUTCString()}
           </div>
           <p style="color: #64748B; font-size: 12px; margin-top: 20px;">TechAxis Global • Automated System Check</p>
         </div>
       `
     });
-    return { success: true, message: `Test email successfully sent to ${targetEmail}!` };
+    return { success: true, message: `Test email successfully sent to ${targetEmail} via Microsoft 365!` };
   } catch (err: any) {
     return { success: false, message: `Email failed to send: ${err.message || String(err)}` };
   }
@@ -127,8 +180,9 @@ export async function sendTestEmail(targetEmail: string): Promise<{ success: boo
 export async function sendApplicationToHR(params: SendApplicationEmailParams): Promise<{ sent: boolean; simulated?: boolean }> {
   const { name, email, phone, role, message, resumeFileName, resumeBuffer, resumeContentType, timestamp } = params;
   
-  const hrEmail = process.env.HR_EMAIL || "careers@techaxisglobal.com";
-  const fromEmail = process.env.SMTP_FROM || `"TAG Careers Portal" <${hrEmail}>`;
+  const defaultMailUser = process.env.MICROSOFT_SMTP_USER || process.env.SMTP_USER || "contact@techaxisglobal.com";
+  const hrEmail = process.env.HR_EMAIL || defaultMailUser;
+  const fromEmail = process.env.SMTP_FROM || `"TAG Careers Portal" <${defaultMailUser}>`;
   const subject = `New Job Application – ${role} – ${name}`;
 
   const formattedDate = new Date(timestamp).toLocaleString("en-US", {
@@ -268,8 +322,9 @@ export async function sendConfirmationToApplicant(params: {
 }): Promise<{ sent: boolean; simulated?: boolean }> {
   const { name, email, role } = params;
 
-  const hrEmail = process.env.HR_EMAIL || "careers@techaxisglobal.com";
-  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global Careers" <${hrEmail}>`;
+  const defaultMailUser = process.env.MICROSOFT_SMTP_USER || process.env.SMTP_USER || "contact@techaxisglobal.com";
+  const hrEmail = process.env.HR_EMAIL || defaultMailUser;
+  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global Careers" <${defaultMailUser}>`;
   const subject = `Application Received – ${role} | TechAxis Global`;
 
   const textBody = `
@@ -373,8 +428,9 @@ export interface SendContactEmailParams {
 export async function sendContactInquiryToTAG(params: SendContactEmailParams): Promise<{ sent: boolean; simulated?: boolean }> {
   const { name, email, company, phone, service, message, timestamp } = params;
 
-  const contactEmail = process.env.CONTACT_EMAIL || process.env.HR_EMAIL || "contact@techaxisglobal.com";
-  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global Inquiries" <${contactEmail}>`;
+  const defaultMailUser = process.env.MICROSOFT_SMTP_USER || process.env.SMTP_USER || "contact@techaxisglobal.com";
+  const contactEmail = process.env.CONTACT_EMAIL || defaultMailUser;
+  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global Inquiries" <${defaultMailUser}>`;
   const subject = `New Consultation Request: ${service} – ${name} (${company})`;
 
   const formattedDate = new Date(timestamp).toLocaleString("en-US", {
@@ -501,8 +557,9 @@ To reply directly to ${name}, click 'Reply' in your email client.
 export async function sendConsultationConfirmationToUser(params: SendContactEmailParams): Promise<{ sent: boolean; simulated?: boolean }> {
   const { name, email, company, service, phone } = params;
 
-  const contactEmail = process.env.CONTACT_EMAIL || process.env.HR_EMAIL || "contact@techaxisglobal.com";
-  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global" <${contactEmail}>`;
+  const defaultMailUser = process.env.MICROSOFT_SMTP_USER || process.env.SMTP_USER || "contact@techaxisglobal.com";
+  const contactEmail = process.env.CONTACT_EMAIL || defaultMailUser;
+  const fromEmail = process.env.SMTP_FROM || `"TechAxis Global" <${defaultMailUser}>`;
   const subject = `Thank You for Contacting TechAxis Global – Consultation Request Received`;
 
   const textBody = `

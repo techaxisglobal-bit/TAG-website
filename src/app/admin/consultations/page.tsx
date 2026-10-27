@@ -82,7 +82,7 @@ export default function AdminConsultationsPage() {
   const [selectedConsultation, setSelectedConsultation] = useState<Consultation | null>(null);
   const [noteDraft, setNoteDraft] = useState("");
   const [statusSaving, setStatusSaving] = useState(false);
-  const [testEmailAddress, setTestEmailAddress] = useState("techaxisglobal@gmail.com");
+  const [testEmailAddress, setTestEmailAddress] = useState("contact@techaxisglobal.com");
   const [testEmailSending, setTestEmailSending] = useState(false);
   const [testEmailResult, setTestEmailResult] = useState<{ success: boolean; message: string } | null>(null);
 
@@ -348,10 +348,10 @@ export default function AdminConsultationsPage() {
               </div>
               <div>
                 <h4 className="text-sm font-bold text-amber-200">
-                  Notice: Live Emails are Not Sending (SMTP Not Configured)
+                  Notice: Microsoft 365 Live Emails Pending Password
                 </h4>
                 <p className="text-xs text-amber-300/80 mt-0.5">
-                  All consultation requests are <strong>100% safely captured</strong> in the table below, but direct email delivery to <code className="bg-black/30 px-1 py-0.5 rounded text-amber-200">techaxisglobal@gmail.com</code> requires a Gmail App Password or Google Apps Script.
+                  All consultation requests are <strong>100% safely saved</strong> in the table below. To send live email receipts from <code className="bg-black/30 px-1 py-0.5 rounded text-amber-200">contact@techaxisglobal.com</code>, add your Microsoft password to <code className="bg-black/30 px-1 py-0.5 rounded text-white font-mono">MICROSOFT_SMTP_PASS</code> in <code className="bg-black/30 px-1 py-0.5 rounded text-white font-mono">.env.local</code>.
                 </p>
               </div>
             </div>
@@ -878,62 +878,43 @@ export default function AdminConsultationsPage() {
 
             {/* Step-by-Step Fix Guide */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Option A: Gmail App Password */}
+              {/* Option A: Microsoft Office 365 */}
               <div className="p-6 rounded-2xl bg-[#0F172A]/70 border border-white/10">
                 <div className="flex items-center gap-2 text-white font-bold text-base">
-                  <span className="w-6 h-6 rounded-full bg-[#B42318] text-white text-xs flex items-center justify-center font-bold">
-                    A
+                  <span className="w-6 h-6 rounded-full bg-[#0078D4] text-white text-xs flex items-center justify-center font-bold">
+                    M365
                   </span>
-                  <span>Option 1: Gmail App Password (Fastest & Direct)</span>
+                  <span>Microsoft 365 / Office 365 (contact@techaxisglobal.com)</span>
                 </div>
                 <p className="text-xs text-zinc-400 mt-2">
-                  Works directly with <code className="text-zinc-200">techaxisglobal@gmail.com</code> in less than 2 minutes:
+                  Configured for <code className="text-zinc-200">contact@techaxisglobal.com</code> via <code className="text-zinc-200">smtp.office365.com:587</code>:
                 </p>
 
                 <ol className="mt-4 space-y-3 text-xs text-zinc-300 list-decimal list-inside">
                   <li>
-                    Open your Google Account at{" "}
-                    <a
-                      href="https://myaccount.google.com/security"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-red-400 hover:underline inline-flex items-center gap-1"
-                    >
-                      myaccount.google.com/security <ExternalLink className="w-2.5 h-2.5" />
-                    </a>
-                  </li>
-                  <li>
-                    Ensure <strong>2-Step Verification</strong> is turned ON.
-                  </li>
-                  <li>
-                    Search for <strong>"App passwords"</strong> in the top search bar (or visit{" "}
-                    <a
-                      href="https://myaccount.google.com/apppasswords"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-red-400 hover:underline"
-                    >
-                      myaccount.google.com/apppasswords
-                    </a>
-                    ).
-                  </li>
-                  <li>
-                    Create an App name called <strong>TAG Website</strong> and click <strong>Create</strong>.
-                  </li>
-                  <li>
-                    Google will show a <strong>16-character password</strong> (e.g., <code className="bg-black/50 px-1 py-0.5 rounded text-amber-300">abcd efgh ijkl mnop</code>).
-                  </li>
-                  <li>
-                    Add these 3 lines to your <code className="bg-black/50 px-1.5 py-0.5 rounded text-white font-mono text-[11px]">.env.local</code> file (and in your Railway dashboard environment variables):
+                    Enter your Microsoft 365 password or App Password in <code className="bg-black/50 px-1.5 py-0.5 rounded text-white font-mono text-[11px]">.env.local</code>:
                     <div className="mt-2 p-3 rounded-lg bg-black/60 border border-white/10 font-mono text-[11px] text-zinc-200 select-all">
-                      SMTP_HOST=smtp.gmail.com<br />
-                      SMTP_USER=techaxisglobal@gmail.com<br />
-                      SMTP_PASS=your-16-character-app-password<br />
-                      SMTP_PORT=465<br />
-                      SMTP_SECURE=true
+                      MICROSOFT_SMTP_HOST=&quot;smtp.office365.com&quot;<br />
+                      MICROSOFT_SMTP_USER=&quot;contact@techaxisglobal.com&quot;<br />
+                      MICROSOFT_SMTP_PASS=&quot;your-microsoft-password&quot;<br />
+                      MICROSOFT_SMTP_PORT=587
                     </div>
                   </li>
-                  <li>Restart your server or re-deploy, and all emails will immediately deliver!</li>
+                  <li>
+                    <strong>If your Microsoft 365 account has 2FA enabled:</strong> Generate an App Password at{" "}
+                    <a
+                      href="https://mysignins.microsoft.com/security-info"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-400 hover:underline inline-flex items-center gap-1"
+                    >
+                      mysignins.microsoft.com/security-info <ExternalLink className="w-2.5 h-2.5" />
+                    </a>
+                  </li>
+                  <li>
+                    <strong>In Microsoft 365 Admin Center:</strong> Ensure &quot;Authenticated SMTP&quot; is allowed for <code className="text-blue-300">contact@techaxisglobal.com</code> (under Users &gt; Active Users &gt; Mail &gt; Manage email apps &gt; check &quot;Authenticated SMTP&quot;).
+                  </li>
+                  <li>Save <code className="text-white">.env.local</code> and test live delivery with the <strong>Send Test Email</strong> button above!</li>
                 </ol>
               </div>
 

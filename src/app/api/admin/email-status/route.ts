@@ -20,8 +20,9 @@ export async function GET() {
         smtp: {
           configured: smtpStatus.configured,
           connected: smtpStatus.connected,
-          host: smtpStatus.host || "Not set",
-          user: smtpStatus.user || "Not set",
+          provider: smtpStatus.provider || "Microsoft Office 365",
+          host: smtpStatus.host || "smtp.office365.com",
+          user: smtpStatus.user || "contact@techaxisglobal.com",
           error: smtpStatus.error || null
         },
         googleWebhook: {
@@ -29,8 +30,8 @@ export async function GET() {
           url: hasWebhook ? `${webhookUrl.slice(0, 35)}...` : "Not configured"
         },
         destinations: {
-          contactEmail: process.env.CONTACT_EMAIL || "contact@techaxisglobal.com",
-          hrEmail: process.env.HR_EMAIL || "techaxisglobal@gmail.com"
+          contactEmail: process.env.CONTACT_EMAIL || process.env.MICROSOFT_SMTP_USER || "contact@techaxisglobal.com",
+          hrEmail: process.env.HR_EMAIL || process.env.MICROSOFT_SMTP_USER || "contact@techaxisglobal.com"
         }
       },
       counts: {
@@ -50,7 +51,8 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const targetEmail = (body.email || process.env.HR_EMAIL || "techaxisglobal@gmail.com").trim();
+    const defaultInbox = process.env.CONTACT_EMAIL || process.env.MICROSOFT_SMTP_USER || "contact@techaxisglobal.com";
+    const targetEmail = (body.email || defaultInbox).trim();
 
     if (!targetEmail) {
       return NextResponse.json(
